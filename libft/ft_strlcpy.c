@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:48:08 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/18 17:48:10 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/09/19 18:40:07 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/09/19 18:40:09 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-int main()
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-    char exp1[50] = "Hola mundo!";
-    const char *exp2 = "Hola mund!";
-    printf("exp1 %i\n", strncpy(exp1,exp2, 100));
-    printf("exp1 %s\n", exp1);
+	size_t	dst_len;
+	size_t	i;
 
-    char str1[50] = "Hola mundo!";
-    const char *str2 = "Hola mund!";
-
-	printf("result %zu\n", ft_strlcpy(str1, str2, 100));
-    printf("str1 %s\n", str1);
-    //printf("%i\n", ft_memcmp(obj1, obj2, 11));
-
-    return 0;
+	dst_len = ft_strlen(src);
+	i = 0;
+	while (i < size && src[i] != '\0')
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst_len);
 }
