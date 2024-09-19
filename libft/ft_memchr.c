@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:48:08 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/18 17:48:10 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/09/18 19:07:11 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/09/18 19:07:13 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-int main()
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-    char exp1[50] = "Hola mundo!";
-    const char *exp2 = "Hola mund!";
-    printf("exp1 %s\n", strncat(exp1,exp2, 11));
+	unsigned char	*str;
+	size_t			i;
 
-    char str1[50] = "Hola mundo!";
-    const char *str2 = "Hola mund!";
-
-	printf("result %zu\n", ft_strlcat(str1, str2, 11));
-printf("str1 %s\n", str1);
-    //printf("%i\n", ft_memcmp(obj1, obj2, 11));
-
-    return 0;
+	str = (unsigned char *)s;
+	i = 0;
+	while (str[i] != '\0' && n > i)
+	{
+		if (str[i] == c)
+		{
+			return ((void *)(str + i));
+		}
+		i++;
+	}
+	return (NULL);
 }

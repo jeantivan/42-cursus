@@ -6,7 +6,8 @@ HEADERS_DIR = /
 
 CFLAGS = -Wall -Werror -Wextra -I $(HEADERS_DIR)
 
-CFILES = main.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_tolower.c ft_toupper.c ft_strlen.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memset.c ft_bzero.c
+CFILES = main.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_tolower.c ft_toupper.c ft_strlen.c ft_strchr.c ft_strrchr.c ft_strncmp.c ft_memset.c \
+ft_bzero.c ft_memchr.c ft_memcmp.c ft_strlcat.c
 
 OBJS = $(CFILES:.c=.o)
 

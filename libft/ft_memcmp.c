@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:48:08 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/18 17:48:10 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/09/19 16:14:25 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/09/19 16:15:30 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-int main()
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-    char exp1[50] = "Hola mundo!";
-    const char *exp2 = "Hola mund!";
-    printf("exp1 %s\n", strncat(exp1,exp2, 11));
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-    char str1[50] = "Hola mundo!";
-    const char *str2 = "Hola mund!";
-
-	printf("result %zu\n", ft_strlcat(str1, str2, 11));
-printf("str1 %s\n", str1);
-    //printf("%i\n", ft_memcmp(obj1, obj2, 11));
-
-    return 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (n-- > 0)
+	{
+		if (*str1++ != *str2++)
+		{
+			return (str1[-1] - str2[-1]);
+		}
+	}
+	return (0);
 }
