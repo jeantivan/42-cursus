@@ -14,13 +14,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 int main()
 {
+    char	src[] = "lorem ipsum dolor sit amet";
     char	*dest;
 
-    dest = (char *)malloc(sizeof(*dest) * 15);
-    printf("%zu\n",ft_strlcpy(dest, "lorem ipsum dolor sit amet", 15));
-    printf("%s\n", dest);
+   	dest = src + 1;
+    if (dest != ft_memmove(dest, src, 8))
+		write(1, "dest's adress was not returned\n", 31);
+	write(1, dest, 22);
+    write(1, "\n", 1);
     return 0;
 }
