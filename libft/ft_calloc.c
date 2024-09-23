@@ -11,20 +11,17 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	int		*mem;
-	size_t	i;
+	size_t	total_size;
 
-	i = 0;
-	mem = malloc(nmemb * size);
+	total_size = nmemb * size;
+	mem = malloc(total_size);
 	if (mem == NULL)
 		return (NULL);
-	while (i < nmemb)
-	{
-		mem[i] = 0;
-		i++;
-	}
+	ft_memset(mem, 0, total_size);
 	return (mem);
 }
