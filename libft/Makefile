@@ -22,7 +22,7 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
 compile:
-	@make
+	@make && make clean
 	@$(CC) $(CFLAGS) main.c -L. $(NAME) -o main.o
 
 clean:
