@@ -12,21 +12,15 @@
 
 #include "libft.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int main()
 {
-    char exp1[50] = "Hola mundo!";
-    const char *exp2 = "Hola mund!";
-    printf("exp1 %i\n", strncpy(exp1,exp2, 100));
-    printf("exp1 %s\n", exp1);
+    char	*dest;
 
-    char str1[50] = "Hola mundo!";
-    const char *str2 = "Hola mund!";
-
-	printf("result %zu\n", ft_strlcpy(str1, str2, 100));
-    printf("str1 %s\n", str1);
-    //printf("%i\n", ft_memcmp(obj1, obj2, 11));
-
+    dest = (char *)malloc(sizeof(*dest) * 15);
+    printf("%zu\n",ft_strlcpy(dest, "lorem ipsum dolor sit amet", 15));
+    printf("%s\n", dest);
     return 0;
 }
