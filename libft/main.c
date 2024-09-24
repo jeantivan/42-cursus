@@ -16,15 +16,93 @@
 #include <string.h>
 #include <unistd.h>
 
-int main()
+void	ft_print_result(char const *s)
 {
-    char	src[] = "lorem ipsum dolor sit amet";
-    char	*dest;
+	int		len;
 
-   	dest = src + 1;
-    if (dest != ft_memmove(dest, src, 8))
-		write(1, "dest's adress was not returned\n", 31);
-	write(1, dest, 22);
-    write(1, "\n", 1);
-    return 0;
+	len = 0;
+	while (s[len])
+		len++;
+	write(1, s, len);
+}
+
+int		main(int argc, const char *argv[])
+{
+	const char *str;
+	int			arg;
+
+	alarm(5);
+	if (argc == 1)
+		return (0);
+	else if ((arg = atoi(argv[1])) == 1)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "lorem", 15)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 2)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "ipsum", 15)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 3)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit lorem ipsum dolor", "ipsum", 35)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 4)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "", 10)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 5)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "ipsumm", 30)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 6)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "dol", 30)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 7)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "consectetur", 30)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 8)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "sit", 10)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 9)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "dolor", 15)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	else if (arg == 10)
+	{
+		if (!(str = ft_strnstr("lorem ipsum dolor sit amet", "dolor", 0)))
+			ft_print_result("NULL");
+		else
+			ft_print_result(str);
+	}
+	return (0);
 }
