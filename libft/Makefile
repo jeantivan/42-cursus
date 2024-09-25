@@ -16,7 +16,8 @@ ft_calloc.c ft_strdup.c ft_memcpy.c \
 ft_memmove.c ft_strnstr.c ft_atoi.c
 
 P2FILES = ft_substr.c ft_strjoin.c ft_itoa.c \
-ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+ft_striteri.c ft_strmapi.c
 
 OBJS = $(P1FILES:%.c=%.o) $(P2FILES:%.c=%.o)
 
