@@ -13,14 +13,26 @@
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_is_negative(int n)
+static int	ft_power(int nb, int power)
 {
-	if (n < 0)
+	int	result;
+	int	i;
+
+	result = 1;
+	i = 0;
+	if (power < 0)
+		return (0);
+	else if (power == 0 && nb == 0)
 		return (1);
-	return (0);
+	while (i < power)
+	{
+		result *= nb;
+		i++;
+	}
+	return (result);
 }
 
-int	ft_n_digits(int n)
+static int	ft_n_digits(int n)
 {
 	int	digits;
 
@@ -30,26 +42,46 @@ int	ft_n_digits(int n)
 		digits++;
 		n /= 10;
 	}
-	return digits;
+	return (digits);
+}
+
+static char	*ft_get_str_memory(int n)
+{
+	char	*str;
+	size_t	size;
+
+	size = ft_n_digits(n);
+	if (n < 0)
+		size++;
+	str = (char *)malloc((size + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	return (str);
 }
 
 char	*ft_itoa(int n)
 {
 	size_t		size;
-	int			n_is_negative;
 	long int	new_n;
-	char 		*str = "itoa";
+	char		*str;
+	int			i;
 
 	new_n = n + 0;
+	i = 0;
 	size = ft_n_digits(n);
-	n_is_negative = ft_is_negative(n);
-	if (n_is_negative) {
-		size++;
+	str = ft_get_str_memory(n);
+	if (!str)
+		return (NULL);
+	if (new_n < 0)
+	{
+		new_n *= -1;
+		str[i++] = '-';
 	}
-	/* TODO: Ya se tiene la longitud final de a string
-		1. Hay que alocar la memoría para la string.
-		2. Si el n es negativo agregar el - al inicio del string y n *= -1;
-		3. Agregar caracter a caracter el primer dígito de int
-	*/
+	while (size != 0)
+	{
+		str[i++] = (char)((new_n / ft_power(10, --size)) + '0');
+		new_n = new_n % ft_power(10, size);
+	}
+	str[i] = '\0';
 	return (str);
 }
