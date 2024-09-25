@@ -15,20 +15,42 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
 
-void	ft_print_result(char const *s)
+void	ft_test_striteri(unsigned int i, char *c)
 {
-	int		len;
-
-	len = 0;
-	while (s[len])
-		len++;
-	write(1, s, len);
+	printf("index: %i, char: %c\n", i, *c);
 }
 
-int		main()
+char	ft_test_strmapi(unsigned int index, char c)
 {
-	printf("1 / 10 = %i\n", 1 / 10);
-	ft_itoa(-202100);
+	if (index % 2 == 0 && ('a' <= c && c <= 'z'))
+	{
+		printf("index: %i, char: %c\n", index, c);
+		return (c - 32);
+	}
+	return ('-');
+};
+
+
+int		main(int argc, const char *argv[])
+{
+	int	arg;
+	alarm(5);
+
+	if (argc == 1)
+		return (0);
+	if ((arg = atoi(argv[1])) == 1)
+	{
+		printf("-----Testing ft_striteri-----\n");
+		ft_striteri("Hola mundo!", ft_test_striteri);
+	}
+	else if (arg == 2)
+	{
+		printf("-----Testing ft_strmapi-----\n");
+		printf("%s\n", ft_strmapi("Hola mundo!", ft_test_strmapi));
+
+	}
+
 	return (0);
 }
