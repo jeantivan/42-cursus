@@ -115,6 +115,20 @@ int		main(int argc, const char *argv[])
 			if (!tabstr[0])
 				ft_print_result("ok\n");
 	}
+	else if (arg == 7)
+	{
+		if (!(tabstr = ft_split("xxxxxxxxhello!", 'x')))
+			ft_print_result("NULL");
+		else
+		{
+			while (tabstr[i] != NULL)
+			{
+				ft_print_result(tabstr[i]);
+				write(1, "\n", 1);
+				i++;
+			}
+		}
+	}
 	return (0);
 }
 
