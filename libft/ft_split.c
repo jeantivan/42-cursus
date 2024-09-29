@@ -38,7 +38,26 @@
  * 4- Crear una función auxiliar que recorra s la cantidad de veces
  *    que aparezca el delimitador
  */
-static int	ft_find_n_of_c(char const *s, char c)
+
+/**
+ * En caso de que no se pueda asignar memoria en algún momento
+ * se limpia la memoria que ya pudo haber sido asignada
+ */
+static void	ft_free_memory(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i++])
+		free(arr[i]);
+	free(arr);
+}
+
+/**
+ * Se encuentran las cantidad de elementos (palabras)
+ * que tendrá nuestro arreglo final.
+ */
+static int	ft_find_n_of_el(char const *s, char c)
 {
 	int	n;
 	int	i;
@@ -47,58 +66,50 @@ static int	ft_find_n_of_c(char const *s, char c)
 	n = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			n++;
 		i++;
 	}
 	return (n);
 }
 
-static char	*ft_get_str_piece(char *temp_s, char c)
+static char	**ft_save_str_pieces(const char *s, char c, char **arr)
 {
-	int		len;
-	char	*piece;
+	int	pace;
+	int	i;
+	int	start;
 
-	len = 0;
-	while (temp_s[len] != c)
-		len++;
-	piece = ft_substr(temp_s, 0, len);
-	return (piece);
+	pace = 0;
+	i = 0;
+	start = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == 0))
+		{
+			arr[pace++] = ft_substr(s, start, i - start + 1);
+			if (!arr[pace - 1])
+			{
+				ft_free_memory(arr);
+				return (NULL);
+			}
+		}
+		if (s[i] == c && (s[i + 1] != c || s[i + 1] != '\0'))
+			start = i + 1;
+		i++;
+	}
+	arr[pace] = NULL;
+	return (arr);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		n_of_c;
-	int		pace;
+	int		n_of_el;
 	char	**arr;
-	char	*temp_s;
 
-	n_of_c = ft_find_n_of_c(s, c);
-	arr = (char **)malloc((n_of_c + 2) * sizeof(char *));
+	n_of_el = ft_find_n_of_el(s, c);
+	arr = (char **)malloc((n_of_el + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);
-	temp_s = (char *)s;
-	pace = 0;
-	while (pace <= n_of_c)
-	{
-		while (*temp_s != '\0')
-		{
-			if (temp_s[0] == c && temp_s[1] != c && temp_s[1] != '\0')
-			{
-				arr[pace] = ft_get_str_piece(temp_s + 1, c);
-				temp_s = temp_s + ft_strlen(arr[pace]) + 1;
-				break ;
-			}
-			else if (temp_s[0] != c && temp_s[1] != '\0')
-			{
-				arr[pace] = ft_get_str_piece(temp_s, c);
-				temp_s = temp_s + ft_strlen(arr[pace]);
-				break ;
-			}
-			temp_s++;
-		}
-		pace++;
-	}
-	arr[pace] = NULL;
+	arr = ft_save_str_pieces(s, c, arr);
 	return (arr);
 }
