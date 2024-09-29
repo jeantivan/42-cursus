@@ -39,4 +39,8 @@ fclean: clean
 
 re: fclean all
 
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(OBJS)
+	gcc -nostartfiles -shared -o libft.so $(OBJ)
+
 .PHONY: all clean fclean re compile 
