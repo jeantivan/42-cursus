@@ -20,10 +20,10 @@ ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 ft_striteri.c ft_strmapi.c \
 ft_split.c ft_strtrim.c
 
-LISTS = ft_lstnew_bonus.c
+LISTS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c
 
-OBJS = $(P1FILES:%.c=%.o) $(P2FILES:%.c=%.o)
-BONUS_OBJS = $(LISTS:%.c=%.o)
+OBJS = $(P1FILES:.c=.o) $(P2FILES:.c=.o)
+BONUS_OBJS = $(LISTS:.c=.o)
 
 all: $(NAME)
 
@@ -47,7 +47,7 @@ re: fclean all
 
 compile:
 	@make && make clean
-	@$(CC) $(CFLAGS) main.c -L. -lft -o main.o
+	@$(CC) $(CFLAGS) main.c libft.a -o main.o
 
 so:
 	$(CC) -nostartfiles -fPIC $(CFLAGS) $(OBJS)
