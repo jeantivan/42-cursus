@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 16:50:57 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/18 16:50:58 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/09/30 18:30:04 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,18 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*str;
-	size_t	str_len;
 	size_t	i;
 
-	str = (char *)s;
-	str_len = ft_strlen(str);
 	i = 0;
-	while (i <= str_len)
+	if (c >= 256)
+		c = c % 256;
+	while (s[i] != '\0')
 	{
-		if (str[i] == c)
-			return (str + i);
+		if (s[i] == (char)c)
+			return ((char *)(s + i));
 		i++;
 	}
+	if (c == '\0')
+		return ((char *)(s + i));
 	return (NULL);
 }
