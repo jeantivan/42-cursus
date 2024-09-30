@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:11:30 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/18 17:11:32 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/09/30 17:41:16 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 
 /* Part 2 function: Additional functions */
-
-/* Listas */
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
@@ -53,10 +51,14 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-
-/* Por hacer */
 char	**ft_split(char const *s, char c);
 char	*ft_strtrim(char const *s1, char const *set);
 
-/* TODO: Bonus functions */
+/* Listas */
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+t_list	*ft_lstnew(void *content);
 #endif /* libft.h */
