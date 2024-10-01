@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 12:00:15 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/30 17:48:59 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:04:02 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	ft_find_start(char const *s1, char const *set)
 	{
 		if (!ft_strchr(set, s1[i]))
 			break ;
-		start = i + 1;
 		i++;
 	}
+	start = i;
 	return (start);
 }
 
@@ -51,7 +51,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		start;
 	int		end;
 
-	if (!set)
+	if (!set || set[0] == '\0')
 		return (ft_strdup(s1));
 	start = ft_find_start(s1, set);
 	end = ft_find_end(s1, set);
