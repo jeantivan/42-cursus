@@ -20,7 +20,8 @@ ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 ft_striteri.c ft_strmapi.c \
 ft_split.c ft_strtrim.c
 
-LISTS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c
+LISTS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
+ ft_lstlast_bonus.c ft_lstadd_back_bonus.c
 
 OBJS = $(P1FILES:.c=.o) $(P2FILES:.c=.o)
 BONUS_OBJS = $(LISTS:.c=.o)
@@ -32,8 +33,8 @@ $(NAME): $(OBJS) $(INCLUDE)
 	@echo  "Created $(NAME)"
 
 bonus: $(OBJS) $(BONUS_OBJS) $(INCLUDE)
-	@ar -rcs $(NAME) $^
-	@touch $@
+	@ar -rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+	@touch bonus
 
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS)
@@ -47,6 +48,10 @@ re: fclean all
 
 compile:
 	@make && make clean
+	@$(CC) $(CFLAGS) main.c libft.a -o main.o
+
+c_bonus:
+	@make bonus && make clean
 	@$(CC) $(CFLAGS) main.c libft.a -o main.o
 
 so:
