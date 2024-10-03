@@ -6,28 +6,10 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 22:02:07 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/19 22:02:09 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:06:38 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-/* void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	size_t				i;
-	char unsigned		*dst_cpy;
-	const char unsigned	*src_cpy;
-
-	i = 0;
-	dst_cpy = (unsigned char *)dest;
-	src_cpy = (const unsigned char *)src;
-	while (i < n)
-	{
-		dst_cpy[i] = src_cpy[i];
-		i++;
-	}
-	return (dst_cpy);
-} */
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)

@@ -6,12 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 16:25:24 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/01 17:23:29 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/03 14:05:58 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
