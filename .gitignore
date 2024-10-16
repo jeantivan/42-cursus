@@ -1,2 +1,4 @@
 # VM en mi laptop
 born2beroot
+*.o
+*.a
