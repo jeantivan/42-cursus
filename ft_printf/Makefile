@@ -1,10 +1,10 @@
-NAME = ft_printf.a
+NAME = libftprintf.a
 
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-INCLUDE = ft_printf.h
+INCLUDE = ft_printf.h 
 
 CFILES = ft_printf.c
 
@@ -29,4 +29,4 @@ compile:
 	@make && make clean
 	@$(CC) $(CFLAGS) main.c $(NAME) -o main.o
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
