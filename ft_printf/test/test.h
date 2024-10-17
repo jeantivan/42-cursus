@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:01:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/16 19:10:31 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/17 19:55:18 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	ft_test_digit(void);
 void	ft_test_int(void);
 void	ft_test_u(void);
 void	ft_test_x(void);
-void	ft_test_X(void);
+void	ft_test_p(void);
 
 #endif
