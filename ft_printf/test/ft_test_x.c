@@ -2,7 +2,7 @@
 
 void	ft_test_x(void)
 {
-		int test;
+	int	test;
 
 	printf(ANSI_COLOR_BLUE "\n--- Test printf behavior with x ---" ANSI_COLOR_RESET "\n");
 	test = printf("%x", 1);

@@ -18,6 +18,7 @@ int	main(int argc, char *argv[])
 		ft_test_u();
 		ft_test_x();
 		ft_test_p();
+		ft_test_void();
 	}
 	else
 	{
@@ -40,7 +41,8 @@ int	main(int argc, char *argv[])
 			ft_test_x();
 		else if (test_n == 9)
 			ft_test_p();
-
+		else if (test_n == 10)
+			ft_test_void();
 	}
 	return (0);
 }
