@@ -1,6 +1,19 @@
 #include "test.h"
 #include <stdlib.h>
 
+void	ft_run_all_test(void)
+{
+	ft_test_base();
+	ft_test_null();
+	ft_test_char();
+	ft_test_string();
+	ft_test_digit();
+	ft_test_int();
+	ft_test_u();
+	ft_test_x();
+	ft_test_p();
+	ft_test_void();
+}
 int	main(int argc, char *argv[])
 {
 	int	test_n;
@@ -8,18 +21,7 @@ int	main(int argc, char *argv[])
 	if (argc >= 3)
 		return (1);
 	else if (argc <= 1)
-	{
-		ft_test_base();
-		ft_test_null();
-		ft_test_char();
-		ft_test_string();
-		ft_test_digit();
-		ft_test_int();
-		ft_test_u();
-		ft_test_x();
-		ft_test_p();
-		ft_test_void();
-	}
+		ft_run_all_test();
 	else
 	{
 		test_n = atoi(argv[1]);
