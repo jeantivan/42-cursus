@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 17:47:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/21 17:48:48 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:50:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_putstr(char *s)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (ft_putstr("(null)"));
 	while (s[i])
 	{
 		i += ft_putchar(s[i]);
