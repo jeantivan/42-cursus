@@ -6,19 +6,25 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:39:36 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/21 19:22:08 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:14:32 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 #include <stdio.h>
+#include "libft/libft.h"
 
 int	main(void)
 {
 	int	counter;
+	int	x;
+	unsigned int ux;
 
-	counter = ft_printf("Hola %% asfas");
+	x = -4242;
+	ux = (unsigned int)x;
+	counter = ft_printf("Testing my own \n Porcentaje %%, c: %c seguimos, d: %d, i: %i, u: %u, p: %p, x: %x, X: %X", -128, 42, -402021, ux, &x, x, x);
+	printf("\nPrinted %i chars \n", counter);
+	counter = printf("Testing my own \n Porcentaje %%, c: %c seguimos, d: %d, i: %i, u: %u, p: %p, x: %x, X: %X", -128, 42, -402021, ux, &x, x, x);
 	printf("\nPrinted %i chars \n", counter);
 	return (0);
 }
