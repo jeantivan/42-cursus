@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:25:49 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/22 19:11:46 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/22 21:40:33 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	ft_handle_formater(char format, va_list args)
 	counter = 0;
 	if (format == '%')
 		counter += ft_putchar('%');
+	else if (format == 's')
+		counter += ft_putstr(va_arg(args, char *));
 	else if (format == 'c')
 		counter += ft_putchar(va_arg(args, int));
 	else if (format == 'i' || format == 'd')
