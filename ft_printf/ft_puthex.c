@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:53:04 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/22 19:17:16 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:44:47 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ int	ft_puthex(int nbr, int upper)
 		hex = ft_nbr_to_hex((unsigned int)nbr, HEX_UPPER);
 	else
 		hex = ft_nbr_to_hex((unsigned int)nbr, HEX_LOWER);
-	tot += ft_putstr(hex);
+	tot = ft_putstr(hex);
 	free(hex);
+	if (tot < 0)
+		return (-1);
 	return (tot);
 }

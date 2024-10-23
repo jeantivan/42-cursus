@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:06:38 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/22 19:18:04 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/23 13:41:32 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	ft_putpointer(void *p)
 	if (p == NULL)
 		return (ft_putstr("(nil)"));
 	tot = ft_putstr("0x");
+	if (tot == -1)
+		return (-1);
 	ptr = (uintptr_t)p;
 	address = ft_pointer_to_hex(ptr, HEX_LOWER);
 	tot += ft_putstr(address);
