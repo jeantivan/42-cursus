@@ -3,11 +3,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-LIBFT_DIR = ./libft
-
-LIBFT = $(LIBFT_DIR)/libft.a
-
-INCLUDE = -I $(LIBFT_DIR) -I .
+INCLUDE = -I .
 
 CFILES = utils.c ft_printf.c ft_putchar.c ft_putstr.c ft_putnbr.c ft_putpointer.c ft_puthex.c
 
@@ -25,17 +21,12 @@ $(NAME): $(OBJS)
 $(OBJS): $(CFILES)
 	$(CC) $(CFLAGS) -c $(CFILES) $(INCLUDE)
 
-# $(LIBFT):
-# 	make -C $(LIBFT_DIR)
-
 clean:
 	@rm -f $(OBJS)
-#	make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	@rm -f $(OBJS)
 	@rm -f $(NAME)
-#	make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
