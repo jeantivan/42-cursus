@@ -6,31 +6,41 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:39:36 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/22 21:57:53 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:08:39 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
-#include "libft/libft.h"
 #include <limits.h>
 
 int	main(void)
 {
 	int	counter;
-	/* int	x;
-	unsigned int ux;
+/*
+	FILE *file = fopen("test.txt", "a");
 
-	x = -4242;
-	ux = (unsigned int)x;
-	counter = ft_printf("Testing my own \n Porcentaje %%, c: %c seguimos, d: %d, i: %i, u: %u, p: %p, x: %x, X: %X", -128, 42, -402021, ux, &x, x, x);
-	printf("\nPrinted %i chars \n", counter);
-	counter = printf("Testing my own \n Porcentaje %%, c: %c seguimos, d: %d, i: %i, u: %u, p: %p, x: %x, X: %X", -128, 42, -402021, ux, &x, x, x);
-	printf("\nPrinted %i chars \n", counter); */
-	counter = ft_printf(" %i ", -1);
-	printf("\nPrinted %i chars \n", counter);
+	if (file == NULL) {
+       perror("Error opening file");
+       return 1;
+	}
+	//close(1);
+	counter = ft_printf("%");
+	fprintf(file, "ft_printf: Printed %i\n", counter);
+	printf("\n");
+	counter = printf("%");
+	fprintf(file, "printf: Printed %i\n", counter);
 
-	printf("\nPrinted %i chars \n", printf(" %i ", INT_MIN));
 
+	printf("\n");
+
+
+
+	fclose(file);
+ */
+	counter = ft_printf(" %s %s ", "", "-");
+	printf("\nTest: printed %i chars\n", counter);
+	counter = printf(" %s %s ", "", "-");
+	printf("\nTest: printed %i chars\n", counter);
 	return (0);
 }
