@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:20:33 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/22 19:17:38 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:06:13 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include "libft/libft.h"
 
 # define HEX_UPPER "0123456789ABCDEF"
 # define HEX_LOWER "0123456789abcdef"
