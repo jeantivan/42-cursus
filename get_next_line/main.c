@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:33:00 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/24 20:47:13 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/26 00:39:43 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,21 @@
 int	main(void)
 {
 	int	fd;
-	//int lines;
+	char	*line;
+	int lines;
 
-	//lines = 0;
+	lines = 0;
 	fd = open("./test/test01", O_RDONLY);
 	if (fd < 0)
 		return (1);
+	while ((line = get_next_line(fd)) && ++lines)
+	{
+		/* //printf("line nro: %i\n", lines);
+		if (lines % 2 == 0)
+			printf(ANSI_COLOR_GREEN"%s"ANSI_COLOR_RESET, line);
+		else
+			printf(ANSI_COLOR_MAGENTA"%s"ANSI_COLOR_RESET, line); */
+	}
 	/* while(lines <= 15)
 	{
 		if (lines % 2 == 0)
@@ -30,9 +39,7 @@ int	main(void)
 			printf(ANSI_COLOR_MAGENTA"%s"ANSI_COLOR_RESET, get_next_line(fd));
 		lines++;
 	} */
-	get_next_line(fd);
-	get_next_line(fd);
-	get_next_line(fd);
+
 	close(fd);
 	return (0);
 }

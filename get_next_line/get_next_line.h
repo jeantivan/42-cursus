@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:14:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/24 20:45:31 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/24 23:53:32 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-# ifndef BUFFER_SIZE
+//# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
-# endif
+//# endif
 
 # define ANSI_COLOR_RED     "\x1b[31m"
 # define ANSI_COLOR_GREEN   "\x1b[32m"
