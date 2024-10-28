@@ -2,8 +2,8 @@ NAME = gnl.o
 
 CC = gcc
 
-#CFLAGS = -Wall -Wextra -Werror -DBUFFER_SIZE=$(BUFFER_SIZE)
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=$(BUFFER_SIZE)
+#CFLAGS = -Wall -Wextra -Werror
 
 INCLUDE = get_next_line.h
 
@@ -25,7 +25,7 @@ fclean: clean
 re: fclean all
 
 exec: fclean
-	@make BUFFER_SIZE=42
+	@make BUFFER_SIZE=84
 	@echo "Executing $(NAME)"
 	./gnl.o
 
