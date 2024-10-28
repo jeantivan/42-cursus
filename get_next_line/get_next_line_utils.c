@@ -6,10 +6,9 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:33:26 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/24 20:52:56 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/28 18:04:02 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 
@@ -26,7 +25,7 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)(s + i));
 		i++;
 	}
-		if (c == '\0')
+	if (c == '\0')
 		return ((char *)(s + i));
 	return (NULL);
 }
