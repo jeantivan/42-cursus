@@ -1,6 +1,6 @@
 NAME = gnl.o
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=$(BUFFER_SIZE)
 #CFLAGS = -Wall -Wextra -Werror

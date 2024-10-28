@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 11:33:26 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/28 18:04:02 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/28 22:30:07 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,31 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+char	*ft_strdup(const char *s)
 {
-	size_t	src_length;
-	size_t	dest_length;
-	size_t	len_to_copy;
-	size_t	counter;
+	size_t	str_len;
+	char	*str_dup;
+	size_t	i;
 
-	src_length = ft_strlen(src);
-	dest_length = ft_strlen(dst);
-	if (size <= dest_length)
-		return (size + src_length);
-	len_to_copy = size - dest_length - 1;
-	if (len_to_copy > src_length)
-		len_to_copy = src_length;
-	counter = 0;
-	while (counter < len_to_copy)
+	i = 0;
+	str_len = ft_strlen(s);
+	str_dup = (char *)malloc((str_len + 1) * sizeof(char));
+	if (str_dup == NULL)
+		return (NULL);
+	while (i < str_len)
 	{
-		dst[dest_length + counter] = src[counter];
-		counter++;
+		str_dup[i] = s[i];
+		i++;
 	}
-	dst[dest_length + counter] = '\0';
-	return (dest_length + src_length);
+	str_dup[i] = '\0';
+	return (str_dup);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*new_str;
+	size_t	i;
+	size_t	j;
 	size_t	total_len;
 
 	if (!s1)
@@ -74,37 +72,44 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s2)
 		s2 = "";
 	total_len = ft_strlen(s1) + ft_strlen(s2);
-	new_str = (char *)malloc((total_len + 1) * sizeof(char));
+	new_str = (char *)malloc(total_len + 1);
 	if (!new_str)
 		return (NULL);
-	new_str[0] = '\0';
-	ft_strlcat(new_str, s1, total_len + 1);
-	ft_strlcat(new_str, s2, total_len + 1);
+	i = 0;
+	while (s1[i])
+	{
+		new_str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		new_str[i++] = s2[j++];
+	new_str[i] = '\0';
 	return (new_str);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
-	size_t	r_len;
+	size_t	i;
 	size_t	s_len;
 
 	if (!s)
 		return (NULL);
 	s_len = ft_strlen(s);
 	if (start >= s_len)
-	{
-		substr = (char *)malloc((1) * sizeof(char));
-		substr[0] = '\0';
-		return (substr);
-	}
-	r_len = s_len - start;
-	if (len < r_len)
-		r_len = len;
-	substr = (char *)malloc((r_len + 1) * sizeof(char));
+		return (ft_strdup(""));
+	if (len > s_len - start)
+		len = s_len - start;
+	substr = (char *)malloc(len + 1);
 	if (!substr)
 		return (NULL);
-	substr[0] = '\0';
-	ft_strlcat(substr, (s + start), r_len + 1);
+	i = 0;
+	while (i < len && s[start + i])
+	{
+		substr[i] = s[start + i];
+		i++;
+	}
+	substr[i] = '\0';
 	return (substr);
 }
