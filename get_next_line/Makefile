@@ -1,9 +1,9 @@
 NAME = gnl.o
 
-CC = cc
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=$(BUFFER_SIZE)
-#CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE=$(BUFFER_SIZE) -fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror
 
 INCLUDE = get_next_line.h
 
@@ -14,7 +14,7 @@ OBJS = $(CFILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(CC)  $(CFLAGS) $(INCLUDE) $(OBJS) -g -o $(NAME)
+	@$(CC)  $(CFLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)
@@ -25,7 +25,7 @@ fclean: clean
 re: fclean all
 
 exec: fclean
-	@make BUFFER_SIZE=84
+	@make BUFFER_SIZE=100000
 	@echo "Executing $(NAME)"
 	./gnl.o
 
