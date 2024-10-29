@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:14:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/28 22:30:15 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:36:22 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);
+void	*ft_safe_free(void **ptr);
 
 #endif /* get_next_line.h */
