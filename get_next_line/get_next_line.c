@@ -6,19 +6,20 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:26 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/28 22:38:53 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/29 16:36:08 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void	ft_safe_free(void **ptr)
+void	*ft_safe_free(void **ptr)
 {
 	if (ptr != NULL && *ptr != NULL)
 	{
 		free(*ptr);
 		*ptr = NULL;
 	}
+	return (NULL);
 }
 
 static int	ft_has_breakline(const char *s)
@@ -103,14 +104,13 @@ char	*get_next_line(int fd)
 	if (!ft_has_breakline(buff))
 	{
 		filled = ft_fill_buff(fd, &buff);
-		if (filled <= 0 && buff[0] == '\0')
-		{
-			ft_safe_free((void **)&buff);
-			return (NULL);
-		}
+		if (filled < 0)
+			return ft_safe_free((void **)&buff);
+		else if (filled == 0 && buff[0] == '\0')
+			return ft_safe_free((void **)&buff);
 	}
 	next_line = ft_extract_line(&buff);
 	if (!next_line)
-		ft_safe_free((void **)&buff);
+		return (ft_safe_free((void **)&buff));
 	return (next_line);
 }
