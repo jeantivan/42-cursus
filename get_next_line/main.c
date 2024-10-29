@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:33:00 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/28 22:40:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/29 18:26:21 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	read_file(char *path)
 			printf(ANSI_COLOR_GREEN"%s"ANSI_COLOR_RESET, line);
 		else
 			printf(ANSI_COLOR_MAGENTA"%s"ANSI_COLOR_RESET, line);
+		ft_safe_free((void **)&line);
 	}
 	close(fd);
 	printf(ANSI_COLOR_YELLOW"\n --- Printed %i lines ---\
@@ -42,5 +43,7 @@ int	main(void)
 	read_file("./test/test02.txt");
 	read_file("./test/test03.dict");
 	read_file("./test/test04");
+	read_file("./test/el_quijote.txt");
+	read_file("./test/1char.txt");
 	return (0);
 }
