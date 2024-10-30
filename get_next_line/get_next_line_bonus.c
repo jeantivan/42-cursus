@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:54:27 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/30 14:22:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:38:18 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ static ssize_t	ft_fill_buff(int fd, char **buff)
 	while (!ft_has_breakline(temp))
 	{
 		bytes_readed = read(fd, data_readed, BUFFER_SIZE);
-		if (bytes_readed <= 0)
+		if (bytes_readed < 0)
 		{
 			free(data_readed);
 			return (bytes_readed);
 		}
+		if (bytes_readed == 0)
+			break ;
 		data_readed[bytes_readed] = '\0';
 		temp = ft_strjoin(*buff, data_readed);
 		ft_safe_free((void **)buff);
@@ -79,7 +81,7 @@ static char	*ft_extract_line(char **buff)
 	temp = ft_substr(*buff, first_oc, buff_len - first_oc);
 	if (!temp)
 	{
-		ft_safe_free((void **)&temp);
+		ft_safe_free((void **)buff);
 		return (NULL);
 	}
 	ft_safe_free((void **)buff);
@@ -90,7 +92,7 @@ static char	*ft_extract_line(char **buff)
 char	*get_next_line(int fd)
 {
 	char		*next_line;
-	static char	*buff[MAX_FD_OPEN] = {NULL};
+	static char	*buff[1024];
 	ssize_t		filled;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)

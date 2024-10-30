@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:50:58 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/30 14:00:50 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:38:09 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
-# endif
-
-# ifndef MAX_FD_OPEN
-#  define MAX_FD_OPEN 256
 # endif
 
 # define ANSI_COLOR_RED     "\x1b[31m"
