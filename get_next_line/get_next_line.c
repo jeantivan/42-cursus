@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:26 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/29 16:36:08 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 12:50:13 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,9 @@ char	*get_next_line(int fd)
 	{
 		filled = ft_fill_buff(fd, &buff);
 		if (filled < 0)
-			return ft_safe_free((void **)&buff);
+			return (ft_safe_free((void **)&buff));
 		else if (filled == 0 && buff[0] == '\0')
-			return ft_safe_free((void **)&buff);
+			return (ft_safe_free((void **)&buff));
 	}
 	next_line = ft_extract_line(&buff);
 	if (!next_line)
