@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:50:58 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/30 17:38:09 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:46:43 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@
 # define ANSI_COLOR_CYAN    "\x1b[36m"
 # define ANSI_COLOR_RESET   "\x1b[0m"
 
-char	  *get_next_line(int fd);
-char	  *ft_strchr(const char *s, int c);
-char	  *ft_strjoin(char const *s1, char const *s2);
-size_t  ft_strlen(const char *s);
-char	  *ft_substr(char const *s, unsigned int start, size_t len);
-char	  *ft_strdup(const char *s);
-void	  *ft_safe_free(void **ptr);
+char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s);
+void	*ft_safe_free(void **ptr);
 
 #endif /* get_next_line_bonus.h */
-

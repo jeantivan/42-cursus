@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:33:00 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/29 18:26:21 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/30 17:49:21 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ void	read_file(char *path)
 		return ;
 	printf(ANSI_COLOR_YELLOW"\n --- Reading file %s fd: \
 	%i ---\n"ANSI_COLOR_RESET, path, fd);
-	while ((line = get_next_line(fd)) && ++lines)
+	line = get_next_line(fd);
+	while (line && ++lines)
 	{
 		if (lines % 2 == 0)
 			printf(ANSI_COLOR_GREEN"%s"ANSI_COLOR_RESET, line);
 		else
 			printf(ANSI_COLOR_MAGENTA"%s"ANSI_COLOR_RESET, line);
 		ft_safe_free((void **)&line);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	printf(ANSI_COLOR_YELLOW"\n --- Printed %i lines ---\
