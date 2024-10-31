@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:25:49 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/23 15:59:53 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:26:22 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	ft_printf_exec(char const *s, va_list args)
 			i += 2;
 			continue ;
 		}
-		else if (s[i] == '%' && i == 0 && s[i + 1] == '\0')
+		else if (s[i] == '%' && s[i + 1] == '\0')
 			return (-1);
 		temp = ft_putchar(s[i]);
 		counter += temp;
@@ -79,7 +79,6 @@ static int	ft_printf_exec(char const *s, va_list args)
 int	ft_printf(char const *s, ...)
 {
 	int		counter;
-	int		temp;
 	va_list	args;
 
 	counter = 0;
