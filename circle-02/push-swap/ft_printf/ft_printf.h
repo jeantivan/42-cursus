@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:20:33 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/23 16:06:13 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:49:28 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int		ft_putnbr_uns(unsigned int nbr);
 int		ft_putpointer(void *p);
 int		ft_puthex(int nbr, int upper);
 /* Utils */
-size_t	ft_strlen(const char *s);
+size_t	ft_strlength(const char *s);
 char	*ft_reverse_string(char *s);
 #endif /* ft_printf.h */

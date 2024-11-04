@@ -6,13 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:51:19 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/22 18:10:20 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/04 19:49:55 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlength(const char *s)
 {
 	size_t	i;
 
@@ -29,7 +29,7 @@ char	*ft_reverse_string(char *s)
 	char	temp_letter;
 
 	i = 0;
-	len = ft_strlen(s);
+	len = ft_strlength(s);
 	while (i < (len / 2))
 	{
 		temp_letter = s[i];
