@@ -6,43 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 18:54:41 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/09/25 18:54:44 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/04 18:38:10 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-/**
- * Función ft_split
- *
- * Descripción:
- *		Reserva (utilizando malloc(3)) un array de strings
- *		resultante de separar la string ’s’ en substrings
- *		utilizando el caracter ’c’ como delimitador. El
- *		array debe terminar con un puntero NULL.
- *
- * Input:
- *	s = "Lorem.ipsum.dolor.sit.amet.consectetur"
- *	c = '.'
- * Output:
- * 	char **r = {"Lorem", "ipsum", "dolor", "sit", "amet", "consectetur"}
- */
 
-/**
- * Algoritmo:
- *
- * 1- Recorrer s y contar las apariciones del delimitador c -> (int n_of_c)
- * 2- Alocar la memoria para el array de string -> (n + 1) * sizeof(char *)
- * 3- Crear una variable char *temp_s que almacenará la s
- *    desplazandose cada vez que se encuentre el delimitador;
- * 4- Crear una función auxiliar que recorra s la cantidad de veces
- *    que aparezca el delimitador
- */
-
-/**
- * En caso de que no se pueda asignar memoria en algún momento
- * se limpia la memoria que ya pudo haber sido asignada
- */
 static void	ft_free_memory(char **arr)
 {
 	int	i;
@@ -53,10 +23,6 @@ static void	ft_free_memory(char **arr)
 	free(arr);
 }
 
-/**
- * Se encuentran las cantidad de elementos (palabras)
- * que tendrá nuestro arreglo final.
- */
 static int	ft_find_n_of_el(char const *s, char c)
 {
 	int	n;
