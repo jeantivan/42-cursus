@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 19:54:02 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/11/04 19:17:45 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
+#include <stdlib.h>
 
-#include "error.h"
-#include "parser.h"
-
-int main(int argc, char **argv)
+void	*ft_safe_free(void **ptr)
 {
-	int	i;
-	t_list	*values;
-
-	if (argc <= 1)
-		return (print_error());
-	i = 1;
-	values = parse_values(argv, argc);
-	if (!values)
-		return (print_error());
-	print_parsed_values(values);
-	return (0);
+	if (ptr != NULL && *ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return (NULL);
 }

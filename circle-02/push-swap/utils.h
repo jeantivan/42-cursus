@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 19:54:02 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/11/04 19:18:01 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/11/04 19:30:49 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-#include "error.h"
-#include "parser.h"
+void	*ft_safe_free(void **ptr);
 
-int main(int argc, char **argv)
-{
-	int	i;
-	t_list	*values;
-
-	if (argc <= 1)
-		return (print_error());
-	i = 1;
-	values = parse_values(argv, argc);
-	if (!values)
-		return (print_error());
-	print_parsed_values(values);
-	return (0);
-}
+#endif /* utils.h */

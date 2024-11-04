@@ -1,33 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 19:54:02 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/11/04 18:23:01 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/11/04 18:25:49 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
+#ifndef ERROR_H
+# define ERROR_H
 
-#include "error.h"
-#include "parser.h"
+int	print_error(void);
 
-int main(int argc, char **argv)
-{
-	int	i;
-	t_list	*values;
-
-	if (argc <= 1)
-		return (print_error());
-	i = 1;
-	values = parse_values(argv, argc);
-	if (!values)
-		return (print_error());
-	print_parsed_values(values);
-	return (0);
-}
+#endif /* error.h */

@@ -12,7 +12,7 @@ PRINTF_DIR = ./ft_printf
 
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-CFILES = main.c
+CFILES = main.c error.c parser.c utils.c
 
 OBJS = $(CFILES:.c=.o)
 
@@ -29,7 +29,7 @@ $(OBJS): $(CFILES)
 	@$(CC) $(CFLAGS) -c $(CFILES) $(INCLUDES)
 
 $(LIBFT): 
-	make -C $(LIBFT_DIR)
+	make -C $(LIBFT_DIR) bonus
 
 $(PRINTF):
 	make -C $(PRINTF_DIR)
