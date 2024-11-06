@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 19:53:04 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:15:16 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ int	valid_el(char *el)
 	return (1);
 }
 
+int	valid_input(char *input)
+{
+	char	**inputs;
+	int		i;
+
+	i = 0;
+	inputs = ft_split(input, ' ');
+	while (inputs[i])
+	{
+		if (!valid_el(inputs[i]))
+		{
+			ft_free_split(inputs);
+			return (0);
+		}
+		i++;
+	}
+	ft_free_split(inputs);
+	return (1);
+}
+
+
+
 t_list	*parse_values(char **argv, size_t size)
 {
 	t_list	*head;
@@ -38,9 +60,8 @@ t_list	*parse_values(char **argv, size_t size)
 	t_list	*temp;
 
 	i = 1;
-	if (valid_el(argv[i]))
-		head = ft_lstnew(ft_strdup(argv[i++]));
-	else
+	head = new_node(ft_atoi(argv[i]));
+	if (!head)
 		return (NULL);
 	while (i < size)
 	{
@@ -49,21 +70,9 @@ t_list	*parse_values(char **argv, size_t size)
 			ft_lstclear(&head, free);
 			return (NULL);
 		}
-		temp = ft_lstnew(ft_strdup(argv[i]));
+		temp = new_node(ft_atoi(argv[i]));
 		ft_lstadd_back(&head, temp);
 		i++;
 	}
 	return (head);
-}
-
-void	print_parsed_values(t_list *values)
-{
-	t_list *temp;
-
-	temp = values;
-	while (temp)
-	{
-		ft_printf("%s\n", temp->content);
-		temp = temp->next;
-	}
 }

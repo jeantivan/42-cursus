@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:46:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 19:51:35 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:06:30 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 
 int		valid_el(char *el);
 t_list	*parse_values(char **argv, size_t size);
-void	print_parsed_values(t_list *values);
+int	valid_input(char *input);
 
 #endif /* parser.h */

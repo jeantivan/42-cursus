@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:18:01 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/06 19:01:01 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/11/06 19:03:21 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/11/06 19:15:05 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef LIST_H
+# define LIST_H
 
-void	*ft_safe_free(void **ptr);
-void	ft_free_split(char **splited);
+# include "libft/libft.h"
 
-#endif /* utils.h */
+void	print_list(t_list *list);
+t_list	*new_node(int val);
+
+#endif /* list.h */

@@ -1,19 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 19:18:01 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/06 19:01:01 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/11/06 19:04:53 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/11/06 19:15:13 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "list.h"
 
-void	*ft_safe_free(void **ptr);
-void	ft_free_split(char **splited);
+void	print_list(t_list *values)
+{
+	t_list	*temp;
+	int		*num;
 
-#endif /* utils.h */
+	temp = values;
+	while (temp)
+	{
+		num = (int *)temp->content;
+		ft_printf("%d\n", *num);
+		temp = temp->next;
+	}
+}
+
+t_list	*new_node(int val)
+{
+	int		*num;
+	t_list	*node;
+
+	num = (int *)malloc(sizeof(int));
+	if (!num)
+		return (NULL);
+	*num = val;
+	node = ft_lstnew(num);
+	return (node);
+}

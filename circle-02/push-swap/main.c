@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 19:54:02 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:47:23 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ int main(int argc, char **argv)
 	if (argc <= 1)
 		return (print_error());
 	i = 1;
+	while (argv[i])
+	{
+		if (!valid_input(argv[i]))
+		{
+			ft_printf("Invalid input %s\n", argv[i]);
+			return (print_error());
+		}
+		i++;
+	}
 	values = parse_values(argv, argc);
 	if (!values)
 		return (print_error());
