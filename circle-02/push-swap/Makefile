@@ -12,7 +12,7 @@ PRINTF_DIR = ./ft_printf
 
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-CFILES = main.c error.c parser.c utils.c
+CFILES = main.c error.c parser.c utils.c list.c
 
 OBJS = $(CFILES:.c=.o)
 
@@ -20,7 +20,7 @@ INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I .
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT) $(PRINTF)
+$(NAME): $(LIBFT) $(PRINTF) $(OBJS) 
 	@echo "Compling files..."
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF) $(INCLUDES)
 	@echo "Created $(NAME)"

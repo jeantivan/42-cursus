@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:18:01 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/06 19:01:01 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:34:57 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 
 void	*ft_safe_free(void **ptr);
 void	ft_free_split(char **splited);
+size_t	count_elements(char **inputs);
 
 #endif /* utils.h */
