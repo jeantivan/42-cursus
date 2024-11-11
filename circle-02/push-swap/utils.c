@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/07 16:51:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/11 19:12:49 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_free_split(char **splited)
 		ft_safe_free((void **)&splited[i]);
 		i++;
 	}
-	ft_safe_free((void **)splited);
+	ft_safe_free((void **)&splited);
 }
 
 size_t arr_length(char **arr)
@@ -74,6 +74,5 @@ size_t	count_elements(char **inputs)
 		ft_free_split(temp);
 		i++;
 	}
-	ft_free_split(temp);
 	return (count);
 }

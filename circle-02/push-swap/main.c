@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/07 16:48:42 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/11 19:04:29 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ int main(int argc, char **argv)
 	int	i;
 	//t_list	*values;
 	//char	**input;
-	//size_t	count;
+	size_t	count;
 
 	if (argc <= 1)
 		return (print_error());
+
 	i = 1;
 	while (argv[i])
 	{
@@ -37,8 +38,8 @@ int main(int argc, char **argv)
 		}
 		i++;
 	}
-	//count = count_elements(argv);
-	//printf("N of elements: %zu", count);
+	count = count_elements(argv);
+	printf("N of elements: %zu\n", count);
 	/* values = parse_values(argv, argc);
 	if (!values)
 		return (print_error());
