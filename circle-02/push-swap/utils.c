@@ -6,13 +6,14 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/11 19:12:49 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:47:04 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
 #include "libft/libft.h"
+#include "ft_printf/ft_printf.h"
 
 void	*ft_safe_free(void **ptr)
 {
@@ -24,19 +25,19 @@ void	*ft_safe_free(void **ptr)
 	return (NULL);
 }
 
-void	ft_free_split(char **splited)
+void	*ft_free_split(char **splited)
 {
 	int	i;
 
 	i = 0;
 	if (!splited)
-		return;
+		return (NULL);
 	while (splited[i])
 	{
 		ft_safe_free((void **)&splited[i]);
 		i++;
 	}
-	ft_safe_free((void **)&splited);
+	return (ft_safe_free((void **)&splited));
 }
 
 size_t arr_length(char **arr)
@@ -52,11 +53,13 @@ size_t arr_length(char **arr)
 void	print_arr(char **arr)
 {
 	int i = 0;
+	ft_printf("arr = {");
 	while (arr[i])
 	{
-		printf("%s\n", arr[i]);
+		ft_printf("%s, ", arr[i]);
 		i++;
 	}
+	ft_printf("NULL }\n");
 }
 
 size_t	count_elements(char **inputs)

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/07 16:53:38 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:47:31 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ft_printf/ft_printf.h"
 #include "utils.h"
 #include "list.h"
+#include <limits.h>
 
 int	valid_el(char *el)
 {
@@ -29,6 +30,10 @@ int	valid_el(char *el)
 			return (0);
 		i++;
 	}
+	if (ft_atoi(el) > INT_MAX)
+		return (0);
+	else if (ft_atoi(el) < INT_MIN)
+		return (0);
 	return (1);
 }
 
@@ -54,30 +59,53 @@ int	valid_input(char *input)
 	return (1);
 }
 
+int	check_duplicate(t_list *head, int new_val)
+{
+	t_list	*temp;
 
-t_list	*parse_values(char **argv, size_t size)
+	if (head)
+	{
+		temp = head;
+		while (temp)
+		{
+			if (*((int *)(temp->content)) == new_val)
+			{
+				ft_lstclear(&head, free);
+				return (1);
+			}
+			temp = temp->next;
+		}
+	}
+	return (0);
+}
+
+t_list	*parse_values(char **argv)
 {
 	t_list	*head;
-	size_t	i;
-	t_list	*temp;
-	ft_printf("Parsing...\n");
+	int		i;
+	int		j;
+	char	**input;
 
 	i = 1;
-	head = new_node(ft_atoi(argv[i]));
-	if (!head)
-		return (NULL);
-	ft_printf("First element... %i \n", ft_atoi(argv[i]));
-	i++;
-	while (i < size)
+	while (argv[i])
 	{
-		ft_printf("Element %i:  %i\n", i, ft_atoi(argv[i]));
-		if (!valid_el(argv[i]))
+		j = 0;
+		input = ft_split(argv[i], ' ');
+		while (input[j])
 		{
-			ft_lstclear(&head, free);
-			return (NULL);
+			if (i == 1 && j == 0)
+			{
+				head = new_node(ft_atoi(input[j]));
+				if (!head)
+					return (ft_free_split(input));
+				j++;
+				continue ;
+			}
+			if (check_duplicate(head, ft_atoi(input[j])))
+				return (ft_free_split(input));
+			ft_lstadd_back(&head, new_node(ft_atoi(input[j++])));
 		}
-		temp = new_node(ft_atoi(argv[i]));
-		ft_lstadd_back(&head, temp);
+		ft_free_split(input);
 		i++;
 	}
 	return (head);

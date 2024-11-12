@@ -44,7 +44,7 @@ void insert(HashTable *table, const char *key, int value)
 {
 	unsigned int	index;
 	Node			*node;
-	Node			*current;
+	//Node			*current;
 
 	index = hash(key);
 	node = (Node *)malloc(sizeof(Node));
@@ -86,8 +86,8 @@ void	free_map(HashTable *table)
 		{
 			temp = current;
 			current = current->next;
-			ft_safe_free(&(temp->key));
-			ft_safe_free(&temp);
+			ft_safe_free((void **)&(temp->key));
+			ft_safe_free((void **)&temp);
 		}
 		free(table->buckets);
 		free(table);
