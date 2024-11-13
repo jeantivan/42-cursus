@@ -6,14 +6,14 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/12 16:47:31 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:15:42 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
-#include "utils.h"
+#include "libft/libft.h"
 #include "list.h"
+#include "utils.h"
 #include <limits.h>
 
 int	valid_el(char *el)
@@ -79,13 +79,14 @@ int	check_duplicate(t_list *head, int new_val)
 	return (0);
 }
 
-t_list	*parse_values(char **argv)
+t_list	*parse_values(char **argv, int argc)
 {
 	t_list	*head;
 	int		i;
 	int		j;
 	char	**input;
 
+	(void)argc;
 	i = 1;
 	while (argv[i])
 	{

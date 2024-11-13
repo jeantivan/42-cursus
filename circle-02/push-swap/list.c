@@ -6,18 +6,19 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:04:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/12 16:47:44 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/13 18:12:24 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "list.h"
+#include "utils.h"
 
-void	print_list(t_list *values)
+void	show_stack(Stack *stack)
 {
 	t_list	*temp;
 	int		*num;
 
-	temp = values;
+	temp = stack->head;
 	ft_printf("head -> ");
 	while (temp)
 	{
@@ -27,7 +28,6 @@ void	print_list(t_list *values)
 	}
 	ft_printf("NULL \n");
 }
-
 
 t_list	*new_node(int val)
 {
@@ -40,4 +40,23 @@ t_list	*new_node(int val)
 	*num = val;
 	node = ft_lstnew(num);
 	return (node);
+}
+Stack	*add_to_stack(Stack *stack, t_list *node)
+{
+	if (!stack || !node)
+		return (NULL);
+	ft_lstadd_front(&stack->head, node);
+	stack->size++;
+	return (stack);
+}
+Stack	*create_stack(void)
+{
+	Stack	*stack;
+
+	stack = (Stack *)malloc(sizeof(Stack));
+	if (!stack)
+		return (NULL);
+	stack->head = NULL;
+	stack->size = 0;
+	return (stack);
 }
