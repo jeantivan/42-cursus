@@ -12,7 +12,7 @@ PRINTF_DIR = ./ft_printf
 
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-CFILES = main.c error.c parser.c utils.c list.c hash_table.c
+CFILES = main.c error.c utils.c stack.c parser.c
 
 OBJS = $(CFILES:.c=.o)
 
