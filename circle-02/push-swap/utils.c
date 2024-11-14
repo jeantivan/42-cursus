@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/12 16:47:04 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/14 22:21:48 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,42 +40,12 @@ void	*ft_free_split(char **splited)
 	return (ft_safe_free((void **)&splited));
 }
 
-size_t arr_length(char **arr)
+int arr_length(char **arr)
 {
-	size_t	count;
+	int	count;
 
 	count = 0;
 	while (arr[count])
 		count++;
-	return (count);
-}
-
-void	print_arr(char **arr)
-{
-	int i = 0;
-	ft_printf("arr = {");
-	while (arr[i])
-	{
-		ft_printf("%s, ", arr[i]);
-		i++;
-	}
-	ft_printf("NULL }\n");
-}
-
-size_t	count_elements(char **inputs)
-{
-	size_t	count;
-	int		i;
-	char	**temp;
-
-	count = 0;
-	i = 1;
-	while (inputs[i])
-	{
-		temp = ft_split(inputs[i], ' ');
-		count += arr_length(temp);
-		ft_free_split(temp);
-		i++;
-	}
 	return (count);
 }
