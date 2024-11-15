@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 22:29:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 12:54:34 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 15:03:13 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,17 @@ void	reverse_r(t_stack *stack)
 	last_n = temp_n->next;
 	temp_n->next = NULL;
 	ft_lstadd_front(&stack->head, last_n);
+}
+int	is_sorted(t_stack *stack)
+{
+	t_list	*temp_n;
+
+	temp_n = stack->head;
+	while (temp_n->next)
+	{
+		if (*((int *)temp_n->content) > *((int *)temp_n->next->content))
+			return (0);
+		temp_n = temp_n->next;
+	}
+	return (1);
 }

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.h                                       :+:      :+:    :+:   */
+/*   sort.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 22:30:25 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 14:54:24 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/11/15 15:03:38 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/11/15 15:10:00 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATIONS_H
-# define OPERATIONS_H
+#ifndef SORT_H
+# define SORT_H
 
-# include "libft/libft.h"
 # include "stack.h"
 
-void	swap(t_stack *stack);
-void	push(t_stack *stack_1, t_stack *stack_2);
-void	rotate(t_stack *stack);
-void	reverse_r(t_stack *stack);
-int		is_sorted(t_stack *stack);
+int	sort_stack(t_stack *stack_a);
 
-#endif /* operations.h */
+#endif /* sort.h */
