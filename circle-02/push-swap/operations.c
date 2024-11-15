@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 22:29:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 15:03:13 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:58:32 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	swap(t_stack *stack)
 
 void	push(t_stack *stack_1, t_stack *stack_2)
 {
-	int	*content;
+	t_list	*node;
 
 	if (!stack_1->head)
 		return ;
-	content = (int *)pop_from_stack(stack_1);
-	push_to_stack(stack_2, *content);
-	ft_safe_free((void **)&content);
+	node = pop_from_stack(stack_1);
+	node->next = NULL;
+	push_to_stack(stack_2, node);
 }
 
 void	rotate(t_stack *stack)

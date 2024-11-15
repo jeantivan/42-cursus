@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 15:12:24 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:20:09 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int argc, char **argv)
 		show_stack(stack_a);
 		ft_printf("\nSorting...\n");
 		operations = sort_stack(stack_a);
-		ft_printf("Stack sorted in %i operations\n", operations);
 		show_stack(stack_a);
+		ft_printf("Stack sorted in %i operations\n", operations);
 	}
 	else
 	{

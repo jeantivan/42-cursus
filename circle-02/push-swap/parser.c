@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 12:56:02 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:52:30 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_stack	*parse_values(char **argv, int argc)
 				ft_free_split(input);
 				return (free_stack(stack));
 			}
-			push_to_stack(stack, ft_atoi(input[j--]));
+			push_to_stack(stack, create_node(ft_atoi(input[j--])));
 		}
 		ft_free_split(input);
 	}

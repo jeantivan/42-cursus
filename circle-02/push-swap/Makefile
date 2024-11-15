@@ -45,6 +45,9 @@ fclean: clean
 
 re: fclean all
 
+test: all
+	./$(NAME) $(shell shuf -i 1-100 -n 10) 
+
 exec: all
 	./$(NAME)
 

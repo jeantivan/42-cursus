@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:03:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/14 20:49:22 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 16:45:42 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ typedef struct s_stack
 	int		size;
 }			t_stack;
 void		show_stack(t_stack *stack);
-t_stack		*create_stack(void);
 void		*free_stack(t_stack *stack);
-t_list		*push_to_stack(t_stack *stack, int val);
-void		*pop_from_stack(t_stack *stack);
+t_stack		*create_stack(void);
+t_list		*push_to_stack(t_stack *stack, t_list *node);
+t_list		*pop_from_stack(t_stack *stack);
+t_list		*create_node(int val);
 
 #endif /* stack.h */
