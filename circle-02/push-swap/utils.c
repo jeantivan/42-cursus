@@ -6,14 +6,14 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/14 22:21:48 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:56:21 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include "libft/libft.h"
 #include "ft_printf/ft_printf.h"
+#include "libft/libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void	*ft_safe_free(void **ptr)
 {
@@ -40,7 +40,7 @@ void	*ft_free_split(char **splited)
 	return (ft_safe_free((void **)&splited));
 }
 
-int arr_length(char **arr)
+int	arr_length(char **arr)
 {
 	int	count;
 

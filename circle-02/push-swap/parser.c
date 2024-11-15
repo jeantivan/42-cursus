@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/14 22:20:50 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:56:02 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "utils.h"
 #include <limits.h>
 
-static int	valid_el(char *el)
+static int	val_el(char *el)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ static int	valid_el(char *el)
 	return (1);
 }
 
-static int	check_duplicate(t_list *head, int new_val)
+static int	check_dup(t_list *head, int new_val)
 {
 	t_list	*temp;
 
@@ -71,12 +71,12 @@ t_stack	*parse_values(char **argv, int argc)
 		j = arr_length(input) - 1;
 		while (j >= 0)
 		{
-			if (!valid_el(input[j]) || check_duplicate(stack->head, ft_atoi(input[j])))
+			if (!val_el(input[j]) || check_dup(stack->head, ft_atoi(input[j])))
 			{
 				ft_free_split(input);
-			return (free_stack(stack));
+				return (free_stack(stack));
 			}
-				push_to_stack(stack, ft_atoi(input[j--]));
+			push_to_stack(stack, ft_atoi(input[j--]));
 		}
 		ft_free_split(input);
 	}
