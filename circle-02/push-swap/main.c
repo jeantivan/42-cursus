@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 17:20:09 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:16:38 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 	if (argc <= 1)
 		return (print_error());
 	stack_a = parse_values(argv, argc);
+	if (!stack_a)
+		return (print_error());
 	if (!is_sorted(stack_a))
 	{
 		ft_printf("Stack a is not sorted\n");
