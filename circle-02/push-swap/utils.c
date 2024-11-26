@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 12:56:21 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:02:33 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,31 @@ int	arr_length(char **arr)
 	while (arr[count])
 		count++;
 	return (count);
+}
+
+long int	ft_atol(const char *nptr)
+{
+	int	sign;
+	long int	result;
+
+	result = 0;
+	sign = 1;
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '-')
+	{
+		sign = -1;
+		nptr++;
+	}
+	else if (*nptr == '+')
+	{
+		nptr++;
+	}
+	while (*nptr && (*nptr >= '0' && *nptr <= '9'))
+	{
+		result = result * 10;
+		result = result + (*nptr - 48);
+		nptr++;
+	}
+	return (sign * result);
 }
