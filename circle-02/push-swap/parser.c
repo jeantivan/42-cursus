@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 16:52:30 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/26 19:15:08 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static int	val_el(char *el)
 			return (0);
 		i++;
 	}
-	if (ft_atoi(el) > INT_MAX)
-		return (0);
-	else if (ft_atoi(el) < INT_MIN)
+	if (ft_atoi(el) != ft_atol(el))
 		return (0);
 	return (1);
 }
