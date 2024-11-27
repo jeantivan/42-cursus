@@ -12,7 +12,7 @@ PRINTF_DIR = ./ft_printf
 
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-CFILES = main.c error.c utils.c stack.c parser.c operations.c sort_temp.c
+CFILES = main.c error.c utils.c stack.c parser.c operations.c sort_temp.c movs_1.c sort.c
 OBJS = $(CFILES:.c=.o)
 
 INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I .
@@ -46,9 +46,10 @@ fclean: clean
 re: fclean all
 
 test: all
-	./$(NAME) $(shell shuf -i 1-100 -n 10) 
+	
+#./$(NAME)  ${nums}
 
 exec: all
-	./$(NAME)
+	./$(NAME) $(shell shuf -i 1-100 -n 100 | tr '\n' ' ')
 
 .PHONY: all clean fclean re
