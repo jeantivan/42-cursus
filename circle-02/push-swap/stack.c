@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:04:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 17:00:58 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/26 20:20:50 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,13 @@ t_list	*pop_from_stack(t_stack *stack)
 	stack->size--;
 	node->next = NULL;
 	return (node);
+}
+
+int	peek(t_list *node)
+{
+	int val;
+
+	val = *((int *)node->content);
+
+	return (val);
 }
