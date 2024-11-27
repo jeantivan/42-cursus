@@ -6,40 +6,31 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:35:13 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 17:11:32 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:37:39 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf/ft_printf.h"
 #include "sort.h"
 #include "utils.h"
+#include "movs.h"
 
-int	sort_stack(t_stack *stack_a)
+int	sort_1(t_stack *stack_a, t_stack *stack_b)
 {
 	int		operations;
-	t_list	*temp_node;
-	t_stack	*stack_b;
+	int temp;
 
-	stack_b = create_stack();
 	operations = 0;
 	while (stack_a->size != 0)
 	{
-		temp_node = pop_from_stack(stack_a);
-		operations++;
-		while (stack_b->size != 0
-			&& *((int *)stack_b->head->content) > *((int *)temp_node->content))
-		{
-			push_to_stack(stack_a, pop_from_stack(stack_b));
-			operations += 2;
-		}
-		push_to_stack(stack_b, temp_node);
-		operations++;
+		temp = peek(stack_a->head);
+		if (stack_a->size >= 2)
+			operations+= ra(stack_a);
+		while (stack_b->size && peek(stack_b->head) > temp)
+			operations += pa(stack_a, stack_b);
+		operations += rra(stack_a) + pb(stack_a, stack_b);
 	}
 	while (stack_b->size != 0)
-	{
-		push_to_stack(stack_a, pop_from_stack(stack_b));
-		operations += 2;
-	}
-	free_stack(stack_b);
+		operations += pa(stack_a, stack_b);
 	return (operations);
 }
