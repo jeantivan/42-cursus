@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/26 20:19:35 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:10:44 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
+#include "stack.h"
 
 void	*ft_safe_free(void **ptr)
 {
@@ -75,4 +77,40 @@ long int	ft_atol(const char *nptr)
 		nptr++;
 	}
 	return (sign * result);
+}
+
+void		set_indexes(t_stack *stack)
+{
+	int	curr_min = INT_MAX;
+	int	switcher = 1;
+	int	index = 0;
+	t_list	*min_node;
+	t_list	*curr_node;
+
+	if (stack->size <= 1)
+		return ;
+
+	while (switcher)
+	{
+		switcher = 0;
+		curr_node = stack->head;
+		curr_min = INT_MAX;
+		while(curr_node)
+		{
+			if (peek(curr_node) < curr_min && curr_node->index == -1)
+			{
+
+				min_node = curr_node;
+				curr_min = peek(min_node);
+			}
+			curr_node = curr_node->next;
+		}
+		if (min_node->index == -1)
+		{
+			min_node->index = index;
+			index++;
+			switcher = 1;
+		}
+
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:11:30 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/01 19:15:14 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:32:48 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ char	*ft_strtrim(char const *s1, char const *set);
 typedef struct s_list
 {
 	void			*content;
+	int				index;
 	struct s_list	*next;
+
 }	t_list;
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);

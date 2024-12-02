@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 19:04:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/26 20:20:50 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:27:00 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	show_stack(t_stack *stack)
 	while (temp)
 	{
 		num = (int *)temp->content;
-		ft_printf("%d -> ", *num);
+		ft_printf("i: %d, %d -> ", temp->index, *num);
 		temp = temp->next;
 	}
 	ft_printf("NULL \n");
@@ -57,6 +57,7 @@ t_list	*create_node(int val)
 		return (NULL);
 	*num = val;
 	node = ft_lstnew(num);
+	node->index = -1;
 	return (node);
 }
 
