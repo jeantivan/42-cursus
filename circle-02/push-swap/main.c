@@ -6,19 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/30 22:57:18 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:29:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "error.h"
-#include "ft_printf/ft_printf.h"
-#include "libft/libft.h"
-#include "operations.h"
-#include "parser.h"
-#include "sort.h"
-#include "stack.h"
-#include "utils.h"
-#include <stdio.h>
+#include "push_swap.h"
 
 int	main(int argc, char **argv)
 {
@@ -31,7 +23,6 @@ int	main(int argc, char **argv)
 		return (print_error());
 	if (!is_sorted(stack_a))
 		sort(stack_a);
-	//show_stack(stack_a);
 	free_stack(stack_a);
 	return (0);
 }
