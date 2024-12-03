@@ -14,7 +14,7 @@ PRINTF_DIR = ./ft_printf
 
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-CFILES = main.c error.c utils.c stack.c parser.c operations.c extra.c push.c swap.c rotate.c r_rotate.c sort.c
+CFILES = main.c error.c utils.c stack.c parser.c operations.c extra.c push.c swap.c rotate.c r_rotate.c k_sort.c sort.c
 OBJS = $(CFILES:.c=.o)
 
 INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I .
