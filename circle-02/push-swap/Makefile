@@ -20,17 +20,19 @@ INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I .
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(PRINTF) $(OBJS) 
-	@echo "Compling files..."
+	@echo "\033[42;37m  Compilando PUSH_SWAP  \033[0m"
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF) $(INCLUDES)
 	@echo "Created $(NAME)"
 
 $(OBJS): $(CFILES)
 	@$(CC) $(CFLAGS) -c $(CFILES) $(INCLUDES)
 
-$(LIBFT): 
+$(LIBFT):
+	@echo "\033[43;37m    Compilando LIBFT    \033[0m"
 	make -C $(LIBFT_DIR) bonus
 
 $(PRINTF):
+	@echo "\033[44;37m    Compilando FT_PRINTF    \033[0m"
 	make -C $(PRINTF_DIR)
 
 clean:
