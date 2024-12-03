@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:27:50 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 22:42:02 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:40:11 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	show_stack(t_stack *stack)
 	while (temp)
 	{
 		num = (int *)temp->content;
-		ft_printf("i: %d, %d -> \n", temp->index, *num);
+		ft_printf("%d ->", *num);
 		temp = temp->next;
 	}
 	ft_printf("NULL \n");
