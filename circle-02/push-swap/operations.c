@@ -6,12 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 22:29:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/15 16:58:32 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:08:14 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-#include "utils.h"
+#include "push_swap.h"
 
 void	swap(t_stack *stack)
 {
@@ -61,17 +60,4 @@ void	reverse_r(t_stack *stack)
 	last_n = temp_n->next;
 	temp_n->next = NULL;
 	ft_lstadd_front(&stack->head, last_n);
-}
-int	is_sorted(t_stack *stack)
-{
-	t_list	*temp_n;
-
-	temp_n = stack->head;
-	while (temp_n->next)
-	{
-		if (*((int *)temp_n->content) > *((int *)temp_n->next->content))
-			return (0);
-		temp_n = temp_n->next;
-	}
-	return (1);
 }
