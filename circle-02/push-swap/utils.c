@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 15:54:20 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:08:09 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,34 @@ long int	ft_atol(const char *nptr)
 		nptr++;
 	}
 	return (sign * result);
+}
+
+int	ft_sqtr(int num)
+{
+	int	start;
+	int	end;
+	int	result;
+	int	mid;
+
+	if (num < 0)
+		return (-1);
+	if (num == 0 || num == 1)
+		return (num);
+	start = 0;
+	end = num;
+	result = 0;
+	while (start <= end)
+	{
+		mid = start + (end - start) / 2;
+		if (mid * mid == num)
+			return (mid);
+		else if (mid * mid < num)
+		{
+			result = mid;
+			start = mid + 1;
+		}
+		else
+			end = mid - 1;
+	}
+	return (result);
 }
