@@ -6,14 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 16:08:09 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 23:15:29 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "push_swap.h"
 
 void	*ft_safe_free(void **ptr)
 {
@@ -77,7 +74,7 @@ long int	ft_atol(const char *nptr)
 	return (sign * result);
 }
 
-int	ft_sqtr(int num)
+int	ft_sqrt(int num)
 {
 	int	start;
 	int	end;

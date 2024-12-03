@@ -6,11 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:21:32 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/04 18:25:43 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 22:27:05 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
+#include "push_swap.h"
 
 int	print_error(void)
 {
