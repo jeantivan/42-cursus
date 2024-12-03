@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/11/26 19:15:08 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:52:40 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,49 @@ static int	check_dup(t_list *head, int new_val)
 	return (0);
 }
 
+static t_list	*find_min(t_list *list)
+{
+	long int	curr_min;
+	t_list		*curr_node;
+	t_list		*min_node;
+
+	curr_node = list;
+	min_node = NULL;
+	curr_min = LONG_MAX;
+	while (curr_node)
+	{
+		if (peek(curr_node) < curr_min && curr_node->index == -1)
+		{
+			min_node = curr_node;
+			curr_min = peek(min_node);
+		}
+		curr_node = curr_node->next;
+	}
+	return (min_node);
+}
+static t_stack	*set_indexes(t_stack *stack)
+{
+	int		switcher;
+	int		index;
+	t_list	*min_node;
+
+	switcher = 1;
+	index = 0;
+	if (stack->size <= 0)
+		return (stack);
+	while (switcher)
+	{
+		switcher = 0;
+		min_node = find_min(stack->head);
+		if (min_node && min_node->index == -1)
+		{
+			min_node->index = index++;
+			switcher = 1;
+		}
+	}
+	return (stack);
+}
+
 t_stack	*parse_values(char **argv, int argc)
 {
 	t_stack	*stack;
@@ -78,5 +121,5 @@ t_stack	*parse_values(char **argv, int argc)
 		}
 		ft_free_split(input);
 	}
-	return (stack);
+	return (set_indexes(stack));
 }
