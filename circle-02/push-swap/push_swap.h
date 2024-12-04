@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:16:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 23:16:55 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 00:10:44 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int			rrr(t_stack *stack_a, t_stack *stack_b);
 
 /* Algorithm */
 int			sort(t_stack *stack_a);
+int			k_sort(t_stack *stack_a, t_stack *stack_b);
 
 /* Extra */
 int			peek(t_list *node);
