@@ -1,4 +1,5 @@
 push_swap
 bonus
+checker
 */*.o
 push_swap_visualizer/
