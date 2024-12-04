@@ -6,13 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:09:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 00:10:17 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:58:17 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	find_max_and_rotate(t_stack *stack)
+static int	find_max_and_rotate(t_stack *stack, char letter)
 {
 	int		op;
 	int		pos;
@@ -28,15 +28,7 @@ static int	find_max_and_rotate(t_stack *stack)
 		pos++;
 		curr = curr->next;
 	}
-	if (pos <= stack->size / 2)
-		while (pos--)
-			op += rb(stack);
-	else
-	{
-		pos = stack->size - pos;
-		while (pos--)
-			op += rrb(stack);
-	}
+	op += best_rotate(pos, stack, letter);
 	return (op);
 }
 
@@ -52,13 +44,13 @@ int	k_sort(t_stack *stack_a, t_stack *stack_b)
 	{
 		top = stack_a->head;
 		if (top->index <= stack_b->size)
-			op += pb(stack_a, stack_b);
+			op += px(stack_a, stack_b, 'b');
 		else if (top->index <= stack_b->size + k)
-			op += pb(stack_a, stack_b) + rb(stack_b);
+			op += px(stack_a, stack_b, 'b') + rx(stack_b, 'b');
 		else
-			op += ra(stack_a);
+			op += rx(stack_a, 'a');
 	}
 	while (stack_b->size)
-		op += find_max_and_rotate(stack_b) + pa(stack_a, stack_b);
+		op += find_max_and_rotate(stack_b, 'b') + px(stack_a, stack_b, 'a');
 	return (op);
 }
