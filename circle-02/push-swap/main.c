@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 22:29:53 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:09:39 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_stack	*stack_a;
 
 	if (argc <= 1)
-		return (print_error());
+		return (1);
 	stack_a = parse_values(argv, argc);
 	if (!stack_a)
 		return (print_error());
