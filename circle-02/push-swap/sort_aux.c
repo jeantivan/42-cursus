@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 17:36:56 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 17:51:45 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:57:36 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,24 @@ int	sort_stack_3(t_stack *stack, char letter)
 		op += rrx(stack, letter);
 	if (peek(stack->head) > peek(stack->head->next))
 		op += sx(stack, letter);
+	return (op);
+}
+
+int	best_rotate(int pos, t_stack *stack, char letter)
+{
+	int	op;
+
+	op = 0;
+	if (pos <= stack->size / 2)
+	{
+		while (pos--)
+			op += rx(stack, letter);
+	}
+	else
+	{
+		pos = stack->size - pos;
+		while (pos--)
+			op += rrx(stack, letter);
+	}
 	return (op);
 }
