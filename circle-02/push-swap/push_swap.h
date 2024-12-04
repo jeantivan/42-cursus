@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:16:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 20:04:10 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:17:00 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int			rrx(t_stack *stack, char letter);
 int			ss(t_stack *stack_a, t_stack *stack_b);
 int			rr(t_stack *stack_a, t_stack *stack_b);
 int			rrr(t_stack *stack_a, t_stack *stack_b);
-
 
 /* Algorithm aux */
 int			sort_stack_2(t_stack *stack, char letter);

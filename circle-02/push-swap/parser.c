@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 18:42:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 23:09:55 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:15:20 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ static t_list	*find_min(t_list *list)
 	}
 	return (min_node);
 }
-
 
 static t_stack	*set_indexes(t_stack *stack)
 {

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:27:50 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 23:40:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:16:46 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	show_stack(t_stack *stack)
 	ft_printf("NULL \n");
 	ft_printf("Stack size: %i\n", stack->size);
 }
-
 
 int	peek(t_list *node)
 {

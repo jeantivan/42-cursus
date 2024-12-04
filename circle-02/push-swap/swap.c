@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:19:04 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 17:50:10 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:17:52 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	sx(t_stack *stack, char letter)
 {
 	if (letter != 'a' && letter != 'b')
 		exit(EXIT_FAILURE);
-
 	swap(stack);
 	if (letter == 'a')
 		ft_printf("sa\n");

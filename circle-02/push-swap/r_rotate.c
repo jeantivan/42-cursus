@@ -6,12 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:21:31 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 18:26:52 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:17:14 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 
 int	rrx(t_stack *stack, char letter)
 {
