@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:16:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 17:50:50 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:28:05 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void		reverse_r(t_stack *stack);
 /* Movements */
 int			sx(t_stack *stack, char letter);
 int			px(t_stack *stack_a, t_stack *stack_b, char letter);
-int			rx(t_list *stack, char letter);
-int			rrx(t_list *stack, char letter);
+int			rx(t_stack *stack, char letter);
+int			rrx(t_stack *stack, char letter);
 int			ss(t_stack *stack_a, t_stack *stack_b);
 int			rr(t_stack *stack_a, t_stack *stack_b);
 int			rrr(t_stack *stack_a, t_stack *stack_b);

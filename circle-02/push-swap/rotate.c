@@ -6,13 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:21:07 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 17:50:47 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 18:27:05 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	rx(t_list *stack, char letter)
+int	rx(t_stack *stack, char letter)
 {
 	if (letter != 'a' && letter != 'b')
 		exit(EXIT_FAILURE);
