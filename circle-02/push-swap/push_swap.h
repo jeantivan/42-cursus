@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:16:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 00:10:44 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:50:50 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,20 @@ void		rotate(t_stack *stack);
 void		reverse_r(t_stack *stack);
 
 /* Movements */
-int			sa(t_stack *stack_a);
-int			sb(t_stack *stack_b);
+int			sx(t_stack *stack, char letter);
+int			px(t_stack *stack_a, t_stack *stack_b, char letter);
+int			rx(t_list *stack, char letter);
+int			rrx(t_list *stack, char letter);
 int			ss(t_stack *stack_a, t_stack *stack_b);
-int			pa(t_stack *stack_a, t_stack *stack_b);
-int			pb(t_stack *stack_a, t_stack *stack_b);
-int			ra(t_stack *stack_a);
-int			rb(t_stack *stack_b);
 int			rr(t_stack *stack_a, t_stack *stack_b);
-int			rra(t_stack *stack_a);
-int			rrb(t_stack *stack_b);
 int			rrr(t_stack *stack_a, t_stack *stack_b);
 
 /* Algorithm */
-int			sort(t_stack *stack_a);
+int			sort_stack_2(t_stack *stack, char letter);
+int			sort_stack_3(t_stack *stack, char letter);
+int			sort_stack_4(t_stack *stack_a, t_stack *stack_b);
 int			k_sort(t_stack *stack_a, t_stack *stack_b);
+int			sort(t_stack *stack_a);
 
 /* Extra */
 int			peek(t_list *node);
