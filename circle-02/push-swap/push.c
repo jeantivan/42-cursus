@@ -6,22 +6,25 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:19:58 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 23:13:18 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:49:39 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	pa(t_stack *stack_a, t_stack *stack_b)
+int	px(t_stack *stack_a, t_stack *stack_b, char letter)
 {
-	push(stack_b, stack_a);
-	ft_printf("pa\n");
-	return (1);
-}
-
-int	pb(t_stack *stack_a, t_stack *stack_b)
-{
-	push(stack_a, stack_b);
-	ft_printf("pb\n");
+	if (letter != 'a' && letter != 'b')
+		exit(EXIT_FAILURE);
+	if (letter == 'a')
+	{
+		push(stack_b, stack_b);
+		ft_printf("pa\n");
+	}
+	else
+	{
+		push(stack_a, stack_b);
+		ft_printf("pb\n");
+	}
 	return (1);
 }

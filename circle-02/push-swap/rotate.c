@@ -6,23 +6,21 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:21:07 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/03 23:13:03 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:50:47 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ra(t_stack *stack_a)
+int	rx(t_list *stack, char letter)
 {
-	rotate(stack_a);
-	ft_printf("ra\n");
-	return (1);
-}
-
-int	rb(t_stack *stack_b)
-{
-	rotate(stack_b);
-	ft_printf("rb\n");
+	if (letter != 'a' && letter != 'b')
+		exit(EXIT_FAILURE);
+	rotate(stack);
+	if (letter == 'a')
+		ft_printf("ra\n");
+	else
+		ft_printf("rb\n");
 	return (1);
 }
 
