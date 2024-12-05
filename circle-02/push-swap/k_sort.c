@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:09:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 18:58:17 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:11:00 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ int	k_sort(t_stack *stack_a, t_stack *stack_b)
 	{
 		top = stack_a->head;
 		if (top->index <= stack_b->size)
-			op += px(stack_a, stack_b, 'b');
+			op += px(stack_a, stack_b, 'b', true);
 		else if (top->index <= stack_b->size + k)
-			op += px(stack_a, stack_b, 'b') + rx(stack_b, 'b');
+			op += px(stack_a, stack_b, 'b', true) + rx(stack_b, 'b', true);
 		else
-			op += rx(stack_a, 'a');
+			op += rx(stack_a, 'a', true);
 	}
 	while (stack_b->size)
-		op += find_max_and_rotate(stack_b, 'b') + px(stack_a, stack_b, 'a');
+		op += find_max_and_rotate(stack_b, 'b') + px(stack_a, stack_b, 'a',
+				true);
 	return (op);
 }
