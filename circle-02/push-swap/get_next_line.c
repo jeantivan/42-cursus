@@ -6,11 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 17:34:26 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 22:51:29 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/05 18:25:02 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "checker.h"
 
 void	*gnl_safe_free(void **ptr)
 {
