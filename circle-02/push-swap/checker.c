@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	i = 0;
 	while (line)
 	{
-		ft_printf("Exe %s\n", line);
+		ft_printf("Mov %s", line);
 		handle_mov(stack_a, stack_b, line);
 		gnl_safe_free((void **)&line);
 		line = get_next_line(0);
