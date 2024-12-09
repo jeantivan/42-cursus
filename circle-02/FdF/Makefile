@@ -4,7 +4,7 @@ MAKEFLAGS += --no-print-directory
 
 CC = cc
 
-CFLAGS = -g -Wall -Werror -Wextra -Wunreachable-code -Ofast
+CFLAGS = -g -Wall -Werror -Wextra -Wunreachable-code -Ofast -lm
 
 LIBFT_DIR = ./libft
 
@@ -26,7 +26,7 @@ CFILES = main.c
 
 OBJS = $(CFILES:.c=.o)
 
-INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I $(GET_NEXT_LINE_DIR) -I $(MLX42)/include -I . 
+INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I $(GET_NEXT_LINE_DIR) -I $(MLX42)/include -I./include 
 
 all: libmlx $(NAME)
 

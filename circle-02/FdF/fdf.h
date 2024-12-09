@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/09 18:18:33 by jtivan-r         ###   ########.fr       */
+/*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
+/*   Updated: 2024/12/09 18:10:36 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef FDF_H
+# define FDF_H
 
-int	main(void)
-{
-	int		fd;
-	char	*line;
-	char	*line_cpy;
+# include "ft_printf/ft_printf.h"
+# include "get_next_line/get_next_line.h"
+# include "libft/libft.h"
 
-	fd = open("./test2.txt", O_RDONLY);
-	if (fd < 0)
-		perror("Error al intentar abrir el archivo");
-	return (0);
-}
+/* Parseo del map */
+
+
+#endif /* fdf.h */
