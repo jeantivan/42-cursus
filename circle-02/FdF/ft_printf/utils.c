@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:51:19 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/09 19:26:36 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/11 19:40:57 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t	str_len(const char *s)
 		i++;
 	return (i);
 }
+
 char	*ft_reverse_string(char *s)
 {
 	int		i;
