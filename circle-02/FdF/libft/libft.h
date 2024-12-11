@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:11:30 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/10/03 14:07:40 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:59:33 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+void				*ft_safe_free(void **ptr);
+void				*ft_free_split(char **splitted);
 
 #endif /* libft.h */
