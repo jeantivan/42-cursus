@@ -6,13 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:54:27 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/02 18:16:33 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:00:54 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_safe_free(void **ptr)
+static void	*ft_safe_free(void **ptr)
 {
 	if (ptr != NULL && *ptr != NULL)
 	{
