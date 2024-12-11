@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:20:13 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/11 18:13:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:19:52 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ int	ft_atoi_base(const char *s, char *base)
 	while (base[base_len])
 		base_len++;
 	while (*s && is_in_base(ft_tolower(*s), base))
-		result = result * base_len + base_index(*s++, base);
+	{
+		result = result * base_len + base_index(ft_tolower(*s), base);
+		s++;
+	}
 	return (result * sign);
 }
