@@ -6,50 +6,12 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:05:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/11 20:17:40 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:49:06 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-
-static int get_color(char *color)
-{
-	char	*r_str;
-	char	*g_str;
-	char	*b_str;
-
-	if (!val_hex(color))
-		return (DEFAULT_COLOR);
-	r_str = ft_substr(color, 2, 4);
-	g_str = ft_substr(color, 4, 6);
-	b_str = ft_substr(color, 6, 8);
-	ft_printf("r = %s g = %s b = %s\n", r_str, g_str, b_str);
-	ft_safe_free((void **)&r_str);
-	ft_safe_free((void **)&g_str);
-	ft_safe_free((void **)&b_str);
-	return 0;
-}
-
-t_point *get_point(char *el, int x, int y)
-{
-	char	**pieces;
-	t_point	*point;
-
-	pieces = ft_split(el, ',');
-	if (!pieces)
-		return (NULL);
-	point = (t_point *)malloc(sizeof(t_point));
-	if (!point)
-		return (NULL);
-	if (ft_arr_length(pieces) >= 2)
-		point->color = get_color(pieces[1]);
-	point->x = x;
-	point->y = y;
-	point->z = ft_atoi(pieces[0]);
-	ft_free_split(pieces);
-	return (point);
-}
 static bool valid_col(char **col)
 {
 	int		i;
@@ -74,7 +36,7 @@ static bool valid_col(char **col)
 	return (true);
 }
 
-static char	*get_row(int fd)
+char	*get_row(int fd)
 {
 	char	*raw_row;
 	char	*row;
@@ -84,13 +46,9 @@ static char	*get_row(int fd)
 	if (!raw_row)
 		return (NULL);
 	len = ft_strlen(raw_row);
-	if (raw_row[len - 1] == '\n')
-	{
-		row = ft_substr(raw_row, 0, ft_strlen(raw_row) - 1);
-		ft_safe_free((void **)&raw_row);
-	}
-	else
-		row = raw_row;
+	printf("len: %zu\n", len);
+	row = ft_substr(raw_row, 0, len - 1);
+	ft_safe_free((void **)&raw_row);
 	return (row);
 }
 
@@ -119,4 +77,64 @@ bool valid_map(int fd)
 		row = get_row(fd);
 	}
 	return (true);
+}
+
+
+int	get_map_dimensions(char *path_file)
+{
+	int		lines;
+	int		cols;
+	char	*row;
+	char	**col;
+	int		fd;
+
+	lines = 0;
+	fd = open(path_file, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_printf("Can't open file\n");
+		return (-1);
+	}
+	row = get_row(fd);
+	cols = -1;
+	while (row)
+	{
+		ft_printf("row: %s-\n", row);
+		lines++;
+		col = ft_split(row, ' ');
+		if (cols == -1)
+			cols = ft_arr_length(col);
+		if (cols != ft_arr_length(col) || !valid_col(col))
+		{
+			ft_printf("%s", row);
+			ft_printf("lines %i Cols %i cur_cols %i\n", lines, cols, ft_arr_length(col));
+			ft_free_split(col);
+			ft_safe_free((void **)&row);
+			close(fd);
+			return (0);
+		}
+		ft_free_split(col);
+		ft_safe_free((void **)&row);
+		row = get_next_line(fd);
+	}
+	close(fd);
+	return (cols * lines);
+}
+
+t_point	**parse_map(char *path_to_file)
+{
+	t_point		**points;
+
+	int dimensions = get_map_dimensions(path_to_file);
+
+	if (dimensions <= 0)
+	{
+		ft_printf("Dimensions %i\n", dimensions);
+		ft_error("Invalid map");
+	}
+	ft_printf("Dimensions %i\n", dimensions);
+	points = get_points(path_to_file, dimensions);
+	if (!points)
+		ft_error("While parsing the map");
+	return (points);
 }

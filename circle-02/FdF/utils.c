@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:09:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/11 23:57:41 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:38:12 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int get_color(char *color)
 	int 		b;
 	char 		base[] ="0123456789ABCDEF";
 
-	if (!val_hex(color))
-		return (DEFAULT_COLOR);
 	r = ft_atoi_base(color + 2, base);
 	g = ft_atoi_base(color + 4, base);
 	b = ft_atoi_base(color + 6, base);

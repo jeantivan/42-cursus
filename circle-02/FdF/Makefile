@@ -22,7 +22,7 @@ MLX42_DIR = ./MLX42
 
 MLX42 = $(MLX42_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-CFILES = main.c parser.c error.c utils.c
+CFILES = main.c parser.c error.c utils.c points.c
 
 OBJS = $(CFILES:.c=.o)
 
