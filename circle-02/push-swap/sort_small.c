@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 17:08:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/05 19:12:55 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/13 21:00:04 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	small_sort(t_stack *stack_a, t_stack *stack_b)
 
 	op = 0;
 	while (stack_a->size != 3)
-		op += find_min_and_rotate(stack_a, 'a') + px(stack_a, stack_b, 'b', true);
+		op += find_min_and_rotate(stack_a, 'a') + \
+		px(stack_a, stack_b, 'b', true);
 	op += sort_stack_3(stack_a, 'a');
 	while (stack_b->size)
 		op += px(stack_a, stack_b, 'a', true);
