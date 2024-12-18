@@ -4,7 +4,7 @@ MAKEFLAGS += --no-print-directory
 
 CC = cc
 
-CFLAGS = -g -Wall -Werror -Wextra -Wunreachable-code -Ofast 
+CFLAGS = -g  -Wunreachable-code -Ofast 
 
 LIBFT_DIR = ./libft
 
@@ -22,7 +22,7 @@ MLX42_DIR = ./MLX42
 
 MLX42 = $(MLX42_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-CFILES = main.c parser.c error.c utils.c points.c
+CFILES = main.c parser.c error.c utils.c map.c points.c draw.c
 
 OBJS = $(CFILES:.c=.o)
 
@@ -70,5 +70,8 @@ fclean: clean
 	make -C $(GET_NEXT_LINE_DIR) fclean
 
 re: fclean all
+
+test: 
+	./$(NAME) test.txt
 
 .PHONY: all clean fclean re

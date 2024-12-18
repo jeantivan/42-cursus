@@ -6,95 +6,88 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:03:40 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/12 18:43:26 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2024/12/18 23:54:25 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_point *get_point(char *el, int x, int y)
+void	ft_show_point(t_point point)
+{
+	printf("{ x: %i, y: %i, z: %i, x_iso: %.2f y_iso: %.2f color: %i }\n", \
+	point.x, point.y, point.z, point.x_iso, point.y_iso ,point.color);
+}
+
+static void	get_point(char *el, int x, int y, t_point *point)
 {
 	char	**pieces;
-	t_point	*point;
+	float	sin30 = 1.0 / 2.0;
+	float	cos30 = sqrt(3.0) / 2.0;
 
+	if (!valid_point(el))
+	{
+		point = NULL;
+		return ;
+	}
 	pieces = ft_split(el, ',');
 	if (!pieces)
-		return (NULL);
-	point = (t_point *)malloc(sizeof(t_point));
-	if (!point)
-		return (NULL);
-	if (ft_arr_length(pieces) >= 2)
+	{
+		point = NULL;
+		return ;
+	}
+	if (ft_arr_len(pieces) >= 2)
 		point->color = get_color(pieces[1]);
 	else
 		point->color = get_color(DEFAULT_COLOR);
 	point->x = x;
 	point->y = y;
 	point->z = ft_atoi(pieces[0]);
+	point->x_iso = (x * cos30) - (y * cos30);
+	point->y_iso = (-point->z + (x * sin30)) +(y * sin30);
 	ft_free_split(pieces);
-	return (point);
 }
 
-bool row_to_points(char *row, int x, t_point **points)
+static bool	row_to_points(char *row, int y, t_point *points, int cols)
 {
 	t_point	*point;
 	char	**col;
-	int		y;
+	int		x;
 
-	y = 0;
+	x = 0;
 	col = ft_split(row, ' ');
-	while (col[y])
+	if (!valid_col(col, cols))
+		return (false);
+	while (col[x])
 	{
-		point = get_point(col[y], x, y);
+		point = &points[(cols * y) + x];
+		get_point(col[x], x, y, point);
 		if (!point)
+		{
+			ft_free_split(col);
 			return (false);
-		points[x + y] = point;
-		y++;
+		}
+		x++;
 	}
+	ft_free_split(col);
 	return (true);
 }
 
-void *ft_free_points(t_point **points)
+void	get_points(int fd, t_map *map)
 {
-	int	i;
-
-	i = 0;
-	if (!points)
-		return (NULL);
-	while (points[i])
-	{
-		ft_safe_free((void **)&points[i]);
-		i++;
-	}
-	ft_safe_free((void **)points);
-	return (NULL);
-}
-
-t_point **get_points(const char *path_to_file, int dimensions)
-{
-	t_point		**points;
-	int			fd;
 	char		*row;
 	int			line;
 
-	fd = open(path_to_file, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	points = (t_point **)malloc((dimensions + 1) * sizeof(t_point));
-	if (points)
-		return (NULL);
 	line = 0;
 	row = get_row(fd);
 	while (row)
 	{
-		if (!row_to_points(row, line, points))
+		if (!row_to_points(row, line++, map->points, map->cols))
 		{
-			close(fd);
-			return (ft_free_points(points));
+			ft_safe_free((void **)&map->points);
+			ft_safe_free((void **)&row);
+			return ;
 		}
-		line++;
 		ft_safe_free((void **)&row);
 		row = get_row(fd);
 	}
-	close(fd);
-	return (points);
 }
