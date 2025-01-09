@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/19 00:45:55 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/05 01:11:55 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,124 +14,162 @@
 #include <stdio.h>
 #include <time.h>
 
-double calculate_pixel_spacing(size_t total_points, double padding)
+void	get_center_coords(t_map *map)
 {
-	double	points_root;
-	double	base_spacing_x;
-	double	base_spacing_y;
-	double	spacing;
+	float	x_min;
+	float	x_max;
+	float	y_min;
+	float	y_max;
+	int		i;
 
-	points_root = sqrt(total_points);
-	base_spacing_x = (WIDTH * (1.0 - padding)) / points_root;
-	base_spacing_y = (HEIGHT * (1.0 - padding)) / points_root;
-	spacing = fmin(base_spacing_x, base_spacing_y);
-	return fmax(spacing, 1.0);
+	i = 0;
+	x_min = map->points[i].coords[X];
+	x_max = map->points[i].coords[X];
+	y_min = map->points[i].coords[Y];
+	y_max = map->points[i].coords[Y];
+	while (i < map->cols * map->rows)
+	{
+		if (map->points[i].coords[X] < x_min)
+			x_min = map->points[i].coords[X];
+		if (map->points[i].coords[X] > x_max)
+			x_max = map->points[i].coords[X];
+		if (map->points[i].coords[Y] < y_min)
+			y_min = map->points[i].coords[X];
+		if (map->points[i].coords[Y] > y_max)
+			y_max = map->points[i].coords[X];
+		i++;
+	}
+	map->x_center = (x_min + x_max) / 2;
+	map->y_center = (y_min + y_max) / 2;
+	map->x_offset = (WIDTH / 2) - map->x_center;
+	map->y_offset = (HEIGHT / 2) - map->y_center;
 }
 
-t_projection_offset calculate_centered_projection(t_screen_config *config) {
-	t_projection_offset offset;
+void	proyect_points(t_map *map)
+{
+	int	i;
 
-	// Calcular la raíz cuadrada del número de puntos
-	double points_root = sqrt(config->total_points);
-
-	// Redondear al siguiente entero para asegurar cubrimiento
-	int grid_size = ceil(points_root);
-
-	// Calcular espaciado base
-	double base_spacing_x = (config->width * (1.0 - config->padding)) / (grid_size * 2.5);
-	double base_spacing_y = (config->height * (1.0 - config->padding)) / (grid_size * 2.5);
-
-	// Tomar el mínimo para mantener proporción
-	offset.spacing = fmax(fmin(base_spacing_x, base_spacing_y), 1);
-
-	// Calcular área total ocupada por la proyección
-	double total_projection_width = offset.spacing * grid_size;
-	double total_projection_height = offset.spacing * grid_size;
-
-	// Calcular desplazamientos para centrar
-	offset.x_offset = (config->width - total_projection_width) / 2.0;
-	offset.y_offset = (config->height - total_projection_height) / 2.0;
-	return (offset);
+	i = 0;
+	while(i < map->cols * map->rows)
+	{
+		printf("\nAntes ");
+		ft_show_point(map->points[i]);
+		map->points[i] = rotate_x(map->points[i], map->ang[X]);
+		map->points[i] = rotate_y(map->points[i], map->ang[Y]);
+		map->points[i] = rotate_z(map->points[i], map->ang[Z]);
+		printf("Despues ");
+		ft_show_point(map->points[i]);
+		i++;
+	}
 }
 
-
-void	do_points_projection(t_map *map, t_screen_config *config)
+void	scale_points(t_map *map, float spacing)
 {
-	t_projection_offset	projection;
-	int					i;
-	t_point				*c_point;
+	int		i;
+	float	factor;
 
-	projection = calculate_centered_projection(config);
+	i = 0;
+	factor = map->scale + spacing;
+	while (i < map->cols * map->rows)
+	{
+
+		map->points[i].coords[X] = map->x_center + \
+		(map->points[i].coords[X] - map->x_center) * factor;
+		map->points[i].coords[Y] = map->y_center + \
+		(map->points[i].coords[Y] - map->y_center) * factor;
+		map->points[i].coords[Z] = map->points[i].coords[Z];
+		i++;
+	}
+}
+
+void	translate_points(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while(i < map->cols * map->rows)
+	{
+		map->points[i].coords[X] += map->x_offset;
+		map->points[i].coords[Y] += map->y_offset;
+		i++;
+	}
+}
+
+void	draw_points(mlx_image_t *image, t_map *map)
+{
+	t_point	point;
+	int		i;
+
 	i = 0;
 	while (i < map->cols * map->rows)
 	{
-		c_point = &map->points[i];
-		c_point->x_iso = projection.x_offset + c_point->x_iso * projection.spacing;
-		c_point->y_iso = projection.y_offset + c_point->y_iso * projection.spacing;
+		point = map->points[i];
+		ft_show_point(point);
+		if (point.coords[X] > 0 && point.coords[X] < WIDTH && \
+		point.coords[Y] > 0 && point.coords[Y] < HEIGHT)
+		{
+			mlx_put_pixel(image, point.coords[X], point.coords[Y], 0x000000FA);
+		}
 		i++;
 	}
 }
 
-void draw_isometric_map(mlx_image_t* image, t_map *map)
+void	draw_map(mlx_image_t* image, t_map *map)
 {
-	int		i;
+	// int		i;
 	t_point	c_point;
 
-	i = 0;
-	while (i < map->rows * map->cols)
-	{
-		c_point = map->points[i];
-		if (c_point.x_iso < image->width && c_point.y_iso < image->height) {
-			mlx_put_pixel(
-				image,
-				c_point.x_iso,
-				c_point.y_iso,
-				c_point.color  // Usar el color del punto original
-			);
-		}
-		if (i < map->rows * map->cols)
-		drawline(image, map->points[i], map->points[i + 1]);
-		i++;
-	}
+	printf("\nPuntos\n\n");
+	// i = 0;
+	draw_points(image, map);
+	printf("\n ----------- ---------- \n");
+	join_points(image, map);
+}
+
+void	prepare_map(t_map *map)
+{
+	proyect_points(map);
+	get_center_coords(map);
+	scale_points(map, 40);
+	translate_points(map);
 }
 
 void	render(t_map *map)
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
-	t_screen_config config = {
-		.width = WIDTH,
-		.height = HEIGHT,
-		.total_points = map->cols * map->rows,
-		.padding = 0.1
-};
 
-	mlx = mlx_init(config.width, config.height, "FdF", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "FdF", true);
 	if (!mlx)
 		ft_error("while rendering map");
-	img = mlx_new_image(mlx, config.width, config.height);
+	img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-	do_points_projection(map, &config);
-	draw_isometric_map(img, map);
+	prepare_map(map);
+	draw_map(img, map);
 	mlx_image_to_window(mlx, img, 0, 0);
-	int i = 0;
-	while(i < WIDTH)
-	{
-		mlx_put_pixel(img, i, (mlx->height / 2), 0xD00F5EFF);
-		i++;
-	}
-	i = 0;
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 }
 
-
+t_map	*init_map(t_map *map, char *file)
+{
+	map = create_map(file);
+	if (map)
+	{
+		map->scale = 1;
+		map->ang[X] = 30;
+		map->ang[Y] = 330;
+		map->ang[Z] = 30;
+	}
+	return (map);
+}
 
 int	main(int ac, char **av)
 {
 	char	*file;
 	int		fd;
 	t_map	*map;
+	t_meta	*meta;
 
 	if (ac != 2)
 		return (1);
@@ -140,11 +178,9 @@ int	main(int ac, char **av)
 	if (fd < 0)
 		ft_error("Bad file");
 	close(fd);
-	map = create_map(file);
+	map = init_map(map, file);
 	if (!map)
 		ft_error("While parsing the map");
-	//printf("Cols: %d Rows: %d -> %d\n", map->cols, map->rows, (map->cols*map->rows));
-
 	render(map);
 	ft_safe_free((void **)&map->points);
 	ft_safe_free((void **)&map);

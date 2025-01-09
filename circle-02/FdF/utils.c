@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:09:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/17 23:30:14 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/05 00:33:57 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,15 @@ bool	valid_hex(char *el)
 
 	len = ft_strlen(el);
 	if (!el || el[0] != '0' || (el[1] != 'x' && el[1] != 'X'))
+	{
+		printf("Color too short\n");
 		return (false);
-	if (len <= 3 || len != 5 || len != 8 || len != 6 || len != 10)
+	}
+	if (len <= 3 || (len != 5 && len != 8 && len != 6 && len != 10))
+	{
+		printf("Invalid len %zu\n", len);
 		return (false);
+	}
 	i = 2;
 	while (el[i])
 	{
@@ -73,17 +79,17 @@ static void	get_rgba(char *color, uint8_t *r, uint8_t *g, uint8_t *b, uint8_t *a
 	len = ft_strlen(color);
 	if (len == 8)
 	{
-		*r = ft_atoi_base(color, "0123456789ABCDEF");
-		*g = ft_atoi_base(color + 2, "0123456789ABCDEF");
-		*b = ft_atoi_base(color + 4, "0123456789ABCDEF");
-		*a = ft_atoi_base(color + 6, "0123456789ABCDEF");
+		*r = ft_atoi_base(color, HEX_LOWER);
+		*g = ft_atoi_base(color + 2, HEX_LOWER);
+		*b = ft_atoi_base(color + 4, HEX_LOWER);
+		*a = ft_atoi_base(color + 6, HEX_LOWER);
 	}
 	else if (len == 5)
 	{
-		*r = ft_atoi_base(color, "0123456789ABCDEF") * 17;
-		*g = ft_atoi_base(color + 1, "0123456789ABCDEF") * 17;
-		*b = ft_atoi_base(color + 2, "0123456789ABCDEF") * 17;
-		*a = ft_atoi_base(color + 3, "0123456789ABCDEF") * 17;
+		*r = ft_atoi_base(color, HEX_LOWER) * 17;
+		*g = ft_atoi_base(color + 1, HEX_LOWER) * 17;
+		*b = ft_atoi_base(color + 2, HEX_LOWER) * 17;
+		*a = ft_atoi_base(color + 3, HEX_LOWER) * 17;
 	}
 }
 
@@ -94,15 +100,15 @@ static void	get_rgb(char *color, uint8_t *r, uint8_t *g, uint8_t *b)
 	len = ft_strlen(color);
 	if (len == 6)
 	{
-		*r = ft_atoi_base(color, "0123456789ABCDEF");
-		*g = ft_atoi_base(color + 2, "0123456789ABCDEF");
-		*b = ft_atoi_base(color + 4, "0123456789ABCDEF");
+		*r = ft_atoi_base(color, HEX_LOWER);
+		*g = ft_atoi_base(color + 2, HEX_LOWER);
+		*b = ft_atoi_base(color + 4, HEX_LOWER);
 	}
 	else if (len == 4)
 	{
-		*r = ft_atoi_base(color, "0123456789ABCDEF") * 17;
-		*g = ft_atoi_base(color + 1, "0123456789ABCDEF") * 17;
-		*b = ft_atoi_base(color + 2, "0123456789ABCDEF") * 17;
+		*r = ft_atoi_base(color, HEX_LOWER) * 17;
+		*g = ft_atoi_base(color + 1, HEX_LOWER) * 17;
+		*b = ft_atoi_base(color + 2, HEX_LOWER) * 17;
 	}
 }
 
@@ -115,7 +121,10 @@ uint32_t	get_color(char *color)
 	uint8_t	a;
 
 	if (!valid_hex(color))
+	{
+		printf("Invalid hex!\n");
 		return (0x000000FF);
+	}
 	color += 2;
 	r = 0;
 	g = 0;

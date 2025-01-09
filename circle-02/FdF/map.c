@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/18 00:30:06 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/04 21:47:42 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ t_map	*create_map(char *path_to_file)
 		return (ft_safe_free((void **)&map));
 	map->points = (t_point *)malloc((map->rows * map->cols) * sizeof(t_point));
 	if (!map->points)
-	{
-		ft_safe_free((void **)&map);
-		return (NULL);
-	}
+		return (ft_safe_free((void **)&map));
 	get_points(fd, map);
 	close(fd);
 	if (!map->points)

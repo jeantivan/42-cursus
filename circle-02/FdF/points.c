@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:03:40 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/18 23:54:25 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/05 01:02:18 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 void	ft_show_point(t_point point)
 {
-	printf("{ x: %i, y: %i, z: %i, x_iso: %.2f y_iso: %.2f color: %i }\n", \
-	point.x, point.y, point.z, point.x_iso, point.y_iso ,point.color);
+	printf("{ x: %.2f, y: %.2f, z: %.2f, color: %u }\n", \
+	point.coords[X], point.coords[Y], point.coords[Z], point.color);
 }
 
 static void	get_point(char *el, int x, int y, t_point *point)
 {
 	char	**pieces;
-	float	sin30 = 1.0 / 2.0;
-	float	cos30 = sqrt(3.0) / 2.0;
 
 	if (!valid_point(el))
 	{
@@ -30,20 +28,13 @@ static void	get_point(char *el, int x, int y, t_point *point)
 		return ;
 	}
 	pieces = ft_split(el, ',');
-	if (!pieces)
-	{
-		point = NULL;
-		return ;
-	}
-	if (ft_arr_len(pieces) >= 2)
+	if (ft_strchr(el, ',') != 0)
 		point->color = get_color(pieces[1]);
 	else
 		point->color = get_color(DEFAULT_COLOR);
-	point->x = x;
-	point->y = y;
-	point->z = ft_atoi(pieces[0]);
-	point->x_iso = (x * cos30) - (y * cos30);
-	point->y_iso = (-point->z + (x * sin30)) +(y * sin30);
+	point->coords[X] = x;
+	point->coords[Y] = y;
+	point->coords[Z] = ft_atoi(pieces[0]);
 	ft_free_split(pieces);
 }
 
