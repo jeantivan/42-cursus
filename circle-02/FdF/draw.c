@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/05 01:13:19 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/13 17:05:19 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ void	join_points(mlx_image_t	*image, t_map *map)
 			if (x + 1 < map->cols)
 			{
 				right = &map->points[(map->cols * y) + (x + 1)];
-				drawline(image, *curr, *right, 0xfE024FFF);
+				drawline(image, *curr, *right, 255);
 			}
 			if ( y + 1 < map->rows)
 			{
 				bottom = &map->points[(map->cols * (y + 1)) + x];
-				drawline(image, *curr, *bottom, 0x00aaffF0);
+				drawline(image, *curr, *bottom, 255);
 			}
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:20:13 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/20 14:44:46 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/13 15:55:30 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_str_tolower(char *s)
 	i = 0;
 	while (s[i])
 	{
-		write(1, &s[i], 1);
-		s[i] = ft_tolower(s[i]);
+		//write(1, &s[i], 1);
+		s[i] = (char)ft_tolower(s[i]);
 		i++;
 	}
 }
@@ -88,7 +88,6 @@ int	ft_atoi_base(const char *s, char *base)
 
 	if (!validate_base(base))
 		return (0);
-	//ft_str_tolower(base);
 	while (*s == ' ' || (*s >= 9 && *s <= 13))
 		s++;
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:09:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/05 00:33:57 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/13 16:55:55 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,9 @@ bool	valid_hex(char *el)
 
 	len = ft_strlen(el);
 	if (!el || el[0] != '0' || (el[1] != 'x' && el[1] != 'X'))
-	{
-		printf("Color too short\n");
 		return (false);
-	}
 	if (len <= 3 || (len != 5 && len != 8 && len != 6 && len != 10))
-	{
-		printf("Invalid len %zu\n", len);
 		return (false);
-	}
 	i = 2;
 	while (el[i])
 	{
@@ -121,10 +115,7 @@ uint32_t	get_color(char *color)
 	uint8_t	a;
 
 	if (!valid_hex(color))
-	{
-		printf("Invalid hex!\n");
 		return (0x000000FF);
-	}
 	color += 2;
 	r = 0;
 	g = 0;

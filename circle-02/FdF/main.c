@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/05 01:11:55 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:08:13 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,27 +52,42 @@ void	proyect_points(t_map *map)
 	i = 0;
 	while(i < map->cols * map->rows)
 	{
-		printf("\nAntes ");
-		ft_show_point(map->points[i]);
 		map->points[i] = rotate_x(map->points[i], map->ang[X]);
 		map->points[i] = rotate_y(map->points[i], map->ang[Y]);
 		map->points[i] = rotate_z(map->points[i], map->ang[Z]);
-		printf("Despues ");
-		ft_show_point(map->points[i]);
 		i++;
 	}
 }
 
-void	scale_points(t_map *map, float spacing)
+bool	points_fit(t_map *map)
+{
+	int	i;
+	int x;
+	int	y;
+
+	i = 0;
+	while (i < map->rows * map->cols)
+	{
+		x = map->points[i].coords[X];
+		y = map->points[i].coords[Y];
+		x = (map->x_center + (x - map->x_center) * map->scale) + map->x_offset;
+		y = (map->y_center + (y - map->y_center) * map->scale) + map->y_offset;
+		if ( x < 10 || y < 10 || x > WIDTH - 10 || y > HEIGHT - 10)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+void	scale_points(t_map *map)
 {
 	int		i;
 	float	factor;
 
 	i = 0;
-	factor = map->scale + spacing;
+	factor = map->scale;
 	while (i < map->cols * map->rows)
 	{
-
 		map->points[i].coords[X] = map->x_center + \
 		(map->points[i].coords[X] - map->x_center) * factor;
 		map->points[i].coords[Y] = map->y_center + \
@@ -92,6 +107,19 @@ void	translate_points(t_map *map)
 		map->points[i].coords[X] += map->x_offset;
 		map->points[i].coords[Y] += map->y_offset;
 		i++;
+	}
+}
+
+void	fit_map(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (!points_fit(map))
+	{
+		map->scale -= 0.5;
+		if (map->scale == 1)
+			break ;
 	}
 }
 
@@ -129,8 +157,9 @@ void	draw_map(mlx_image_t* image, t_map *map)
 void	prepare_map(t_map *map)
 {
 	proyect_points(map);
+	fit_map(map);
+	scale_points(map);
 	get_center_coords(map);
-	scale_points(map, 40);
 	translate_points(map);
 }
 
@@ -156,7 +185,7 @@ t_map	*init_map(t_map *map, char *file)
 	map = create_map(file);
 	if (map)
 	{
-		map->scale = 1;
+		map->scale = 100;
 		map->ang[X] = 30;
 		map->ang[Y] = 330;
 		map->ang[Z] = 30;
