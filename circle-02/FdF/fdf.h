@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/04 22:31:16 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:07:03 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@
 # ifndef M_PI
 #  define M_PI (3.14159265358979323846)
 # endif
-# define WIDTH 1280
-# define HEIGHT 720
+# ifndef WIN_W
+#  define WIN_W 1280
+# endif
+# ifndef WIN_H
+#  define WIN_H 720
+# endif
 # define DEFAULT_COLOR "0x000000FF"
+# define MARGIN 10
 # define X 0
 # define Y 1
 # define Z 2
@@ -54,6 +59,7 @@ typedef struct s_map
 	int			rows;
 	int			cols;
 	t_point		*points;
+	float		center[2];
 	float		x_center;
 	float		y_center;
 	float		scale;
@@ -90,6 +96,8 @@ void		get_points(int fd, t_map *map);
 void		ft_show_point(t_point point);
 
 /* Matrix */
+void	matrix_init(float (*matrix)[3]);
+t_point	matmul(float matrix[3][3], t_point point);
 t_point	rotate_x(t_point point, float ang);
 t_point	rotate_y(t_point point, float ang);
 t_point	rotate_z(t_point point, float ang);

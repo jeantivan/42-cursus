@@ -6,13 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/04 19:26:48 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/05 00:49:05 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/14 18:05:52 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void matrix_init(float (*matrix)[3])
+void	matrix_init(float (*matrix)[3])
 {
 	int	i;
 	int	j;
@@ -30,7 +30,7 @@ static void matrix_init(float (*matrix)[3])
 	}
 }
 
-static t_point matmul(float matrix[3][3], t_point point)
+t_point	matmul(float matrix[3][3], t_point point)
 {
 	int		i;
 	int		k;
@@ -53,7 +53,7 @@ static t_point matmul(float matrix[3][3], t_point point)
 	return (r);
 }
 
-t_point rotate_x(t_point point, float ang)
+t_point	rotate_x(t_point point, float ang)
 {
 	float	rad;
 	float	matrix_proy[3][3];

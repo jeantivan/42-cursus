@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/13 17:05:19 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:42:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void drawline(mlx_image_t* image, t_point p0, t_point p1, uint32_t color)
 	int err = dx - dy;
 	while (1)
 	{
-		if (x0 > 0 && x0 < WIDTH && y0 > 0 && y0 < HEIGHT)
+		if (x0 > 0 && x0 < WIN_W && y0 > 0 && y0 < WIN_H)
 		{
 			mlx_put_pixel(image, x0, y0, color);
 		}
