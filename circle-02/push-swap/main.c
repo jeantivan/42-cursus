@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 13:29:05 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 20:09:39 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/09 20:28:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 		return (print_error());
 	if (!is_sorted(stack_a))
 		sort(stack_a);
+	//ft_printf("ra\n");
 	free_stack(stack_a);
 	return (0);
 }

@@ -6,11 +6,35 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:00:47 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/13 21:00:48 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:08:35 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
+
+void	read_movs(t_stack *stack_a, t_stack *stack_b)
+{
+	int		i;
+	char	*line;
+
+	line = get_next_line(0);
+	i = 0;
+	while (line)
+	{
+		handle_mov(stack_a, stack_b, line);
+		gnl_safe_free((void **)&line);
+		line = get_next_line(0);
+		i++;
+	}
+}
+
+void	check_status(t_stack *stack_a, t_stack *stack_b)
+{
+	if (is_sorted(stack_a) && stack_b->size == 0)
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
+}
 
 int	main(int ac, char **av)
 {
@@ -30,21 +54,9 @@ int	main(int ac, char **av)
 		free_stack(stack_a);
 		return (1);
 	}
-	line = get_next_line(0);
-	i = 0;
-	while (line)
-	{
-		ft_printf("Mov %s", line);
-		handle_mov(stack_a, stack_b, line);
-		gnl_safe_free((void **)&line);
-		line = get_next_line(0);
-		i++;
-	}
-	ft_printf("Se hicieron %i movimientos\n", i);
-	show_stack(stack_a);
-	show_stack(stack_b);
+	read_movs(stack_a, stack_b);
+	check_status(stack_a, stack_b);
 	free_stack(stack_a);
-	free_stack(stack_b);
 	gnl_safe_free((void **)&line);
 	return (0);
 }

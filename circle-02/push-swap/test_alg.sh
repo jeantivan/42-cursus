@@ -1,6 +1,6 @@
 #!/bin/bash
 
-test_cases=("5" "10" "100" "500")
+test_cases=("5" "10" "100" "500" "1000")
 test_n="20"
 
 BACKGROUND="\033[44;37m"
@@ -18,7 +18,7 @@ do
     i=0
     while [ $i -lt $test_n ]
     do
-        args=$(shuf -i 0-50 -n $test_case | tr '\n' ' ')
+        args=$(shuf -i 0-$test_case -n $test_case | tr '\n' ' ')
         checker=$(./push_swap $args | ./checker_linux $args)
         res="Checker: $checker | Mov: [$(./push_swap $args | wc -l)]"
         if [ "$checker" == "OK" ]; then
