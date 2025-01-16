@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/14 19:07:03 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/16 02:48:12 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@
 # ifndef WIN_H
 #  define WIN_H 720
 # endif
+# ifndef MARGIN
+#  define MARGIN 20
+# endif
 # define DEFAULT_COLOR "0x000000FF"
-# define MARGIN 10
 # define X 0
 # define Y 1
 # define Z 2
