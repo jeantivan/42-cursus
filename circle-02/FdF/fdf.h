@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/16 02:48:12 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:16:00 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,18 @@ t_point	rotate_x(t_point point, float ang);
 t_point	rotate_y(t_point point, float ang);
 t_point	rotate_z(t_point point, float ang);
 
+/* Proyection */
+void	get_center_coords(t_point *points, size_t len, float center[2]);
+void	ortho_proyection(t_point *points, size_t len);
+void	scale_points(t_point *points, size_t len, float factor);
+void	translate_points(t_point *points, size_t len, float move[2]);
+void	proyect_points(t_point *points, t_point *proyection,size_t len, float ang[3]);
+
 /* Drawing*/
 void		drawline(mlx_image_t *image, t_point p1, t_point p2, uint32_t color);
 void		join_points(mlx_image_t *image, t_map *map);
+
+/* Bresenham */
+void	plotLine(mlx_image_t *image, t_point point0, t_point point1);
 
 #endif /* fdf.h */
