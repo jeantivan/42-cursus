@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/14 19:24:54 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/16 02:49:45 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,64 +14,59 @@
 #include <stdio.h>
 #include <time.h>
 
-void	get_center_coords(t_map *map)
+void	get_center_coords(t_point *points, size_t len, float center[2])
 {
-	float	x_min;
-	float	x_max;
-	float	y_min;
-	float	y_max;
-	int		i;
+	float	min[2];
+	float	max[2];
+	size_t	i;
 
 	i = 0;
-	x_min = map->points[i].coords[X];
-	x_max = map->points[i].coords[X];
-	y_min = map->points[i].coords[Y];
-	y_max = map->points[i].coords[Y];
-	while (i < map->cols * map->rows)
+	min[X] = points[i].coords[X];
+	max[X] = points[i].coords[X];
+	min[Y] = points[i].coords[Y];
+	max[Y] = points[i].coords[Y];
+	while (i < len)
 	{
-		if (map->points[i].coords[X] < x_min)
-			x_min = map->points[i].coords[X];
-		if (map->points[i].coords[X] > x_max)
-			x_max = map->points[i].coords[X];
-		if (map->points[i].coords[Y] < y_min)
-			y_min = map->points[i].coords[X];
-		if (map->points[i].coords[Y] > y_max)
-			y_max = map->points[i].coords[X];
+		if (points[i].coords[X] < min[X])
+			min[X] = points[i].coords[X];
+		if (points[i].coords[X] > max[X])
+			max[X] = points[i].coords[X];
+		if (points[i].coords[Y] < min[Y])
+			min[Y] = points[i].coords[Y];
+		if (points[i].coords[Y] > max[Y])
+			max[Y] = points[i].coords[Y];
 		i++;
 	}
-	map->x_center = (x_min + x_max) / 2;
-	map->y_center = (y_min + y_max) / 2;
-	map->x_offset = (WIN_W / 2) - map->x_center;
-	map->y_offset = (WIN_H / 2) - map->y_center;
+	center[X] = (min[X] + max[X]) / 2;
+	center[Y] = (min[Y] + max[Y]) / 2;
 }
 
-void	proyect_points(t_map *map)
+void	ortho_proyection(t_point *points, size_t len)
 {
-	int		i;
-
-
-	i = 0;
-	while(i < map->cols * map->rows)
-	{
-		map->points[i] = rotate_x(map->points[i], map->ang[X]);
-		map->points[i] = rotate_y(map->points[i], map->ang[Y]);
-		map->points[i] = rotate_z(map->points[i], map->ang[Z]);
-		i++;
-	}
-}
-
-void	ortho_proyection(t_map *map)
-{
-	int	i;
+	size_t	i;
 	float	matrix_proy[3][3];
 
 	i = 0;
 	matrix_init(matrix_proy);
 	matrix_proy[0][0] = 1;
 	matrix_proy[1][1] = 1;
-	while (i < map->cols * map->rows)
+	while (i < len)
 	{
-		map->points[i] = matmul(matrix_proy, map->points[i]);
+		points[i] = matmul(matrix_proy, points[i]);
+		i++;
+	}
+}
+
+void	proyect_points(t_point *points, t_point *proyection,size_t len, float ang[3])
+{
+	size_t	i;
+
+	i = 0;
+	while(i < len)
+	{
+		proyection[i] = rotate_x(points[i], ang[X]);
+		proyection[i] = rotate_y(proyection[i], ang[Y]);
+		proyection[i] = rotate_z(proyection[i], ang[Z]);
 		i++;
 	}
 }
@@ -96,31 +91,32 @@ bool	points_fit(t_point *points, size_t len)
 	return (true);
 }
 
-void	scale_points(t_map *map)
+void	scale_points(t_point *points, size_t len, float factor)
 {
-	int		i;
-	float	factor;
+	size_t	i;
 
 	i = 0;
-	factor = map->scale;
-	while (i < map->cols * map->rows)
+	while (i < len)
 	{
-		map->points[i].coords[X] = map->points[i].coords[X] * factor;
-		map->points[i].coords[Y] = map->points[i].coords[Y] * factor;
-		map->points[i].coords[Z] = map->points[i].coords[Z];
+		points[i].coords[X] = (points[i].coords[X]) * factor;
+		points[i].coords[Y] = (points[i].coords[Y]) * factor;
 		i++;
 	}
 }
 
-void	translate_points(t_map *map)
+void	translate_points(t_point *points, size_t len, float move[2])
 {
-	int	i;
+	size_t	i;
+	float	x_off;
+	float	y_off;
 
 	i = 0;
-	while(i < map->cols * map->rows)
+	x_off = (WIN_W / 2) - move[X];
+	y_off = (WIN_H / 2) - move[Y];
+	while(i < len)
 	{
-		map->points[i].coords[X] += map->center[X];
-		map->points[i].coords[Y] += map->center[Y];
+		points[i].coords[X] += x_off;
+		points[i].coords[Y] += y_off;
 		i++;
 	}
 }
@@ -136,20 +132,6 @@ void	copy_points(t_point *dst, t_point *src, size_t len)
 		i++;
 	}
 }
-void	fit_map(t_map *map)
-{
-	int	i;
-	t_point *points;
-
-	i = 0;
-	points = (t_point *)malloc(sizeof(t_point) * map->cols * map->rows);
-	copy_points(points, map->points, map->rows * map->cols);
-	while (points_fit(points, map->cols * map->rows))
-	{
-
-		map->scale += 0.5;
-	}
-}
 
 void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 {
@@ -160,8 +142,8 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 	while (i < len)
 	{
 		point = points[i];
-		if (point.coords[X] > 0 && point.coords[X] < WIN_W && \
-		point.coords[Y] > 0 && point.coords[Y] < WIN_H)
+		if (point.coords[X] > MARGIN && point.coords[X] < WIN_W - MARGIN && \
+		point.coords[Y] > MARGIN && point.coords[Y] < WIN_H - MARGIN)
 		{
 			mlx_put_pixel(image, point.coords[X], point.coords[Y], 0x000000FA);
 			mlx_put_pixel(image, point.coords[X] - 1, point.coords[Y], 0x000000FA);
@@ -173,53 +155,52 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 	}
 }
 
-void	mark_center(mlx_image_t *image)
-{
-	float	center_x;
-	float	center_y;
-
-	center_x = image->width / 2;
-	center_y = image->height / 2;
-
-	mlx_put_pixel(image, center_x, center_y, 0xFF0000FF);
-
-	/* Laterales */
-	mlx_put_pixel(image, center_x - 1 , center_y, 0xFF0000FF);
-	mlx_put_pixel(image, center_x + 1, center_y, 0xFF0000FF);
-
-	/* Superiores */
-	mlx_put_pixel(image, center_x, center_y - 1, 0xFF0000FF);
-	mlx_put_pixel(image, center_x, center_y + 1, 0xFF0000FF);
-
-	/* Esquina UL*/
-	mlx_put_pixel(image, center_x - 1, center_y - 1, 0xFF0000FF);
-
-	/* Esquina UR*/
-	mlx_put_pixel(image, center_x + 1, center_y - 1, 0xFF0000FF);
-
-	/* Esquina DL */
-	mlx_put_pixel(image, center_x - 1, center_y + 1, 0xFF0000FF);
-
-	/* Esquina DR*/
-	mlx_put_pixel(image, center_x + 1, center_y + 1, 0xFF0000FF);
-}
-
 void	draw_map(mlx_image_t *image, t_map *map)
 {
-	mark_center(image);
-	//draw_points(image, map);
+	draw_points(image, map->points, map->cols * map->rows);
+	join_points(image, map);
+}
+
+void	show_points(t_point *points, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		ft_show_point(points[i]);
+		i++;
+	}
 }
 
 void	prepare_map(t_map *map, bool fit)
 {
-	int i;
-
-	proyect_points(map);
-	ortho_proyection(map);
-	get_center_coords(map);
-	if (fit)
-		fit_map(map);
+	int		i;
+	size_t	len;
+	t_point	*points;
+	float	center[2];
+	//TODO: GESTION DE MEMORIA
+	len = map->cols * map->rows;
+	points = (t_point *)malloc((len) * sizeof(t_point));
+	copy_points(points, map->points, len);
+	proyect_points(map->points, points, len, map->ang);
+	ortho_proyection(points, len);
+	scale_points(points, len, map->scale);
+	get_center_coords(points, len, center);
+	translate_points(points, len, center);
+	while (points_fit(points, len))
+	{
+		copy_points(points, map->points, len);
+		proyect_points(map->points, points, len, map->ang);
+		ortho_proyection(points, len);
+		scale_points(points, len, map->scale);
+		get_center_coords(points, len, center);
+		translate_points(points, len, center);
+		map->scale += .5;
+	}
+	map->points = points;
 }
+
 
 void	render(t_map *map)
 {
@@ -244,11 +225,10 @@ t_map	*init_map(t_map *map, char *file)
 	if (map)
 	{
 		map->scale = 1;
-		map->center.coords[X] = WIN_W / 2;
-		map->center.coords[Y] = WIN_H / 2;
-		map->center.coords[Z] = 0;
+		map->center[X] = WIN_W / 2;
+		map->center[Y] = WIN_H / 2;
 		map->ang[X] = 30;
-		map->ang[Y] = 330;
+		map->ang[Y] = -30;
 		map->ang[Z] = 30;
 	}
 	return (map);
