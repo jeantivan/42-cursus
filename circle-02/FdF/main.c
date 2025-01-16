@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/16 18:13:23 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/16 19:15:05 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 		if (point.coords[X] > MARGIN && point.coords[X] < WIN_W - MARGIN && \
 		point.coords[Y] > MARGIN && point.coords[Y] < WIN_H - MARGIN)
 		{
-			mlx_put_pixel(image, point.coords[X], point.coords[Y], 0x000000FA);
-			mlx_put_pixel(image, point.coords[X] - 1, point.coords[Y], 0x000000FA);
-			mlx_put_pixel(image, point.coords[X] + 1, point.coords[Y], 0x000000FA);
-			mlx_put_pixel(image, point.coords[X], point.coords[Y] - 1, 0x000000FA);
-			mlx_put_pixel(image, point.coords[X], point.coords[Y] + 1, 0x000000FA);
+			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y]), 0x000000FA);
+			mlx_put_pixel(image, round(point.coords[X] - 1), round(point.coords[Y]), 0x000000FA);
+			mlx_put_pixel(image, round(point.coords[X] + 1), round(point.coords[Y]), 0x000000FA);
+			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] - 1), 0x000000FA);
+			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] + 1), 0x000000FA);
 		}
 		i++;
 	}
@@ -76,7 +76,6 @@ void	draw_map(mlx_image_t *image, t_map *map)
 
 void	prepare_map(t_map *map, bool fit)
 {
-	int		i;
 	size_t	len;
 	t_point	*points;
 	float	center[2];
@@ -97,7 +96,13 @@ void	prepare_map(t_map *map, bool fit)
 		scale_points(points, len, map->scale);
 		get_center_coords(points, len, center);
 		translate_points(points, len, center);
-		map->scale += .5;
+		map->scale += .2;
+	}
+	int i = 0;
+	while (i < len)
+	{
+		ft_show_point(points[i]);
+		i++;
 	}
 	map->points = points;
 }
@@ -128,7 +133,7 @@ t_map	*init_map(t_map *map, char *file)
 		map->center[X] = WIN_W / 2;
 		map->center[Y] = WIN_H / 2;
 		map->ang[X] = 30;
-		map->ang[Y] = -30;
+		map->ang[Y] = 330;
 		map->ang[Z] = 30;
 	}
 	return (map);

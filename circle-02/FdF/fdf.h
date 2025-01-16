@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/16 18:16:00 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:59:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,4 +118,6 @@ void		join_points(mlx_image_t *image, t_map *map);
 /* Bresenham */
 void	plotLine(mlx_image_t *image, t_point point0, t_point point1);
 
+/* DDA */
+void DDA(mlx_image_t *image, t_point point0, t_point point1);
 #endif /* fdf.h */
