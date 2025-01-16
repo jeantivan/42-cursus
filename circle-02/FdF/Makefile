@@ -4,7 +4,7 @@ MAKEFLAGS += --no-print-directory
 
 CC = cc
 
-CFLAGS = -g  -Wunreachable-code -Ofast -DWIN_W=1300 -DWIN_H=680
+CFLAGS = -g  -Wunreachable-code -Ofast
 
 LIBFT_DIR = ./libft
 
@@ -28,6 +28,10 @@ OBJS = $(CFILES:.c=.o)
 
 INCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I $(GET_NEXT_LINE_DIR) -I $(MLX42_DIR)/include -I .
 
+WIN_W ?= 1920
+WIN_H ?= 1080
+MARGIN ?= 20
+
 all: libmlx $(NAME)
 
 $(MLX42): libmlx
@@ -37,11 +41,11 @@ libmlx:
 	@cmake --build $(MLX42_DIR)/build -j4
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDES)
+	@$(CC) $(CFLAGS) -DWIN_H=$(WIN_H) -DWIN_W=${WIN_W} -DMARGIN=${MARGIN} -o $@ -c $< $(INCLUDES)
 
 $(NAME): $(LIBFT) $(PRINTF) $(GET_NEXT_LINE) $(MLX42) $(OBJS) 
 	@echo "Compling files..."
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF) $(GET_NEXT_LINE) $(MLX42) $(INCLUDES)
+	@$(CC) $(CFLAGS)  $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF) $(GET_NEXT_LINE) $(MLX42) $(INCLUDES)
 	@echo "Created $(NAME)"
 
 $(LIBFT): 
