@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/16 19:15:05 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/16 23:43:07 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ bool	points_fit(t_point *points, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		x = points[i].coords[X];
-		y = points[i].coords[Y];
+		x = round(points[i].coords[X]);
+		y = round(points[i].coords[Y]);
 		if ( x < MARGIN ||x > WIN_W - MARGIN)
 			return (false);
 		if (y < MARGIN || y > WIN_H - MARGIN)
@@ -55,15 +55,15 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 	while (i < len)
 	{
 		point = points[i];
-		if (point.coords[X] > MARGIN && point.coords[X] < WIN_W - MARGIN && \
-		point.coords[Y] > MARGIN && point.coords[Y] < WIN_H - MARGIN)
-		{
-			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y]), 0x000000FA);
-			mlx_put_pixel(image, round(point.coords[X] - 1), round(point.coords[Y]), 0x000000FA);
-			mlx_put_pixel(image, round(point.coords[X] + 1), round(point.coords[Y]), 0x000000FA);
-			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] - 1), 0x000000FA);
-			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] + 1), 0x000000FA);
-		}
+		// if (point.coords[X] > MARGIN && point.coords[X] < WIN_W - MARGIN && \
+		// point.coords[Y] > MARGIN && point.coords[Y] < WIN_H - MARGIN)
+		// {
+			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y]), 0xFF0000FA);
+			mlx_put_pixel(image, round(point.coords[X] - 1), round(point.coords[Y]), 0xFF0000FA);
+			mlx_put_pixel(image, round(point.coords[X] + 1), round(point.coords[Y]), 0xFF0000FA);
+			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] - 1), 0xFF0000FA);
+			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] + 1), 0xFF0000FA);
+		// }
 		i++;
 	}
 }
@@ -71,7 +71,7 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 void	draw_map(mlx_image_t *image, t_map *map)
 {
 	draw_points(image, map->points, map->cols * map->rows);
-	join_points(image, map);
+	//join_points(image, map);
 }
 
 void	prepare_map(t_map *map, bool fit)
