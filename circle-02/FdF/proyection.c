@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:39:40 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/16 18:16:15 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:46:56 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	translate_points(t_point *points, size_t len, float move[2])
 	i = 0;
 	x_off = (WIN_W / 2) - move[X];
 	y_off = (WIN_H / 2) - move[Y];
-	while(i < len)
+	while (i < len)
 	{
 		points[i].coords[X] += x_off;
 		points[i].coords[Y] += y_off;
@@ -85,16 +85,16 @@ void	translate_points(t_point *points, size_t len, float move[2])
 	}
 }
 
-void	proyect_points(t_point *points, t_point *proyection,size_t len, float ang[3])
+void	proyect_points(t_point *points, t_point *proy, size_t len, float ang[3])
 {
 	size_t	i;
 
 	i = 0;
-	while(i < len)
+	while (i < len)
 	{
-		proyection[i] = rotate_x(points[i], ang[X]);
-		proyection[i] = rotate_y(proyection[i], ang[Y]);
-		proyection[i] = rotate_z(proyection[i], ang[Z]);
+		proy[i] = rotate_x(points[i], ang[X]);
+		proy[i] = rotate_y(proy[i], ang[Y]);
+		proy[i] = rotate_z(proy[i], ang[Z]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:05:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/18 20:42:15 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:44:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	valid_point(char *el)
 
 	point = ft_split(el, ',');
 	if (!point)
-		return false;
+		return (false);
 	if (!valid_num(point[0]))
 	{
 		ft_free_split(point);

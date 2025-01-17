@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:03:40 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/13 15:21:57 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/17 19:45:42 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ static void	get_point(char *el, int x, int y, t_point *point)
 		return ;
 	}
 	pieces = ft_split(el, ',');
-	// if (ft_strchr(el, ',') != 0)
-	// 	point->color = get_color(pieces[1]);
-	// else
 	point->color = get_color(DEFAULT_COLOR);
 	point->coords[X] = x;
 	point->coords[Y] = y;
