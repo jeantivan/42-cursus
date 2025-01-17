@@ -78,4 +78,7 @@ re: fclean all
 test: 
 	./$(NAME) test.txt
 
+laptop:
+	make WIN_W=1300 WIN_H=680
+
 .PHONY: all clean fclean re
