@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 20:40:25 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/17 21:44:11 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ t_map		*create_map(char *path_to_file);
 /* Points */
 void		get_points(int fd, t_map *map);
 void		ft_show_point(t_point point);
+bool		points_fit(t_point *points, size_t len);
+void		copy_points(t_point *dst, t_point *src, size_t len);
 
 /* Matrix */
 void		matrix_init(float (*matrix)[3]);
