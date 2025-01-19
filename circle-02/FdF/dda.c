@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:45:39 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 20:31:48 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:10:33 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static void	dda_aux(mlx_image_t *image, t_point p0, int steps, float inc[2])
 
 	x = p0.coords[X];
 	y = p0.coords[Y];
-	put_pixel(image, round(x), round(y), 255);
+	put_pixel(image, round(x), round(y), p0.color);
 	i = 0;
 	while (i < steps)
 	{
 		x += inc[X];
 		y += inc[Y];
-		put_pixel(image, round(x), round(y), 255);
+		put_pixel(image, round(x), round(y), p0.color);
 		i++;
 	}
 }
