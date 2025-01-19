@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/16 23:43:07 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/19 01:10:45 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,6 @@
 #include <stdio.h>
 #include <time.h>
 
-bool	points_fit(t_point *points, size_t len)
-{
-	size_t	i;
-	int		x;
-	int		y;
-
-	i = 0;
-	while (i < len)
-	{
-		x = round(points[i].coords[X]);
-		y = round(points[i].coords[Y]);
-		if ( x < MARGIN ||x > WIN_W - MARGIN)
-			return (false);
-		if (y < MARGIN || y > WIN_H - MARGIN)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-void	copy_points(t_point *dst, t_point *src, size_t len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		dst[i] = src[i];
-		i++;
-	}
-}
 
 void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 {
@@ -55,15 +24,7 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 	while (i < len)
 	{
 		point = points[i];
-		// if (point.coords[X] > MARGIN && point.coords[X] < WIN_W - MARGIN && \
-		// point.coords[Y] > MARGIN && point.coords[Y] < WIN_H - MARGIN)
-		// {
-			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y]), 0xFF0000FA);
-			mlx_put_pixel(image, round(point.coords[X] - 1), round(point.coords[Y]), 0xFF0000FA);
-			mlx_put_pixel(image, round(point.coords[X] + 1), round(point.coords[Y]), 0xFF0000FA);
-			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] - 1), 0xFF0000FA);
-			mlx_put_pixel(image, round(point.coords[X]), round(point.coords[Y] + 1), 0xFF0000FA);
-		// }
+		draw_dot(image, point);
 		i++;
 	}
 }
@@ -71,7 +32,7 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 void	draw_map(mlx_image_t *image, t_map *map)
 {
 	draw_points(image, map->points, map->cols * map->rows);
-	//join_points(image, map);
+	join_points(image, map);
 }
 
 void	prepare_map(t_map *map, bool fit)
@@ -79,7 +40,7 @@ void	prepare_map(t_map *map, bool fit)
 	size_t	len;
 	t_point	*points;
 	float	center[2];
-	//TODO: GESTION DE MEMORIA
+
 	len = map->cols * map->rows;
 	points = (t_point *)malloc((len) * sizeof(t_point));
 	copy_points(points, map->points, len);
@@ -98,12 +59,13 @@ void	prepare_map(t_map *map, bool fit)
 		translate_points(points, len, center);
 		map->scale += .2;
 	}
-	int i = 0;
+	size_t i = 0;
 	while (i < len)
 	{
 		ft_show_point(points[i]);
 		i++;
 	}
+	ft_safe_free((void **)&map->points);
 	map->points = points;
 }
 
@@ -144,7 +106,6 @@ int	main(int ac, char **av)
 	char	*file;
 	int		fd;
 	t_map	*map;
-	t_meta	*meta;
 
 	if (ac != 2)
 		return (1);
@@ -161,4 +122,15 @@ int	main(int ac, char **av)
 	ft_safe_free((void **)&map->points);
 	ft_safe_free((void **)&map);
 	return (0);
+
+	// (void)ac;
+	// (void)av;
+
+	// char* hex_color = "0xa19f"; // Ejemplo de entrada.
+	// uint32_t color = get_color(hex_color);
+	// uint32_t test = 0xa19f;
+	// //int test = ft_atoi_base("f", HEX_LOWER);
+
+	// printf("El entero RGBA para %s es: %u t: %u cmp: %i\n", hex_color, color, test, color == test);
+	return 0;
 }
