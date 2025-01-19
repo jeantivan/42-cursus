@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:05:23 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 19:44:53 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/18 00:19:31 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,50 @@ bool	valid_col(char **col, int expected_len)
 			ft_free_split(col);
 			return (false);
 		}
+		i++;
+	}
+	return (true);
+}
+
+bool	valid_hex(char *el)
+{
+	int		i;
+	size_t	len;
+
+	len = ft_strlen(el);
+	if (!el || el[0] != '0' || (el[1] != 'x' && el[1] != 'X'))
+		return (false);
+	if (len <= 3 || (len != 5 && len != 8 && len != 6 && len != 10))
+		return (false);
+	i = 2;
+	while (el[i])
+	{
+		if (!(('0' <= el[i] && el[i] <= '9') || \
+			('a' <= el[i] && el[i] <= 'f') || \
+			('A' <= el[i] && el[i] <= 'F')))
+		{
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+bool	valid_num(char *el)
+{
+	int	i;
+
+	i = 0;
+	if (!el || el[i] == '\0')
+		return (false);
+	if ((el[i] == '-' || el[i] == '+') && el[i + 1] == '\0')
+		return (false);
+	if (el[i] == '-' || el[i] == '+')
+		i++;
+	while (el[i])
+	{
+		if (!ft_isdigit(el[i]))
+			return (false);
 		i++;
 	}
 	return (true);
