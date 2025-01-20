@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/20 16:44:09 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:50:19 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,15 @@ typedef struct s_map
 	float		ang[3];
 }				t_map;
 
+typedef struct s_state
+{
+	mlx_t		*mlx;
+	mlx_image_t	*image;
+	t_map		*map;
+	bool		dots;
+	bool		join;
+}	t_state;
+
 typedef struct s_neighbors
 {
 	t_point	*right;
@@ -76,7 +85,6 @@ uint32_t	get_color(char *color);
 bool		valid_col(char **col, int expected_len);
 bool		valid_point(char *el);
 char		*get_row(int fd);
-t_map		*create_map(char *path_to_file);
 
 /* Points */
 void		get_points(int fd, t_map *map);
@@ -90,6 +98,15 @@ t_point		matmul(float matrix[3][3], t_point point);
 t_point		rotate_x(t_point point, float ang);
 t_point		rotate_y(t_point point, float ang);
 t_point		rotate_z(t_point point, float ang);
+
+/* Map */
+t_map		*init_map(t_map *map, char *file);
+void		clean_map(t_map *map);
+void		draw_map(t_state *state, bool fit);
+
+/* Map utils */
+void		get_map_dimensions(char *path_to_file, t_map *map);
+void		prepare_map(t_map *map, bool fit);
 
 /* Proyection */
 void		get_center_coords(t_point *points, size_t len, float center[2]);
@@ -110,5 +127,8 @@ void		draw_dot(mlx_image_t *image, t_point p);
 int			get_index(int x, int y, int cols);
 int			is_valid_point(int x, int y, int rows, int cols);
 t_neighbors	get_neighbors(int x, int y, t_map *map);
+
+/* Hooks */
+void		close_hook(mlx_key_data_t keydata, void *param);
 
 #endif /* fdf.h */
