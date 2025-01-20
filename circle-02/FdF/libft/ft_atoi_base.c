@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 17:20:13 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/13 15:55:30 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 14:44:29 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_str_tolower(char *s)
 	i = 0;
 	while (s[i])
 	{
-		//write(1, &s[i], 1);
 		s[i] = (char)ft_tolower(s[i]);
 		i++;
 	}
