@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 21:44:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:44:09 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define X 0
 # define Y 1
 # define Z 2
+
 typedef struct s_point
 {
 	float		coords[3];
@@ -60,7 +61,7 @@ typedef struct s_neighbors
 	t_point	*bottom;
 	bool	has_right;
 	bool	has_bottom;
-} t_neighbors;
+}	t_neighbors;
 
 /* Error */
 void		ft_error(char *error_message);
@@ -95,12 +96,13 @@ void		get_center_coords(t_point *points, size_t len, float center[2]);
 void		ortho_proyection(t_point *points, size_t len);
 void		scale_points(t_point *points, size_t len, float factor);
 void		translate_points(t_point *points, size_t len, float move[2]);
-void		proyect_points(t_point *points, t_point *proyection,\
- size_t len, float ang[3]);
+void		proyect_points(t_point *points, t_point *proyection, \
+size_t len, float ang[3]);
 
 /* Drawing*/
 void		put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
 void		dda(mlx_image_t *image, t_point point0, t_point point1);
+void		draw_points(mlx_image_t *image, t_point *points, size_t len);
 void		join_points(mlx_image_t *image, t_map *map);
 void		draw_dot(mlx_image_t *image, t_point p);
 

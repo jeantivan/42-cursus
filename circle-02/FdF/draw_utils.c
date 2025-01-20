@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 20:37:50 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 20:38:16 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:43:08 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_valid_point(int x, int y, int rows, int cols)
 
 t_neighbors	get_neighbors(int x, int y, t_map *map)
 {
-	t_neighbors neighbors;
+	t_neighbors	neighbors;
 
 	neighbors.right = NULL;
 	neighbors.bottom = NULL;

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:39:40 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 19:46:56 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:37:17 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	scale_points(t_point *points, size_t len, float factor)
 	}
 }
 
+// TODO: En lugar de utilizar los macros utilizar map->center
 void	translate_points(t_point *points, size_t len, float move[2])
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:45:39 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/19 01:10:33 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:42:53 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	get_delta(int delta[2], t_point p0, t_point p1)
 	delta[X] = p1.coords[X] - p0.coords[X];
 	delta[Y] = p1.coords[Y] - p0.coords[Y];
 }
+
 // TODO: Implentar el antialiasing
 static void	dda_aux(mlx_image_t *image, t_point p0, int steps, float inc[2])
 {

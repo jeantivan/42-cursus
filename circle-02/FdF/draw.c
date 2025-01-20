@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/17 20:40:28 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:19:21 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ void	draw_dot(mlx_image_t *image, t_point p)
 	put_pixel(image, round(p.coords[X] + 1), round(p.coords[Y]), p.color);
 	put_pixel(image, round(p.coords[X]), round(p.coords[Y] - 1), p.color);
 	put_pixel(image, round(p.coords[X]), round(p.coords[Y] + 1), p.color);
+}
+
+void	draw_points(mlx_image_t *image, t_point *points, size_t len)
+{
+	t_point	point;
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		point = points[i];
+		draw_dot(image, point);
+		i++;
+	}
 }
 
 void	join_points(mlx_image_t	*image, t_map *map)
