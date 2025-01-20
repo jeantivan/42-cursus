@@ -6,18 +6,18 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:06:27 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/19 00:57:25 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:16:10 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	hex_to_int(char *hex)
+static int	hex_to_int(char *hex)
 {
 	return (ft_atoi_base(hex, HEX_LOWER));
 }
 
-uint32_t	get_alpha(char *color, size_t len)
+static uint32_t	get_alpha(char *color, size_t len)
 {
 	int			factor;
 	char		*hex;
@@ -38,34 +38,21 @@ uint32_t	get_alpha(char *color, size_t len)
 	return (alpha);
 }
 
-uint32_t	get_rgb(char *color, size_t len)
+static uint32_t	get_rgb(char *color, int limit, int spacing)
 {
-	uint32_t	rgb;
 	int			i;
+	uint32_t	rgb;
 	char		*hex;
 
-	rgb = 0;
 	i = 0;
 	hex = NULL;
-	printf("color: %s, len: %zu\n", color, len);
-	if (len == 8 || len == 6)
-		while (i <= 4)
-		{
-			hex = ft_substr(color, i, 2);
-			printf("hex %s bits: %i\n", hex, (24 - 8 * (i / 2)));
-			rgb |= (uint32_t)hex_to_int(hex) << (24 - 8 * (i / 2));
-			ft_safe_free((void **)&hex);
-			i += 2;
-		}
-	else
-		while (i < 3)
-		{
-			hex = ft_substr(color, i, 1);
-			printf("hex %s bits: %i\n", hex, (24 - 8 * (i)));
-			rgb |= (uint32_t)(hex_to_int(hex)) << (24 - 8 * i);
-			ft_safe_free((void **)&hex);
-			i++;
-		}
+	rgb = 0;
+	while (i <= limit)
+	{
+		hex = ft_substr(color, i, spacing);
+		rgb |= (uint32_t)hex_to_int(hex) << (24 - 8 * (i / spacing));
+		i += spacing;
+	}
 	return (rgb);
 }
 
@@ -79,11 +66,15 @@ uint32_t	get_color(char *color)
 		return (0x00000000);
 	color += 2;
 	len = ft_strlen(color);
-	rgb = get_rgb(color, len);
-	// AABBCCDD ABCD
 	if (len == 8 || len == 4)
+	{
+		rgb = get_rgb(color, 4, 2);
 		a = get_alpha(color, len);
+	}
 	else
+	{
+		rgb = get_rgb(color, 2, 1);
 		a = 255;
+	}
 	return ((uint32_t)(rgb | a));
 }
