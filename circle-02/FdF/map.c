@@ -6,40 +6,13 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/04 21:47:42 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:43:49 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_map_dimensions(char *path_to_file, t_map *map)
-{
-	int		lines;
-	int		col_len;
-	char	*row;
-	char	**col;
-	int		fd;
-
-	fd = open(path_to_file, O_RDONLY);
-	lines = 0;
-	row = get_row(fd);
-	col = ft_split(row, ' ');
-	if (!col)
-		col_len = -1;
-	else
-		col_len = ft_arr_len(col);
-	ft_free_split(col);
-	while (row)
-	{
-		lines++;
-		ft_safe_free((void **)&row);
-		row = get_row(fd);
-	}
-	map->cols = col_len;
-	map->rows = lines;
-}
-
-t_map	*create_map(char *path_to_file)
+static t_map	*create_map(char *path_to_file)
 {
 	t_map	*map;
 	int		fd;
@@ -64,4 +37,37 @@ t_map	*create_map(char *path_to_file)
 		return (ft_safe_free((void **)&map));
 	}
 	return (map);
+}
+
+t_map	*init_map(t_map *map, char *file)
+{
+	map = create_map(file);
+	if (map)
+	{
+		map->scale = 1;
+		map->center[X] = WIN_W / 2;
+		map->center[Y] = WIN_H / 2;
+		map->ang[X] = 30;
+		map->ang[Y] = 330;
+		map->ang[Z] = 30;
+	}
+	return (map);
+}
+
+void	clean_map(t_map *map)
+{
+	ft_safe_free((void **)&map->points);
+	ft_safe_free((void **)&map);
+}
+
+void	draw_map(t_state *state, bool fit)
+{
+	size_t	len;
+
+	len = state->map->cols * state->map->rows;
+	prepare_map(state->map, fit);
+	if (state->dots)
+		draw_points(state->image, state->map->points, len);
+	if (state->join)
+		join_points(state->image, state->map);
 }
