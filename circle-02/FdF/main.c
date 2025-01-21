@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/20 18:49:51 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:54:01 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,28 @@
 
 t_state	*init(t_map *map)
 {
-	t_state		*state;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	t_state		*s;
+	size_t		size;
 
-	mlx = mlx_init(WIN_W, WIN_H, "FdF - jtivan-r", true);
-	if (!mlx)
+	s = (t_state *)malloc(sizeof(t_state));
+	if (!s)
 	{
 		clean_map(map);
-		ft_error("while rendering map");
+		ft_error("Failed to allocate memory");
+		return (NULL);
 	}
-	img = mlx_new_image(mlx, WIN_W, WIN_H);
-	if (!img)
-	{
-		clean_map(map);
-		mlx_terminate(mlx);
-		ft_error("while rendering map");
-	}
-	ft_memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-	state->mlx = mlx;
-	state->image = img;
-	state->map = map;
-	state->dots = false;
-	state->join = true;
-	return (state);
+	s->map = map;
+	s->dots = false;
+	s->join = true;
+	s->mlx = mlx_init(WIN_W, WIN_H, "FdF - jtivan-r", true);
+	if (!s->mlx)
+		return (clean_with_error(s, "Failed to allocate memory"));
+	s->image = mlx_new_image(s->mlx, WIN_W, WIN_H);
+	if (!s->image)
+		return (clean_with_error(s, "Failed to allocate memory"));
+	size = s->image->width * s->image->height * sizeof(int32_t);
+	ft_memset(s->image->pixels, 255, size);
+	return (s);
 }
 
 void	render(t_map *map)
@@ -49,9 +47,9 @@ void	render(t_map *map)
 	state = init(map);
 	draw_map(state, true);
 	mlx_image_to_window(state->mlx, state->image, 0, 0);
-	mlx_key_hook(state->mlx, &close_hook, NULL);
+	mlx_close_hook(state->mlx, &close_hook, state);
+	mlx_key_hook(state->mlx, &key_hook, state);
 	mlx_loop(state->mlx);
-	mlx_terminate(state->mlx);
 }
 
 int	main(int ac, char **av)
