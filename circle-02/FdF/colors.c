@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:06:27 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/20 15:16:10 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:29:30 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static uint32_t	get_rgb(char *color, int limit, int spacing)
 	{
 		hex = ft_substr(color, i, spacing);
 		rgb |= (uint32_t)hex_to_int(hex) << (24 - 8 * (i / spacing));
+		ft_safe_free((void **)&hex);
 		i += spacing;
 	}
 	return (rgb);
