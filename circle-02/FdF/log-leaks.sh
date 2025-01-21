@@ -6,7 +6,7 @@ else
   map="./test_maps/42.fdf"
 fi
 
-valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./maps map2.ber > valgrind_output.txt 2>&1
+valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./FdF test.txt > valgrind_output.txt 2>&1
 
 grep -A 5 -B 5 "definitely lost" valgrind_output.txt > filtered_leaks.txt
 
