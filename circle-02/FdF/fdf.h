@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/20 18:50:19 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:47:34 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_neighbors
 
 /* Error */
 void		ft_error(char *error_message);
+void		*clean_with_error(t_state *state, char *error_message);
 
 /* Utils */
 int			ft_arr_len(char **arr);
@@ -129,6 +130,7 @@ int			is_valid_point(int x, int y, int rows, int cols);
 t_neighbors	get_neighbors(int x, int y, t_map *map);
 
 /* Hooks */
-void		close_hook(mlx_key_data_t keydata, void *param);
+void		close_hook(void *param);
+void		key_hook(mlx_key_data_t keydata, void *param);
 
 #endif /* fdf.h */
