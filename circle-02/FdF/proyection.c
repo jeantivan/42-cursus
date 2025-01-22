@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 15:39:40 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/20 16:37:17 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:45:27 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,19 @@ void	scale_points(t_point *points, size_t len, float factor)
 	}
 }
 
-// TODO: En lugar de utilizar los macros utilizar map->center
-void	translate_points(t_point *points, size_t len, float move[2])
+void	translate_points(t_point *points, size_t len, float c[2], float m[2])
 {
 	size_t	i;
 	float	x_off;
 	float	y_off;
 
+	printf("Origin -> x: %.2f y: %.2f\n", c[X], c[Y]);
+	printf("Map center -> x: %.2f y: %.2f\n", m[X], m[Y]);
 	i = 0;
-	x_off = (WIN_W / 2) - move[X];
-	y_off = (WIN_H / 2) - move[Y];
+	x_off = c[X] - m[X];
+	y_off = c[Y] - m[Y];
+
+	printf("Offset -> x: %.2f y: %.2f\n", x_off, y_off);
 	while (i < len)
 	{
 		points[i].coords[X] += x_off;

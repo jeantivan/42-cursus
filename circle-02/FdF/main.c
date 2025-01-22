@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/21 18:54:01 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:20:27 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_state	*init(t_map *map)
 		return (NULL);
 	}
 	s->map = map;
-	s->dots = false;
-	s->join = true;
+	s->dots = true;
+	s->join = false;
 	s->mlx = mlx_init(WIN_W, WIN_H, "FdF - jtivan-r", true);
 	if (!s->mlx)
 		return (clean_with_error(s, "Failed to allocate memory"));
@@ -46,7 +46,6 @@ void	render(t_map *map)
 
 	state = init(map);
 	draw_map(state, true);
-	mlx_image_to_window(state->mlx, state->image, 0, 0);
 	mlx_close_hook(state->mlx, &close_hook, state);
 	mlx_key_hook(state->mlx, &key_hook, state);
 	mlx_loop(state->mlx);

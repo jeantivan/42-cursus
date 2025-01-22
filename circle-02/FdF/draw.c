@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/20 15:19:21 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/22 20:21:35 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void	draw_points(mlx_image_t *image, t_point *points, size_t len)
 	while (i < len)
 	{
 		point = points[i];
+		if (i == 0)
+		{
+			ft_show_point(point);
+		}
 		draw_dot(image, point);
 		i++;
 	}
@@ -50,6 +54,7 @@ void	join_points(mlx_image_t	*image, t_map *map)
 	t_neighbors	neighbors;
 	t_point		curr;
 
+	printf("Uniendo lineas\n");
 	y = 0;
 	while (y < map->rows)
 	{
