@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:14:22 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:21:06 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ void	join_points(t_state *state, t_point *proyection)
 		}
 		j++;
 	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:06:16 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:20:52 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	draw_map(t_state *state, bool fit)
 	size_t	len;
 	size_t	size;
 	t_point	*proyection;
-
 
 	len = state->map->cols * state->map->rows;
 	proyection = (t_point *)malloc((len) * sizeof(t_point));
