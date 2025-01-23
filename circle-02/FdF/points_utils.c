@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 21:34:55 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/19 01:09:55 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:53:17 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	ft_show_point(t_point point)
 {
-	printf("{ x: %.2f, y: %.2f, z: %.2f, color: %u }\n", \
-	point.coords[X], point.coords[Y], point.coords[Z], point.color);
+	ft_printf("{ x: %d, y: %d, z: %d, color: %u }\n", \
+	(int)point.coords[X], \
+	(int)point.coords[Y], \
+	(int)point.coords[Z], \
+	point.color);
 }
 
 bool	points_fit(t_point *points, size_t len)
