@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:45:20 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:54:37 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:56:28 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			return (handle_mode(keydata.key, state));
 		if (keydata.key >= MLX_KEY_RIGHT && keydata.key <= MLX_KEY_UP)
 			return (handle_translate(keydata.key, state));
-		if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_S \
-		|| keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_Z)
+		if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_A \
+		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_D \
+		|| keydata.key == MLX_KEY_Z)
 			return (handle_rotate(keydata, state));
 	}
 }
