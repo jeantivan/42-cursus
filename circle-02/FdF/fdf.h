@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 14:03:05 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:04:45 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_state
 	mlx_image_t	*image;
 	t_map		*map;
 	bool		dots;
-	bool		join;
+	bool		lines;
 }	t_state;
 
 typedef struct s_neighbors
