@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/22 19:45:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:03:05 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void		draw_map(t_state *state, bool fit);
 
 /* Map utils */
 void		get_map_dimensions(char *path_to_file, t_map *map);
-void		prepare_map(t_map *map, bool fit);
+void		prepare_map(t_map *map, t_point *proyection, size_t len, bool fit);
 
 /* Proyection */
 void		get_center_coords(t_point *points, size_t len, float center[2]);
@@ -121,14 +121,14 @@ size_t len, float ang[3]);
 /* Drawing*/
 void		put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
 void		dda(mlx_image_t *image, t_point point0, t_point point1);
-void		draw_points(mlx_image_t *image, t_point *points, size_t len);
-void		join_points(mlx_image_t *image, t_map *map);
+void		draw_points(t_state *state, t_point *points, size_t len);
+void		join_points(t_state *state, t_point *proyection);
 void		draw_dot(mlx_image_t *image, t_point p);
 
 /* Draw utils */
 int			get_index(int x, int y, int cols);
 int			is_valid_point(int x, int y, int rows, int cols);
-t_neighbors	get_neighbors(int x, int y, t_map *map);
+t_neighbors	get_neighbors(int x, int y, t_map *map, t_point *proyection);
 
 /* Hooks */
 void		close_hook(void *param);

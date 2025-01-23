@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:16:34 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 00:20:17 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:25:39 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,37 +52,22 @@ void	parse_map(t_map *map, t_point *points)
 	translate_points(points, len, map->center, center);
 }
 
-/**
- * TODO: Perdida del valor original de los puntos
- * 	Estoy perdiendo el valor original de los puntos
- * 	Por eso al tratar de mover el map con las teclas
- * 	estoy "re-proyectando" los puntos lo cual genera
- * 	valores innesperados.
- */
-void	prepare_map(t_map *map, bool fit)
+void	prepare_map(t_map *map, t_point *proyection, size_t len, bool fit)
 {
-	size_t	len;
-	t_point	*points;
 	float	center[2];
 
-	printf("Origin -> x: %f y: %f\n", map->center[X], map->center[Y]);
 	len = map->cols * map->rows;
-	points = (t_point *)malloc((len) * sizeof(t_point));
-	copy_points(points, map->points, len);
-	parse_map(map, points);
+	copy_points(proyection, map->points, len);
+	parse_map(map, proyection);
 	if (fit)
 	{
-		printf("WILL FIT\n");
 		int i = 0;
-		while (points_fit(points, len))
+		while (points_fit(proyection, len))
 		{
-			copy_points(points, map->points, len);
-			parse_map(map, points);
+			copy_points(proyection, map->points, len);
+			parse_map(map, proyection);
 			map->scale += 5;
 			i++;
 		}
-		printf("\nCURR SCALE %.2f %i\n\n", map->scale, i);
 	}
-	ft_safe_free((void **)&map->points);
-	map->points = points;
 }

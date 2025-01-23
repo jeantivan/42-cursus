@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/22 20:18:50 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:37:27 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ static t_map	*create_map(char *path_to_file)
 	get_points(fd, map);
 	close(fd);
 	if (!map->points)
-	{
-		printf("----- error with points \n");
 		return (ft_safe_free((void **)&map));
-	}
 	return (map);
 }
 
@@ -63,14 +60,19 @@ void	clean_map(t_map *map)
 void	draw_map(t_state *state, bool fit)
 {
 	size_t	len;
+	size_t	size;
+	t_point	*proyection;
+
 
 	len = state->map->cols * state->map->rows;
-	printf("Preparando el mapa\n");
-	prepare_map(state->map, fit);
-	printf("Done\n");
+	proyection = (t_point *)malloc((len) * sizeof(t_point));
+	size = state->image->width * state->image->height * sizeof(int32_t);
+	ft_memset(state->image->pixels, 255, size);
+	prepare_map(state->map, proyection, len, fit);
 	if (state->dots)
-		draw_points(state->image, state->map->points, len);
+		draw_points(state, proyection, len);
 	if (state->join)
-		join_points(state->image, state->map);
+		join_points(state, proyection);
 	mlx_image_to_window(state->mlx, state->image, 0, 0);
+	ft_safe_free((void **)&proyection);
 }

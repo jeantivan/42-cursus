@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/22 20:20:27 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:24:54 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,14 @@ t_state	*init(t_map *map)
 		return (NULL);
 	}
 	s->map = map;
-	s->dots = true;
-	s->join = false;
+	s->dots = false;
+	s->join = true;
 	s->mlx = mlx_init(WIN_W, WIN_H, "FdF - jtivan-r", true);
 	if (!s->mlx)
 		return (clean_with_error(s, "Failed to allocate memory"));
 	s->image = mlx_new_image(s->mlx, WIN_W, WIN_H);
 	if (!s->image)
 		return (clean_with_error(s, "Failed to allocate memory"));
-	size = s->image->width * s->image->height * sizeof(int32_t);
-	ft_memset(s->image->pixels, 255, size);
 	return (s);
 }
 
@@ -67,7 +65,7 @@ int	main(int ac, char **av)
 	map = init_map(map, file);
 	if (!map)
 		ft_error("While parsing the map");
-	printf("WIN_W: %d WIN_H: %d\n\n", WIN_W, WIN_H);
+	ft_printf("WIN_W: %d WIN_H: %d\n\n", WIN_W, WIN_H);
 	render(map);
 	return (0);
 }
