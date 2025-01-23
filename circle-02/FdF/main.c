@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 14:24:54 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:06:09 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_state	*init(t_map *map)
 	}
 	s->map = map;
 	s->dots = false;
-	s->join = true;
+	s->lines = true;
 	s->mlx = mlx_init(WIN_W, WIN_H, "FdF - jtivan-r", true);
 	if (!s->mlx)
 		return (clean_with_error(s, "Failed to allocate memory"));

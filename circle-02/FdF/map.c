@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 14:37:27 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:06:16 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	draw_map(t_state *state, bool fit)
 	prepare_map(state->map, proyection, len, fit);
 	if (state->dots)
 		draw_points(state, proyection, len);
-	if (state->join)
+	if (state->lines)
 		join_points(state, proyection);
 	mlx_image_to_window(state->mlx, state->image, 0, 0);
 	ft_safe_free((void **)&proyection);
