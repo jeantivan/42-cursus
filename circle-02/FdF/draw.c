@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 14:02:12 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:14:22 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ void	draw_points(t_state *state, t_point *points, size_t len)
 	while (i < len)
 	{
 		point = points[i];
-		if (i == 0)
-		{
-			ft_show_point(point);
-		}
 		draw_dot(state->image, point);
 		i++;
 	}
