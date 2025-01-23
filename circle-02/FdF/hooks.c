@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:45:20 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/22 20:53:11 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:05:29 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,37 @@ void	handle_translate(uint32_t key, t_state *state)
 	float	factor;
 
 	factor = 16.0;
-
 	if (key == MLX_KEY_RIGHT)
 	{
-		printf("\nMoving right, scale: %.1f\n", state->map->scale);
 		state->map->center[X] = state->map->center[X] + factor;
 		draw_map(state, false);
 	}
 	else if (key == MLX_KEY_LEFT)
 	{
-		printf("\nMoving left, scale: %.1f\n", state->map->scale);
 		state->map->center[X] = state->map->center[X] - factor;
 		draw_map(state, false);
 	}
 	else if (key == MLX_KEY_DOWN)
 	{
-		printf("\nMoving down, scale: %.1f\n", state->map->scale);
-		state->map->center[Y] = state->map->center[Y] - factor;
+		state->map->center[Y] = state->map->center[Y] + factor;
 		draw_map(state, false);
 	}
 	else
 	{
-		printf("\nMoving up, scale: %.1f\n", state->map->scale);
-		state->map->center[Y] = state->map->center[Y] + factor;
+		state->map->center[Y] = state->map->center[Y] - factor;
 		draw_map(state, false);
 	}
+}
+
+void	handle_reset(t_state *state)
+{
+	state->map->scale = 1;
+	state->map->center[X] = WIN_W / 2;
+	state->map->center[Y] = WIN_H / 2;
+	state->map->ang[X] = 30;
+	state->map->ang[Y] = 330;
+	state->map->ang[Z] = 30;
+	draw_map(state, true);
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -70,5 +76,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 			return (close_hook(param));
 		if (keydata.key >= MLX_KEY_RIGHT && keydata.key <= MLX_KEY_UP)
 			return (handle_translate(keydata.key, state));
+		if (keydata.key == MLX_KEY_R)
+			return (handle_reset(state));
 	}
 }
