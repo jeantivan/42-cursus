@@ -22,7 +22,8 @@ MLX42_DIR = ./MLX42
 
 MLX42 = $(MLX42_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-CFILES = main.c parser.c error.c utils.c map.c map_utils.c points.c points_utils.c draw.c draw_utils.c matrix.c proyection.c dda.c colors.c hooks.c
+CFILES = main.c parser.c error.c utils.c map.c map_utils.c points.c points_utils.c \
+ draw.c draw_utils.c matrix.c proyection.c dda.c colors.c hooks.c handlers.c
 
 OBJS = $(CFILES:.c=.o)
 
