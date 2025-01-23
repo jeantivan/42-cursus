@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:16:34 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 14:25:39 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:20:33 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,11 @@ void	prepare_map(t_map *map, t_point *proyection, size_t len, bool fit)
 	parse_map(map, proyection);
 	if (fit)
 	{
-		int i = 0;
 		while (points_fit(proyection, len))
 		{
 			copy_points(proyection, map->points, len);
 			parse_map(map, proyection);
 			map->scale += 5;
-			i++;
 		}
 	}
 }
