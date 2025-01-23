@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:45:20 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 15:05:29 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:54:37 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,42 +27,12 @@ void	close_hook(void *param)
 	exit(0);
 }
 
-void	handle_translate(uint32_t key, t_state *state)
+void	scroll_hook(double xdelta, double ydelta, void *param)
 {
-	float	factor;
+	t_state	*state;
 
-	factor = 16.0;
-	if (key == MLX_KEY_RIGHT)
-	{
-		state->map->center[X] = state->map->center[X] + factor;
-		draw_map(state, false);
-	}
-	else if (key == MLX_KEY_LEFT)
-	{
-		state->map->center[X] = state->map->center[X] - factor;
-		draw_map(state, false);
-	}
-	else if (key == MLX_KEY_DOWN)
-	{
-		state->map->center[Y] = state->map->center[Y] + factor;
-		draw_map(state, false);
-	}
-	else
-	{
-		state->map->center[Y] = state->map->center[Y] - factor;
-		draw_map(state, false);
-	}
-}
-
-void	handle_reset(t_state *state)
-{
-	state->map->scale = 1;
-	state->map->center[X] = WIN_W / 2;
-	state->map->center[Y] = WIN_H / 2;
-	state->map->ang[X] = 30;
-	state->map->ang[Y] = 330;
-	state->map->ang[Z] = 30;
-	draw_map(state, true);
+	state = (t_state *)param;
+	return (handle_scale(ydelta, state));
 }
 
 void	key_hook(mlx_key_data_t keydata, void *param)
@@ -70,13 +40,19 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	t_state	*state;
 
 	state = (t_state *)param;
-	if (keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+		return (close_hook(param));
+	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
 	{
-		if (keydata.key == MLX_KEY_ESCAPE)
-			return (close_hook(param));
+		if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS)
+			return (handle_reset(state));
+		if ((keydata.key == MLX_KEY_P || keydata.key == MLX_KEY_L) \
+		&& keydata.action == MLX_PRESS)
+			return (handle_mode(keydata.key, state));
 		if (keydata.key >= MLX_KEY_RIGHT && keydata.key <= MLX_KEY_UP)
 			return (handle_translate(keydata.key, state));
-		if (keydata.key == MLX_KEY_R)
-			return (handle_reset(state));
+		if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_S \
+		|| keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_Z)
+			return (handle_rotate(keydata, state));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:04:45 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:19:59 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,14 @@ t_neighbors	get_neighbors(int x, int y, t_map *map, t_point *proyection);
 /* Hooks */
 void		close_hook(void *param);
 void		key_hook(mlx_key_data_t keydata, void *param);
+void		scroll_hook(double xdelta, double ydelta, void *param);
+
+/* Handlers */
+void		handle_translate(uint32_t key, t_state *state);
+void		handle_reset(t_state *state);
+void		handle_scale(double ydelta, t_state *state);
+void		handle_rotate(mlx_key_data_t keydata, t_state *state);
+void		handle_mode(uint32_t key, t_state *state);
+void		handle_proyections(uint32_t key, t_state *state);
 
 #endif /* fdf.h */

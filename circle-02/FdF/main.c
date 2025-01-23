@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:06:09 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:36:27 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	render(t_map *map)
 	draw_map(state, true);
 	mlx_close_hook(state->mlx, &close_hook, state);
 	mlx_key_hook(state->mlx, &key_hook, state);
+	mlx_scroll_hook(state->mlx, &scroll_hook, state);
 	mlx_loop(state->mlx);
 }
 
