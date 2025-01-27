@@ -1,28 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 12:09:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/27 15:00:41 by jtivan-r         ###   ########.fr       */
+/*   Created: 2025/01/27 14:57:38 by jtivan-r          #+#    #+#             */
+/*   Updated: 2025/01/27 15:00:03 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "ft_printf/ft_printf.h"
-# include "libft/libft.h"
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <stdio.h>
+void	*ft_safe_free(void **ptr)
+{
+	if (ptr != NULL && *ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+	return (NULL);
+}
 
-/* Utils */
-void	*ft_safe_free(void **ptr);
-void	*ft_free_split(char **splited);
+void	*ft_free_split(char **splited)
+{
+	int	i;
 
-#endif /* pipex.h */
+	i = 0;
+	if (!splited)
+		return (NULL);
+	while (splited[i])
+	{
+		ft_safe_free((void **)&splited[i]);
+		i++;
+	}
+	return (ft_safe_free((void **)&splited));
+}
