@@ -54,12 +54,11 @@ start:
 	@echo "$(BG_YELLOW)    Creating [$(NAME)]    $(DEF_COLOR)"
 
 $(NAME): start $(OBJS) $(INCLUDE)
-
 	@ar -rcs $(NAME) $(OBJS)
-	@echo "\n🔗 $(CYAN) ar -rcs $(NAME) $(OBJS) $(OBJS_BONUS)$(DEF_COLOR)"
+	@echo "\n🔗 $(CYAN) ar -rcs $(NAME) $(OBJS) $(DEF_COLOR)"
 	@echo  "\n✅ DONE $(NAME) created!"
 
-bonus: $(OBJS) $(BONUS_OBJS) $(INCLUDE)
+bonus: start $(OBJS) $(BONUS_OBJS) $(INCLUDE)
 	@ar -rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 	@echo "\n🔗 $(CYAN) ar -rcs $(NAME) $(OBJS) $(BONUS_OBJS)$(DEF_COLOR)"
 	@echo  "\n✅ DONE $(NAME) created!"
