@@ -13,7 +13,7 @@ PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 BASEINCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I . 
 
-MAINFILES = main.c utils.c
+MAINFILES = main.c utils.c command.c
 
 OBJS = $(MAINFILES:.c=.o)
 
