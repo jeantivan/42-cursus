@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 16:41:34 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:48:54 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,5 @@ void	draw_map(t_state *state, bool fit)
 		draw_points(state, projection, len);
 	if (state->lines)
 		join_points(state, projection);
-	mlx_image_to_window(state->mlx, state->image, 0, 0);
 	ft_safe_free((void **)&projection);
 }
