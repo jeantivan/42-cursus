@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 16:44:32 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:24:48 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,6 @@ void		handle_reset(t_state *state);
 void		handle_scale(double ydelta, t_state *state);
 void		handle_rotate(mlx_key_data_t keydata, t_state *state);
 void		handle_mode(uint32_t key, t_state *state);
-void		handle_proyections(uint32_t key, t_state *state);
+void		handle_view(uint32_t key, t_state *state);
 
 #endif /* fdf.h */
