@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:20:52 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:41:34 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ void	draw_map(t_state *state, bool fit)
 {
 	size_t	len;
 	size_t	size;
-	t_point	*proyection;
+	t_point	*projection;
 
 	len = state->map->cols * state->map->rows;
-	proyection = (t_point *)malloc((len) * sizeof(t_point));
+	projection = (t_point *)malloc((len) * sizeof(t_point));
 	size = state->image->width * state->image->height * sizeof(int32_t);
 	ft_memset(state->image->pixels, 255, size);
-	prepare_map(state->map, proyection, len, fit);
+	prepare_map(state->map, projection, len, fit);
 	if (state->dots)
-		draw_points(state, proyection, len);
+		draw_points(state, projection, len);
 	if (state->lines)
-		join_points(state, proyection);
+		join_points(state, projection);
 	mlx_image_to_window(state->mlx, state->image, 0, 0);
-	ft_safe_free((void **)&proyection);
+	ft_safe_free((void **)&projection);
 }

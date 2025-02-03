@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:16:34 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:20:33 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:45:43 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,26 @@ void	parse_map(t_map *map, t_point *points)
 	float	center[2];
 
 	len = map->cols * map->rows;
-	proyect_points(map->points, points, len, map->ang);
-	ortho_proyection(points, len);
+	project_points(map->points, points, len, map->ang);
+	ortho_projection(points, len);
 	scale_points(points, len, map->scale);
 	get_center_coords(points, len, center);
 	translate_points(points, len, map->center, center);
 }
 
-void	prepare_map(t_map *map, t_point *proyection, size_t len, bool fit)
+void	prepare_map(t_map *map, t_point *projection, size_t len, bool fit)
 {
 	float	center[2];
 
 	len = map->cols * map->rows;
-	copy_points(proyection, map->points, len);
-	parse_map(map, proyection);
+	copy_points(projection, map->points, len);
+	parse_map(map, projection);
 	if (fit)
 	{
-		while (points_fit(proyection, len))
+		while (points_fit(projection, len))
 		{
-			copy_points(proyection, map->points, len);
-			parse_map(map, proyection);
+			copy_points(projection, map->points, len);
+			parse_map(map, projection);
 			map->scale += 5;
 		}
 	}

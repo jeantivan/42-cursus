@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:19:59 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:44:32 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,11 @@ void		prepare_map(t_map *map, t_point *proyection, size_t len, bool fit);
 
 /* Proyection */
 void		get_center_coords(t_point *points, size_t len, float center[2]);
-void		ortho_proyection(t_point *points, size_t len);
+void		ortho_projection(t_point *points, size_t len);
 void		scale_points(t_point *points, size_t len, float factor);
 void		translate_points(t_point *points, size_t len, \
 float c[2], float m[2]);
-void		proyect_points(t_point *points, t_point *proyection, \
+void		project_points(t_point *points, t_point *proyection, \
 size_t len, float ang[3]);
 
 /* Drawing*/

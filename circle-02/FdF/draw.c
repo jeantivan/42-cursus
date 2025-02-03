@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 22:36:35 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/23 17:21:06 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:41:34 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	draw_points(t_state *state, t_point *points, size_t len)
 	}
 }
 
-void	join_points(t_state *state, t_point *proyection)
+void	join_points(t_state *state, t_point *projection)
 {
 	int			i;
 	int			j;
@@ -56,8 +56,8 @@ void	join_points(t_state *state, t_point *proyection)
 		i = 0;
 		while (i < state->map->cols)
 		{
-			curr = proyection[get_index(i, j, state->map->cols)];
-			nei = get_neighbors(i, j, state->map, proyection);
+			curr = projection[get_index(i, j, state->map->cols)];
+			nei = get_neighbors(i, j, state->map, projection);
 			if (nei.has_right)
 				dda(state->image, curr, *nei.right);
 			if (nei.has_bottom)
