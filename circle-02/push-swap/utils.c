@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 19:16:46 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/09 20:20:36 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:19:57 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,38 +74,7 @@ long int	ft_atol(const char *nptr)
 	return (sign * result);
 }
 
-// int	ft_sqrt(int num)
-// {
-// 	int	start;
-// 	int	end;
-// 	int	result;
-// 	int	mid;
-
-// 	if (num < 0)
-// 		return (-1);
-// 	if (num == 0 || num == 1)
-// 		return (num);
-// 	start = 0;
-// 	end = num;
-// 	result = 0;
-// 	while (start <= end)
-// 	{
-// 		mid = start + (end - start) / 2;
-// 		if (mid * mid == num)
-// 			return (mid);
-// 		else if (mid * mid < num)
-// 		{
-// 			result = mid;
-// 			start = mid + 1;
-// 		}
-// 		else
-// 			end = mid - 1;
-// 	}
-// 	return (result);
-// }
-
-
-int ft_sqrt(int num)
+int	ft_sqrt(int num)
 {
 	int	left;
 	int	right;
@@ -122,7 +91,7 @@ int ft_sqrt(int num)
 		mid = (left + right) >> 1;
 		if (mid == num / mid)
 			return (mid);
-		if ( mid <= num /mid)
+		if (mid <= num / mid)
 			left = mid + 1;
 		else
 			right = mid - 1;
