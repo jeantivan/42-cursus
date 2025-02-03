@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 22:27:50 by jtivan-r          #+#    #+#             */
-/*   Updated: 2024/12/04 20:16:46 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:18:35 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	is_sorted(t_stack *stack)
 	t_list	*temp_n;
 
 	temp_n = stack->head;
+	if (!temp_n)
+		return (0);
 	while (temp_n->next)
 	{
 		if (*((int *)temp_n->content) > *((int *)temp_n->next->content))
