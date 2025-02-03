@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 21:00:47 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/14 13:08:35 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:13:47 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	main(int ac, char **av)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	char	*line;
-	int		i;
 
 	if (ac <= 1)
 		return (1);
@@ -57,6 +55,5 @@ int	main(int ac, char **av)
 	read_movs(stack_a, stack_b);
 	check_status(stack_a, stack_b);
 	free_stack(stack_a);
-	gnl_safe_free((void **)&line);
 	return (0);
 }
