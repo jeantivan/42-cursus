@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/01/30 14:57:23 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:01:15 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ bool	file_access(int ac, char **av)
 int	main(int ac, char **av, char **env)
 {
 	t_cmds	*cmds;
-	char	**cmd1_args;
-	char	**cmd2_args;
+	// char	**cmd1_args;
+	// char	**cmd2_args;
 
 	if (ac == 1 || ac != 5)
 		return (EXIT_FAILURE);
@@ -78,10 +78,10 @@ int	main(int ac, char **av, char **env)
 		return (EXIT_FAILURE);
 	ft_printf("%s\n", cmds->cmd_1);
 	ft_printf("%s\n", cmds->cmd_2);
-	cmd1_args = ft_split(av[1], ' ');
-	cmd2_args = ft_split(av[2], ' ');
-	execve(cmds->cmd_1, cmd1_args, env);
-	execve(cmds->cmd_2, cmd2_args, env);
+	// cmd1_args = ft_split(av[1], ' ');
+	// cmd2_args = ft_split(av[2], ' ');
+	// execve(cmds->cmd_1, cmd1_args, env);
+	// execve(cmds->cmd_2, cmd2_args, env);
 	free_cmds(cmds);
 	return (0);
 }
