@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:07:55 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/04 11:48:52 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:41:58 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	handle_scale(double ydelta, t_state *state)
 			return ;
 		state->map->scale = (state->map->scale * 1.2) + 0.5;
 	}
-
 	draw_map(state, false);
 }
 
