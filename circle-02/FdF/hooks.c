@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 18:45:20 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 17:24:19 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:00:32 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	scroll_hook(double xdelta, double ydelta, void *param)
 	t_state	*state;
 
 	state = (t_state *)param;
+	(void)xdelta;
 	return (handle_scale(ydelta, state));
 }
 

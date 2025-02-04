@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 16:36:52 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 16:49:02 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:59:41 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 
 t_state	*init(t_map *map)
 {
-	t_state		*s;
-	size_t		size;
+	t_state	*s;
 
 	s = (t_state *)malloc(sizeof(t_state));
 	if (!s)
@@ -64,7 +63,7 @@ int	main(int ac, char **av)
 	if (fd < 0)
 		ft_error("Bad file");
 	close(fd);
-	map = init_map(map, file);
+	map = init_map(file);
 	if (!map)
 		ft_error("While parsing the map");
 	ft_printf("WIN_W: %d WIN_H: %d\n\n", WIN_W, WIN_H);

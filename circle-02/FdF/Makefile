@@ -4,7 +4,7 @@ MAKEFLAGS += --no-print-directory
 
 CC = cc
 
-CFLAGS = -g  -Wunreachable-code -Ofast
+CFLAGS = -g -Wall -Wextra -Werror -Wunreachable-code -Ofast
 
 LIBFT_DIR = ./libft
 

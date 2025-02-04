@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 12:50:59 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 16:48:54 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:59:03 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ static t_map	*create_map(char *path_to_file)
 	return (map);
 }
 
-t_map	*init_map(t_map *map, char *file)
+t_map	*init_map(char *file)
 {
+	t_map	*map;
+
 	map = create_map(file);
 	if (map)
 	{

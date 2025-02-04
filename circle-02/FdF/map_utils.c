@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 17:16:34 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 17:32:04 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 19:00:11 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	parse_map(t_map *map, t_point *points)
 
 void	prepare_map(t_map *map, t_point *projection, size_t len, bool fit)
 {
-	float	center[2];
-
 	len = map->cols * map->rows;
 	copy_points(projection, map->points, len);
 	parse_map(map, projection);

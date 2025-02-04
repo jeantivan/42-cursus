@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 17:59:29 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/03 17:24:48 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:59:31 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_point		rotate_y(t_point point, float ang);
 t_point		rotate_z(t_point point, float ang);
 
 /* Map */
-t_map		*init_map(t_map *map, char *file);
+t_map		*init_map(char *file);
 void		clean_map(t_map *map);
 void		draw_map(t_state *state, bool fit);
 
