@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/04 13:01:15 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:33:40 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,20 @@ t_cmds	*find_cmds(char **av, char **env)
 
 bool	file_access(int ac, char **av)
 {
+	bool	con;
+
+	con = true;
 	if (access(av[1], F_OK) != 0 || access(av[1], R_OK) != 0)
 	{
 		ft_printf("%s: Permiso denegado.\n", av[1]);
-		return (false);
+		con = false;
 	}
 	if (access(av[ac - 1], F_OK) == 0 && access(av[ac - 1], W_OK) != 0)
 	{
 		ft_printf("%s: Permiso denegado.\n", av[ac - 1]);
-		return (false);
+		con = false;
 	}
-	return (true);
+	return (con);
 }
 
 int	main(int ac, char **av, char **env)
