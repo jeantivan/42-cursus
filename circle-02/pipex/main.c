@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/07 12:33:40 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:40:16 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ t_cmds	*find_cmds(char **av, char **env)
 	return (cmds);
 }
 
+void	execute(char *cmd, char **env)
+{
+	char	*cmd_path;
+	char	**cmd_args;
+
+	cmd_path = find_cmd_abs_path(cmd, env);
+	if (!cmd_path)
+		return ;
+	cmd_args = ft_split(cmd, ' ');
+	if (!cmd_args)
+		return ;
+	execve(cmd_path, cmd_args, env);
+	ft_free_split(cmd_args);
+	exit(EXIT_FAILURE);
+}
+
 bool	file_access(int ac, char **av)
 {
 	bool	con;
@@ -66,25 +82,75 @@ bool	file_access(int ac, char **av)
 	return (con);
 }
 
+int	redirect_std(char *infile, char *outfile)
+{
+	int	fd;
+
+	fd = open(infile, O_RDONLY);
+	if (fd < 0)
+	{
+		perror(infile);
+		return (-1);
+	}
+	if (dup2(fd, STDIN_FILENO) < 0)
+	{
+		perror("Redirect infile to STDIN");
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	fd = open(outfile, O_CREAT | O_TRUNC | O_WRONLY, 0777);
+	if (fd < 0)
+	{
+		perror(outfile);
+		return (-1);
+	}
+	if (dup2(fd, STDOUT_FILENO) < 0)
+	{
+		perror("Redirect outfile to STDOUT");
+		close(fd);
+		return (-1);
+	}
+	close(fd);
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
-	t_cmds	*cmds;
-	// char	**cmd1_args;
-	// char	**cmd2_args;
+	int	fd[2];
+	int	pid;
 
 	if (ac == 1 || ac != 5)
 		return (EXIT_FAILURE);
 	if (!file_access(ac, av))
 		return (EXIT_FAILURE);
-	cmds = find_cmds(av, env);
-	if (!cmds)
+	if (redirect_std(av[1], av[ac - 1]) < 0)
 		return (EXIT_FAILURE);
-	ft_printf("%s\n", cmds->cmd_1);
-	ft_printf("%s\n", cmds->cmd_2);
-	// cmd1_args = ft_split(av[1], ' ');
-	// cmd2_args = ft_split(av[2], ' ');
-	// execve(cmds->cmd_1, cmd1_args, env);
-	// execve(cmds->cmd_2, cmd2_args, env);
-	free_cmds(cmds);
+	if (pipe(fd) < 0)
+		return (EXIT_FAILURE);
+	pid = fork();
+	if (pid < 0)
+		return (EXIT_FAILURE);
+	if (pid == 0)
+	{
+		close(fd[0]);
+		if (dup2(fd[1], STDOUT_FILENO) < 0)
+			return (EXIT_FAILURE);
+		close(fd[1]);
+		execute(av[2], env);
+		perror("execute in child");
+		return (EXIT_FAILURE);
+	}
+	else
+	{
+		wait(NULL);
+		close(fd[1]);
+		if (dup2(fd[0], STDIN_FILENO) < 0)
+			return (EXIT_FAILURE);
+		close(fd[0]);
+		execute(av[3], env);
+		perror("execute in parent");
+		return (EXIT_SUCCESS);
+	}
 	return (0);
 }
