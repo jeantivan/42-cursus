@@ -39,7 +39,7 @@ start:
 
 $(NAME): start $(OBJS) $(INCLUDE)
 	@ar -rcs $(NAME) $(OBJS)
-	@echo "\n🔗 $(CYAN) @ar -rcs $(NAME) $(OBJS)$(DEF_COLOR)"
+	@echo "\n🔗 $(CYAN) ar -rcs $(NAME) $(OBJS)$(DEF_COLOR)"
 	@echo  "\n✅ DONE $(NAME) created!"
 
 clean:
