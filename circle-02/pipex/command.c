@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
+/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:56 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/10 16:54:13 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:05:07 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,20 @@ char	*get_sys_cmd_path(char *cmd_str, char **env)
 	return (cmd);
 }
 
-char	*find_cmd_abs_path(char *cmd_str, char **env)
+char	*find_cmd_abs_path(char *cmd, char **env)
 {
 	char	*cmd_path;
 
-	if (is_relative_cmd(cmd_str))
+	if (cmd[0] == '\0')
+		return (NULL);
+	if ((cmd[0] == '.' || cmd[0] == '/') && \
+	(access(cmd, F_OK) == 0 && access(cmd, X_OK) == 0))
 	{
-		cmd_path = get_pwd_cmd_path(cmd_str, env);
+		cmd_path = cmd;
 	}
 	else
 	{
-		cmd_path = get_sys_cmd_path(cmd_str, env);
+		cmd_path = get_sys_cmd_path(cmd, env);
 	}
 	return (cmd_path);
 }

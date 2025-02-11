@@ -6,36 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:57:38 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/10 17:32:40 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:24:31 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	*ft_safe_free(void **ptr)
-{
-	if (ptr != NULL && *ptr != NULL)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
-	return (NULL);
-}
-
-void	*ft_free_split(char **splited)
-{
-	int	i;
-
-	i = 0;
-	if (!splited)
-		return (NULL);
-	while (splited[i])
-	{
-		ft_safe_free((void **)&splited[i]);
-		i++;
-	}
-	return (ft_safe_free((void **)&splited));
-}
 
 bool	is_relative_cmd(char *cmd_path)
 {
@@ -62,4 +37,12 @@ int	ft_error(const char *err_msg)
 {
 	perror(err_msg);
 	return (EXIT_FAILURE);
+}
+
+bool	valid_args(int ac, char **av)
+{
+	while (--ac)
+		if (av[ac][0] == '\0')
+			return (false);
+	return (true);
 }

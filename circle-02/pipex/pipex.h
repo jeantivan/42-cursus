@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtivan-r <jtivan-r@student.42madrid>       +#+  +:+       +#+        */
+/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/10 14:35:15 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:27:07 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ char	*get_env_var(char **env, const char *var);
 void	*ft_safe_free(void **ptr);
 void	*ft_free_split(char **splited);
 int		ft_error(const char *err_msg);
+bool	valid_args(int ac, char **av);
 
 #endif /* pipex.h */
