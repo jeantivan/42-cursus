@@ -11,7 +11,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 PRINTF_DIR = ./ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
-BASEINCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I . 
+BASEINCLUDES = -I $(LIBFT_DIR) -I $(PRINTF_DIR) -I .
 
 MAINFILES = main.c utils.c command.c
 
@@ -35,10 +35,7 @@ BG_GREEN = \033[42;37m
 
 all: $(NAME)
 
-start:
-	@echo "$(BG_GREEN)    Creating [$(NAME)]    $(DEF_COLOR)"
-
-$(NAME): $(LIBFT) $(PRINTF) start $(OBJS) 
+$(NAME): $(LIBFT) $(PRINTF) $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF)
 	@printf "\r                                                                           "
 	@printf "\r🔧 $(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) $(PRINTF)$(DEF_COLOR)"
