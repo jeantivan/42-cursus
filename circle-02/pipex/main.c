@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/16 14:38:59 by jean             ###   ########.fr       */
+/*   Updated: 2025/02/17 12:31:28 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	show_pipex(t_pipex *pipex)
 			ft_printf(" arg #%d: %s\n", j, pipex->cmds[i]->args[j]);
 			j++;
 		}
+		ft_printf(" arg #%d: %s\n", j, pipex->cmds[i]->args[j]);
 		i++;
 	}
 }
@@ -41,7 +42,7 @@ void	first_child(t_pipex *pipex, char **env, int pipe_fd[2])
 	close(pipe_fd[0]);
 	in_fd = open(pipex->infile, O_RDONLY);
 	if (in_fd < 0)
-		ft_error(pipex->infile, 1);
+		ft_error(pipex->infile, strerror(errno), 1);
 	if (dup2(in_fd, STDIN_FILENO) < 0)
 	{
 		close(in_fd);
@@ -66,7 +67,7 @@ void	last_child(t_pipex *pipex, char **env, int pipe_fd[2])
 	close(pipe_fd[1]);
 	out_fd = open(pipex->outfile, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (out_fd < 0)
-		ft_error(pipex->outfile, 1);
+		ft_error(pipex->outfile, strerror(errno), 1);
 	if (dup2(out_fd, STDOUT_FILENO) < 0)
 	{
 		close(out_fd);

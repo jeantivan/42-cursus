@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:44:56 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/16 14:36:58 by jean             ###   ########.fr       */
+/*   Updated: 2025/02/17 11:30:38 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,17 @@ t_cmd	*get_cmd(char *raw_cmd, char **env)
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
-	cmd->raw_cmd = raw_cmd;
+	cmd->raw_cmd = ft_strdup(raw_cmd);
 	cmd->path = find_cmd_abs_path(cmd->raw_cmd, env);
 	if (ft_strchr(cmd->raw_cmd, '/') && \
-	ft_strrchr(cmd->raw_cmd, '/')[0] != '\0')
+	ft_strchr(cmd->raw_cmd, '/')[0] != '\0')
 		cmd->args = ft_split(ft_strrchr(cmd->raw_cmd, '/') + 1, ' ');
 	else
 		cmd->args = ft_split(cmd->raw_cmd, ' ');
 	if (!cmd->args)
 	{
 		ft_safe_free((void **)&cmd->path);
+		ft_safe_free((void **)&cmd->raw_cmd);
 		ft_safe_free((void **)&cmd);
 		return (NULL);
 	}

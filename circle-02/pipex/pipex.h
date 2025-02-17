@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/13 15:11:36 by jean             ###   ########.fr       */
+/*   Updated: 2025/02/17 11:48:01 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <sys/wait.h>
 # include <stdio.h>
 # include <stdbool.h>
+# include <string.h>
+# include <errno.h>
 
 /* Command */
 typedef struct s_cmd
@@ -41,7 +43,7 @@ char	*find_cmd_abs_path(char *cmd_str, char **env);
 t_cmd	*get_cmd(char *raw_cmd, char **env);
 
 /* Utils */
-int		ft_error(const char *err_msg, int exit_code);
+void	ft_error(char *err_msg, char *err_desc, int exit_code);
 char	*get_env_var(char **env, const char *var);
 t_pipex	*create_pipex(int ac, char **av, char **env);
 void	clean_pipex(t_pipex *pipex);
