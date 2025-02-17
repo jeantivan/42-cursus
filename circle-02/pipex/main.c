@@ -3,120 +3,122 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/11 17:04:46 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/16 14:38:59 by jean             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	execute(char *cmd, char **env)
+void	show_pipex(t_pipex *pipex)
 {
-	char	*cmd_path;
-	char	**cmd_args;
+	int	i;
+	int	j;
 
-	if (cmd[0] == '\0' && access(cmd, F_OK) != 0)
+	ft_printf("infile: %s outfile: %s\n", pipex->infile, pipex->outfile);
+	ft_printf("n_cmds: %d\n", pipex->n_cmds);
+	i = 0;
+	while (pipex->cmds[i])
 	{
-		perror("Error");
-		exit(EXIT_FAILURE);
+		ft_printf("cmd #%d: %s\n", i, pipex->cmds[i]->raw_cmd);
+		ft_printf(" path: %s\n", pipex->cmds[i]->path);
+		j = 0;
+		while (pipex->cmds[i]->args[j])
+		{
+			ft_printf(" arg #%d: %s\n", j, pipex->cmds[i]->args[j]);
+			j++;
+		}
+		i++;
 	}
-	cmd_args = ft_split(cmd, ' ');
-	if (!cmd_args)
-		exit(EXIT_FAILURE);
-	cmd_path = find_cmd_abs_path(cmd_args[0], env);
-	if (!cmd_path)
-	{
-		perror("command not found");
-		ft_free_split(cmd_args);
-		return ;
-	}
-	execve(cmd_path, cmd_args, env);
-	ft_free_split(cmd_args);
-	exit(EXIT_FAILURE);
 }
 
-bool	redirect_file(char *file, int dest_fd, int flags, int opts)
+void	first_child(t_pipex *pipex, char **env, int pipe_fd[2])
 {
-	int	fd;
+	int	in_fd;
 
-	fd = open(file, flags, opts);
-	if (fd < 0)
-	{
-		perror(file);
-		return (false);
-	}
-	if (dup2(fd, dest_fd) < 0)
-	{
-		close(fd);
-		perror("While redirecting file");
-		return (false);
-	}
-	close(fd);
-	return (true);
-}
-
-int	first_child(char **av, char **env, int pipe_fd[2])
-{
 	close(pipe_fd[0]);
-	if (!redirect_file(av[1], STDIN_FILENO, O_RDONLY, 0644))
+	in_fd = open(pipex->infile, O_RDONLY);
+	if (in_fd < 0)
+		ft_error(pipex->infile, 1);
+	if (dup2(in_fd, STDIN_FILENO) < 0)
 	{
-		close(pipe_fd[1]);
-		exit(EXIT_FAILURE);
+		close(in_fd);
+		exit(1);
 	}
+	close(in_fd);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) < 0)
 	{
 		close(pipe_fd[1]);
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[1]);
-	execute(av[2], env);
-	return (1);
+	execute(pipex->cmds[0], env);
+	clean_pipex(pipex);
+	exit(127);
 }
 
-int	last_child(int ac, char **av, char **env, int pipe_fd[2])
+void	last_child(t_pipex *pipex, char **env, int pipe_fd[2])
 {
-	if (!redirect_file(av[ac - 1], STDOUT_FILENO, \
-	O_CREAT | O_TRUNC | O_WRONLY, 0644))
-	{
-		close(pipe_fd[1]);
-		exit(EXIT_FAILURE);
-	}
+	int	out_fd;
+
 	close(pipe_fd[1]);
+	out_fd = open(pipex->outfile, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (out_fd < 0)
+		ft_error(pipex->outfile, 1);
+	if (dup2(out_fd, STDOUT_FILENO) < 0)
+	{
+		close(out_fd);
+		exit(1);
+	}
+	close(out_fd);
 	if (dup2(pipe_fd[0], STDIN_FILENO) < 0)
 	{
 		close(pipe_fd[0]);
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[0]);
-	execute(av[ac - 2], env);
-	return (1);
+	execute(pipex->cmds[pipex->n_cmds - 1], env);
+	clean_pipex(pipex);
+	exit(127);
+}
+
+int	wait_childs(int pid1, int pid2, t_pipex *pipex)
+{
+	int	status;
+
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, &status, 0);
+	clean_pipex(pipex);
+	return (WEXITSTATUS(status));
 }
 
 int	main(int ac, char **av, char **env)
 {
-	int	pipe_fd[2];
-	int	pid1;
-	int	pid2;
+	t_pipex	*pipex;
+	int		pid1;
+	int		pid2;
+	int		pipe_fd[2];
 
 	if (ac != 5)
 		return (EXIT_FAILURE);
+	pipex = create_pipex(ac, av, env);
+	if (!pipex)
+		return (EXIT_FAILURE);
 	if (pipe(pipe_fd) < 0)
-		return (ft_error("Error: while creating the pipe"));
+		(clean_pipex(pipex), exit(EXIT_FAILURE));
 	pid1 = fork();
 	if (pid1 < 0)
-		exit(EXIT_FAILURE);
+		(clean_pipex(pipex), exit(EXIT_FAILURE));
 	if (pid1 == 0)
-		return (first_child(av, env, pipe_fd));
+		first_child(pipex, env, pipe_fd);
 	close(pipe_fd[1]);
 	pid2 = fork();
 	if (pid2 < 0)
-		exit(EXIT_FAILURE);
+		(clean_pipex(pipex), exit(EXIT_FAILURE));
 	if (pid2 == 0)
-		return (last_child(ac, av, env, pipe_fd));
+		last_child(pipex, env, pipe_fd);
 	close(pipe_fd[0]);
-	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
-	return (0);
+	return (wait_childs(pid1, pid2, pipex));
 }
