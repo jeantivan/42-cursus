@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:53 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/17 11:48:01 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:00:18 by jean             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*find_cmd_abs_path(char *cmd_str, char **env);
 t_cmd	*get_cmd(char *raw_cmd, char **env);
 
 /* Utils */
-void	ft_error(char *err_msg, char *err_desc, int exit_code);
+void	ft_error(char *err_msg, char *err_desc);
 char	*get_env_var(char **env, const char *var);
 t_pipex	*create_pipex(int ac, char **av, char **env);
 void	clean_pipex(t_pipex *pipex);
-void	execute(t_cmd *cmd, char **env);
+int		execute(t_cmd *cmd, char **env);
 
 #endif /* pipex.h */

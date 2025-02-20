@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/17 12:31:28 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:02:48 by jean             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	first_child(t_pipex *pipex, char **env, int pipe_fd[2])
 	close(pipe_fd[0]);
 	in_fd = open(pipex->infile, O_RDONLY);
 	if (in_fd < 0)
-		ft_error(pipex->infile, strerror(errno), 1);
-	if (dup2(in_fd, STDIN_FILENO) < 0)
 	{
-		close(in_fd);
+		ft_error(pipex->infile, strerror(errno));
 		exit(1);
 	}
+	if (dup2(in_fd, STDIN_FILENO) < 0)
+		(close(in_fd), exit(1));
 	close(in_fd);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) < 0)
 	{
@@ -55,9 +55,12 @@ void	first_child(t_pipex *pipex, char **env, int pipe_fd[2])
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[1]);
-	execute(pipex->cmds[0], env);
-	clean_pipex(pipex);
-	exit(127);
+	if (execute(pipex->cmds[0], env) < 0)
+	{
+		ft_error(pipex->cmds[0]->raw_cmd, "command not found");
+		clean_pipex(pipex);
+		exit(127);
+	}
 }
 
 void	last_child(t_pipex *pipex, char **env, int pipe_fd[2])
@@ -67,12 +70,12 @@ void	last_child(t_pipex *pipex, char **env, int pipe_fd[2])
 	close(pipe_fd[1]);
 	out_fd = open(pipex->outfile, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (out_fd < 0)
-		ft_error(pipex->outfile, strerror(errno), 1);
-	if (dup2(out_fd, STDOUT_FILENO) < 0)
 	{
-		close(out_fd);
+		ft_error(pipex->outfile, strerror(errno));
 		exit(1);
 	}
+	if (dup2(out_fd, STDOUT_FILENO) < 0)
+		(close(out_fd), exit(1));
 	close(out_fd);
 	if (dup2(pipe_fd[0], STDIN_FILENO) < 0)
 	{
@@ -80,9 +83,12 @@ void	last_child(t_pipex *pipex, char **env, int pipe_fd[2])
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[0]);
-	execute(pipex->cmds[pipex->n_cmds - 1], env);
-	clean_pipex(pipex);
-	exit(127);
+	if (execute(pipex->cmds[pipex->n_cmds - 1], env) < 0)
+	{
+		ft_error(pipex->cmds[pipex->n_cmds - 1]->raw_cmd, "command not found");
+		clean_pipex(pipex);
+		exit(127);
+	}
 }
 
 int	wait_childs(int pid1, int pid2, t_pipex *pipex)

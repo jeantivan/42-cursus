@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:57:38 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/17 12:44:52 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:25:57 by jean             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,24 @@ char	*get_env_var(char **env, const char *var)
 	return (env[i]);
 }
 
-void	ft_error(char *err_msg, char *err_desc, int exit_code)
+void	ft_error(char *err_msg, char *err_desc)
 {
-	ft_putstr_fd((char *)err_msg, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	if (err_desc)
-		ft_putstr_fd(err_desc, STDERR_FILENO);
-	ft_putchar_fd('\n', STDERR_FILENO);
-	exit(exit_code);
+	int		total_len;
+	char	*msg;
+
+	if (!err_msg || !err_desc)
+		return ;
+	total_len = ft_strlen(err_msg) + ft_strlen(err_desc) + 4;
+	msg = (char *)malloc(sizeof(char) * total_len);
+	if (!msg)
+		return ;
+	msg[0] = '\0';
+	ft_strlcat(msg, err_msg, total_len);
+	ft_strlcat(msg, ": ", total_len);
+	ft_strlcat(msg, err_desc, total_len);
+	ft_strlcat(msg, "\n", total_len);
+	ft_putstr_fd(msg, STDERR_FILENO);
+	ft_safe_free((void **)&msg);
 }
 
 t_pipex	*create_pipex(int ac, char **av, char **env)
@@ -85,12 +95,12 @@ void	clean_pipex(t_pipex *pipex)
 	ft_safe_free((void **)&pipex);
 }
 
-void	execute(t_cmd *cmd, char **env)
+int	execute(t_cmd *cmd, char **env)
 {
 	if (!cmd->path)
-		ft_error(cmd->raw_cmd, "command not found.", 127);
+		return (-1);
 	if (access(cmd->path, F_OK) != 0 || cmd->path[0] == '\0')
-		ft_error(cmd->raw_cmd, "command not found.", 127);
+		return (-1);
 	execve(cmd->path, cmd->args, env);
-	exit(1);
+	return (-1);
 }
