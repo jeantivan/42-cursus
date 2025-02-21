@@ -6,7 +6,7 @@
 /*   By: jean <jean@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 12:09:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/02/20 15:02:48 by jean             ###   ########.fr       */
+/*   Updated: 2025/02/22 00:46:11 by jean             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	first_child(t_pipex *pipex, char **env, int pipe_fd[2])
 	in_fd = open(pipex->infile, O_RDONLY);
 	if (in_fd < 0)
 	{
-		ft_error(pipex->infile, strerror(errno));
-		exit(1);
+		(ft_error(pipex->infile, strerror(errno)), clean_pipex(pipex));
+		exit(EXIT_FAILURE);
 	}
 	if (dup2(in_fd, STDIN_FILENO) < 0)
-		(close(in_fd), exit(1));
+		(close(in_fd), clean_pipex(pipex), exit(EXIT_FAILURE));
 	close(in_fd);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) < 0)
 	{
-		close(pipe_fd[1]);
+		(close(pipe_fd[1]), clean_pipex(pipex));
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[1]);
@@ -71,15 +71,15 @@ void	last_child(t_pipex *pipex, char **env, int pipe_fd[2])
 	out_fd = open(pipex->outfile, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (out_fd < 0)
 	{
-		ft_error(pipex->outfile, strerror(errno));
-		exit(1);
+		(ft_error(pipex->outfile, strerror(errno)), clean_pipex(pipex));
+		exit(EXIT_FAILURE);
 	}
 	if (dup2(out_fd, STDOUT_FILENO) < 0)
-		(close(out_fd), exit(1));
+		(close(out_fd), clean_pipex(pipex), exit(EXIT_FAILURE));
 	close(out_fd);
 	if (dup2(pipe_fd[0], STDIN_FILENO) < 0)
 	{
-		close(pipe_fd[0]);
+		(close(pipe_fd[0]), clean_pipex(pipex));
 		exit(EXIT_FAILURE);
 	}
 	close(pipe_fd[0]);
@@ -109,7 +109,7 @@ int	main(int ac, char **av, char **env)
 	int		pipe_fd[2];
 
 	if (ac != 5)
-		return (EXIT_FAILURE);
+		(ft_error("Bad args", "infile cmd1 cmd2 outfile"), exit(1));
 	pipex = create_pipex(ac, av, env);
 	if (!pipex)
 		return (EXIT_FAILURE);
