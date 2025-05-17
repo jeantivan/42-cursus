@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:21:04 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/14 11:39:51 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/05/17 22:23:45 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,22 @@
 # include <pthread.h>
 
 //Colors
-# define RED "\033[1;31m"
-# define GREEN "\033[1;32m"
-# define YELLOW "\033[1;33m"
-# define BLUE "\033[1;34m"
-# define MAGENTA "\033[1;35m"
-# define CYAN "\033[1;36m"
-# define WHITE "\033[1;37m"
-# define RST "\033[1;0m"
+# define RED "\033[31m"
+# define GREEN "\033[32m"
+# define YELLOW "\033[33m"
+# define BLUE "\033[34m"
+# define MAGENTA "\033[35m"
+# define CYAN "\033[36m"
+# define WHITE "\033[37m"
+# define BGRED "\033[41;37m"
+# define BGCYAN "\033[46;37m"
+# define BGGREEN "\033[42;37m"
+# define BGYELLOW "\033[43;37m"
+# define BGMAGENTA "\033[45;37m"
+# define BGBLUE "\033[44;37m"
+# define RST "\033[0m"
+
+# define MAX_PHILOS 200
 
 typedef pthread_mutex_t	t_mxt;
 
