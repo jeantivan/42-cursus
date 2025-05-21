@@ -15,7 +15,9 @@ OBJ_DIR = ./obj
 SRC = main.c \
 	  utils/error.c \
 	  utils/basic.c \
-	  utils/check_args.c
+	  utils/check_args.c \
+	  fork.c \
+	  table.c
 
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
