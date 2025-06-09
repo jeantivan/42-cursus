@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:21:04 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/21 19:21:56 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:32:58 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,76 @@
 
 # define MAX_PHILOS 200
 
+/* Error messages */
+# define ERR_BAD_ARGS "Bad number of arguments."
 # define ERR_CREATE_TABLE "Could not allocate memory for 'table'"
-# define ERR_CREATE_FORKS "Could not allocate memory or init mutexes for 'table->forks'"
+# define ERR_CREATE_FORKS "Could not allocate memory or init \
+mutexes for 'table->forks'"
+# define ERR_CREATE_PHILOS "Could not allocate memory for 'table->philos'"
 
-typedef pthread_mutex_t	t_mxt;
+/* Info messages */
+# define INFO_BAD_ARGS "Use: ./philo <nbr_of_philos>  \
+<time_to_die> <time_to_eat> <time_to_sleep> \
+[nbr_of_times_each_philo_must_eat]"
 
-typedef struct s_fork
+typedef pthread_mutex_t	t_mtx;
+typedef struct s_fork t_fork;
+typedef struct s_philo t_philo;
+typedef struct s_table t_table;
+
+struct s_fork
 {
 	int		id;
-	t_mxt	fork;
-}	t_fork;
+	t_mtx	fork;
+};
 
-typedef struct s_table
+struct s_table
 {
-	long	num_philos;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	num_meals;
-	long	start_time;
-	bool	end_dinner;
-	t_fork	*forks;
-	t_philo	*philos;
-	t_mxt	*print_mutex;
-	t_mxt	*meal_mutex;
-}	t_table;
+	long		num_philos;
+	long		time_to_die;
+	long		time_to_eat;
+	long		time_to_sleep;
+	long		num_meals;
+	long		start_time;
+	bool		finished;
+	t_fork		*forks;
+	t_philo		*philos;
+	bool		table_ready;
+	t_mtx		print_mtx;
+	t_mtx		table_mtx;
+	pthread_t	waiter;
+};
 
-typedef struct s_philo
+struct s_philo
 {
-	int		id;
-	int		eat_count;
-	long	last_meal_time;
-	t_fork	*left_fork;
-	t_fork	*right_fork;
-	t_table	*table;
-}	t_philo;
+	int			id;
+	pthread_t	thread;
+	int			eat_count;
+	long		last_meal_time;
+	bool		is_dead;
+	bool		full;
+	t_fork		*first_fork;
+	t_fork		*second_fork;
+	t_mtx		mtx;
+	t_table		*table;
+};
+
+/* Time scale */
+typedef enum e_time_scale
+{
+	MILI,
+	MICRO
+} t_time_scale;
+
+/* Philo actions */
+typedef enum e_action
+{
+	EAT,
+	SLEEP,
+	THINK,
+	DIE,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK
+} t_action;
 
 #endif /* defines.h */
