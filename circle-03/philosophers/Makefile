@@ -4,7 +4,7 @@ CC = cc
 
 MAKEFLAGS += --no-print-directory
 
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -O1 -fsanitize=thread -Wall -Werror -Wextra
 LDFLAGS = -lpthread
 
 INCLUDES = -I./inc
@@ -16,8 +16,12 @@ SRC = main.c \
 	  utils/error.c \
 	  utils/basic.c \
 	  utils/check_args.c \
+	  utils/time.c \
 	  fork.c \
-	  table.c
+	  table.c \
+	  philo.c \
+	  syncro.c \
+	  write.c \
 
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(SRC))
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
