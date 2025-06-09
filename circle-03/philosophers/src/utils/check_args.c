@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:23:50 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/17 22:56:34 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/05/23 13:01:17 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ bool	valid_args(int ac, char **av)
 
 	if (ac < 5 || ac > 6)
 	{
-		ft_puterror("Bad number of arguments.", \
-			"Use: \
-./philo <nbr_of_philos>  \
-<time_to_die> <time_to_eat> <time_to_sleep> \
-[nbr_of_times_each_philo_must_eat]");
+		ft_puterror(ERR_BAD_ARGS, INFO_BAD_ARGS);
 		return (false);
 	}
 	i = 0;
