@@ -4,7 +4,7 @@ CC = cc
 
 MAKEFLAGS += --no-print-directory
 
-CFLAGS = -g -O1 -fsanitize=thread -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 LDFLAGS = -lpthread
 
 INCLUDES = -I./inc
