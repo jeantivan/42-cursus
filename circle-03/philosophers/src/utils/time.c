@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 13:33:22 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/28 18:33:47 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:58:48 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ void	my_usleep(long usec, t_table *table)
 			break ;
 		usleep(100);
 	}
-
 }

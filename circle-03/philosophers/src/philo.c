@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:43:56 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/28 19:16:59 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:55:27 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,12 @@ void	clean_philos(t_philo *philos, long qty)
 	long	i;
 
 	i = -1;
-	// TODO: Chequear si hay que liberar memoria o destruir algun mutex
 	while (++i < qty)
-	{
 		pthread_mutex_destroy(&philos[i].mtx);
-	}
 	safe_free((void **)&philos);
 }
 
-static void	assign_forks(t_philo *philo, t_table *table,  long  pos, long qty)
+static void	assign_forks(t_philo *philo, t_table *table, long pos, long qty)
 {
 	philo->first_fork = &table->forks[(pos + 1) % qty];
 	philo->second_fork = &table->forks[pos];

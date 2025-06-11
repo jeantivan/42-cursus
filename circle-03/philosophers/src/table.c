@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 18:22:31 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/28 17:18:12 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:47:40 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,15 @@ static t_table	*init_table(int ac, char **av)
 	table->table_ready = false;
 	pthread_mutex_init(&table->print_mtx, NULL);
 	pthread_mutex_init(&table->table_mtx, NULL);
-	// TODO: Inicializar print_mtx y meals_mtx;
 	return (table);
 }
 
 t_table	*clean_table(t_table *table, char *reason)
 {
 	clean_forks(table->forks, table->num_philos);
-	// TODO: Destroy mutexes
+	clean_philos(table->philos, table->num_philos);
 	pthread_mutex_destroy(&table->table_mtx);
 	pthread_mutex_destroy(&table->print_mtx);
-	// TODO: Clean table->philos
-	// TODO: Destroy threads
 	safe_free((void **)&table);
 	if (reason)
 		ft_puterror(reason, NULL);
