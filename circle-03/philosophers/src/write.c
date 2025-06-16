@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:40:21 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/11 16:54:27 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:37:25 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	write_state(t_action action, t_philo *philo)
 		return ;
 	time_passed = get_time(MILI) - philo->table->start_time;
 	pthread_mutex_lock(&philo->table->print_mtx);
-	if ((action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK) \
-&& !dinner_finished(philo->table))
+	if ((action == TAKE_FIRST_FORK || action == TAKE_SECOND_FORK) && \
+	!dinner_finished(philo->table))
 		printf(Y"%-6ld %d has taken a fork 🍴 \n"RST, time_passed, philo->id);
 	else if (action == EAT && !dinner_finished(philo->table))
 		printf(G"%-6ld %d is eating 🍽️\n"RST, time_passed, philo->id);
