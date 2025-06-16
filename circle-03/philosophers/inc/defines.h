@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:21:04 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/28 19:32:58 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:59:31 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 # include <pthread.h>
 
 //Colors
-# define RED "\033[31m"
-# define GREEN "\033[32m"
-# define YELLOW "\033[33m"
-# define BLUE "\033[34m"
-# define MAGENTA "\033[35m"
-# define CYAN "\033[36m"
-# define WHITE "\033[37m"
-# define BGRED "\033[41;37m"
-# define BGCYAN "\033[46;37m"
-# define BGGREEN "\033[42;37m"
-# define BGYELLOW "\033[43;37m"
-# define BGMAGENTA "\033[45;37m"
-# define BGBLUE "\033[44;37m"
+# define R "\033[31m"
+# define G "\033[32m"
+# define Y "\033[33m"
+# define B "\033[34m"
+# define M "\033[35m"
+# define C "\033[36m"
+# define W "\033[37m"
+# define BGR "\033[41;37m"
+# define BGC "\033[46;37m"
+# define BGG "\033[42;37m"
+# define BGY "\033[43;37m"
+# define BGM "\033[45;37m"
+# define BGB "\033[44;37m"
 # define RST "\033[0m"
 
 # define MAX_PHILOS 200
@@ -46,9 +46,9 @@ mutexes for 'table->forks'"
 [nbr_of_times_each_philo_must_eat]"
 
 typedef pthread_mutex_t	t_mtx;
-typedef struct s_fork t_fork;
-typedef struct s_philo t_philo;
-typedef struct s_table t_table;
+typedef struct s_fork	t_fork;
+typedef struct s_philo	t_philo;
+typedef struct s_table	t_table;
 
 struct s_fork
 {
@@ -92,7 +92,7 @@ typedef enum e_time_scale
 {
 	MILI,
 	MICRO
-} t_time_scale;
+}	t_time_scale;
 
 /* Philo actions */
 typedef enum e_action
@@ -103,6 +103,6 @@ typedef enum e_action
 	DIE,
 	TAKE_FIRST_FORK,
 	TAKE_SECOND_FORK
-} t_action;
+}	t_action;
 
 #endif /* defines.h */

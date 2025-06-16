@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:40:48 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/09 16:03:07 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/11 16:58:29 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,19 @@ void	*waiter_job(void *data)
 
 	table = (t_table *)data;
 	my_usleep(100, table);
-	while(!dinner_finished(table))
+	while (!dinner_finished(table))
 	{
 		i = -1;
 		while (++i < table->num_philos && !dinner_finished(table))
 		{
-
 			if (philo_died(&table->philos[i]))
 			{
 				write_state(DIE, &table->philos[i]);
 				set_dinner_finished(table, true);
 			}
-
 		}
 		my_usleep(100, table);
 	}
-
 	return (NULL);
 }
 
@@ -98,9 +95,7 @@ void	*dinner(void *arg)
 	{
 		if (is_full(philo))
 			break ;
-		eating(philo);
-		sleeping(philo);
-		thinking(philo, false);
+		(eating(philo), sleeping(philo), thinking(philo, false));
 	}
 	return (NULL);
 }
@@ -112,7 +107,6 @@ void	start_dinner(t_table *table)
 
 	i = -1;
 	philos = table->philos;
-
 	if (table->num_meals == 0)
 		return ;
 	else if (table->num_philos == 1)
