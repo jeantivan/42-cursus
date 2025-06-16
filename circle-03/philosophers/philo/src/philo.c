@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:43:56 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/16 12:45:07 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:15:36 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,3 @@ bool	create_philos(t_table *table)
 	table->philos = philos;
 	return (true);
 }
-
