@@ -6,99 +6,11 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:40:48 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/11 16:58:29 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:44:52 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-bool	philo_died(t_philo *philo)
-{
-	long	time_passed;
-	long	last_meal_time;
-	long	time_to_die;
-
-	if (is_full(philo))
-		return (false);
-	pthread_mutex_lock(&philo->table->table_mtx);
-	time_to_die = philo->table->time_to_die / 1e3;
-	pthread_mutex_unlock(&philo->table->table_mtx);
-	pthread_mutex_lock(&philo->mtx);
-	last_meal_time = philo->last_meal_time;
-	pthread_mutex_unlock(&philo->mtx);
-	time_passed = get_time(MILI) - last_meal_time;
-	if (time_passed > time_to_die)
-		return (true);
-	return (false);
-}
-
-void	*waiter_job(void *data)
-{
-	long	i;
-	t_table	*table;
-
-	table = (t_table *)data;
-	my_usleep(100, table);
-	while (!dinner_finished(table))
-	{
-		i = -1;
-		while (++i < table->num_philos && !dinner_finished(table))
-		{
-			if (philo_died(&table->philos[i]))
-			{
-				write_state(DIE, &table->philos[i]);
-				set_dinner_finished(table, true);
-			}
-		}
-		my_usleep(100, table);
-	}
-	return (NULL);
-}
-
-void	*dinner_for_one(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	while (!is_table_ready(philo->table))
-		;
-	pthread_mutex_lock(&philo->mtx);
-	philo->last_meal_time = get_time(MILI);
-	pthread_mutex_unlock(&philo->mtx);
-	write_state(TAKE_FIRST_FORK, philo);
-	while (!dinner_finished(philo->table))
-		usleep(100);
-	return (NULL);
-}
-
-void	*dinner(void *arg)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)arg;
-	while (!is_table_ready(philo->table))
-		;
-	pthread_mutex_lock(&philo->mtx);
-	philo->last_meal_time = get_time(MILI);
-	pthread_mutex_unlock(&philo->mtx);
-	if (philo->table->num_philos % 2 == 0)
-	{
-		if (philo->id % 2 == 0)
-			my_usleep(3e4, philo->table);
-	}
-	else
-	{
-		if (philo->id % 2)
-			thinking(philo, true);
-	}
-	while (!dinner_finished(philo->table))
-	{
-		if (is_full(philo))
-			break ;
-		(eating(philo), sleeping(philo), thinking(philo, false));
-	}
-	return (NULL);
-}
 
 void	start_dinner(t_table *table)
 {
