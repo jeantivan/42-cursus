@@ -2,3 +2,5 @@
 born2beroot
 *.o
 *.a
+exam-*
+.vscode
