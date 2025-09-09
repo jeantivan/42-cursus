@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 11:15:19 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/09 16:01:26 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:45:30 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ bool		create_philos(t_table *table);
 void		clean_philos(t_philo *philos, long qty);
 bool		is_full(t_philo *philo);
 void		set_full(t_philo *philo, bool val);
+bool		philo_died(t_philo *philo);
 
 /* Syncro */
 bool		dinner_finished(t_table *table);
@@ -61,5 +62,10 @@ void		thinking(t_philo *philo, bool pre_dinner);
 
 /* Write */
 void		write_state(t_action action, t_philo *philo);
+
+/* Dinner */
+void		*dinner(void *arg);
+void		*dinner_for_one(void *arg);
+void		*waiter_job(void *data);
 
 #endif /* philosophers.h */

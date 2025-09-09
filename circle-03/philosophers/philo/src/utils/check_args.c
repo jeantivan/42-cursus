@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 19:23:50 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/05/23 13:01:17 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 12:35:19 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static bool	valid_arg(char *arg, int index)
 	int	i;
 
 	i = -1;
+	if (arg[0] == '\0')
+		return (ft_puterror("Empty string", NULL), false);
 	while (arg[++i])
 		if (arg[i] != ' ' || arg[i] != '\t')
 			break ;

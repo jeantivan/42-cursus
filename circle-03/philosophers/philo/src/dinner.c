@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   dinner.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/14 11:40:48 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/11 16:58:29 by jtivan-r         ###   ########.fr       */
+/*   Created: 2025/06/16 12:40:31 by jtivan-r          #+#    #+#             */
+/*   Updated: 2025/06/16 13:15:45 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-bool	philo_died(t_philo *philo)
-{
-	long	time_passed;
-	long	last_meal_time;
-	long	time_to_die;
-
-	if (is_full(philo))
-		return (false);
-	pthread_mutex_lock(&philo->table->table_mtx);
-	time_to_die = philo->table->time_to_die / 1e3;
-	pthread_mutex_unlock(&philo->table->table_mtx);
-	pthread_mutex_lock(&philo->mtx);
-	last_meal_time = philo->last_meal_time;
-	pthread_mutex_unlock(&philo->mtx);
-	time_passed = get_time(MILI) - last_meal_time;
-	if (time_passed > time_to_die)
-		return (true);
-	return (false);
-}
 
 void	*waiter_job(void *data)
 {
@@ -98,44 +78,4 @@ void	*dinner(void *arg)
 		(eating(philo), sleeping(philo), thinking(philo, false));
 	}
 	return (NULL);
-}
-
-void	start_dinner(t_table *table)
-{
-	int		i;
-	t_philo	*philos;
-
-	i = -1;
-	philos = table->philos;
-	if (table->num_meals == 0)
-		return ;
-	else if (table->num_philos == 1)
-		pthread_create(&philos[0].thread, NULL, dinner_for_one, &philos[0]);
-	else
-	{
-		while (++i < table->num_philos)
-			pthread_create(&philos[i].thread, NULL, dinner, &philos[i]);
-	}
-	pthread_create(&table->waiter, NULL, waiter_job, table);
-	table->start_time = get_time(MILI);
-	set_table_ready(table);
-	i = -1;
-	while (++i < table->num_philos)
-		pthread_join(table->philos[i].thread, NULL);
-	set_dinner_finished(table, true);
-	pthread_join(table->waiter, NULL);
-}
-
-int	main(int ac, char **av)
-{
-	t_table		*table;
-
-	if (!valid_args(ac, av))
-		return (EXIT_FAILURE);
-	table = set_table(ac, av);
-	if (!table)
-		return (EXIT_FAILURE);
-	start_dinner(table);
-	clean_table(table, NULL);
-	return (0);
 }

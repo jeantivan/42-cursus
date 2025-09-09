@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 19:43:56 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/11 16:55:27 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 13:15:36 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,4 @@ bool	create_philos(t_table *table)
 	}
 	table->philos = philos;
 	return (true);
-}
-
-bool	is_full(t_philo *philo)
-{
-	bool	ret;
-
-	pthread_mutex_lock(&philo->mtx);
-	ret = philo->full;
-	pthread_mutex_unlock(&philo->mtx);
-	return (ret);
-}
-
-void	set_full(t_philo *philo, bool val)
-{
-	pthread_mutex_lock(&philo->mtx);
-	philo->full = val;
-	pthread_mutex_unlock(&philo->mtx);
 }

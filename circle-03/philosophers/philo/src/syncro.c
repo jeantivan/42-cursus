@@ -6,7 +6,7 @@
 /*   By: jtivan-r <jtivan-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 17:15:00 by jtivan-r          #+#    #+#             */
-/*   Updated: 2025/06/11 16:56:41 by jtivan-r         ###   ########.fr       */
+/*   Updated: 2025/06/16 11:12:19 by jtivan-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->mtx);
 	write_state(EAT, philo);
 	my_usleep(philo->table->time_to_eat, philo->table);
-	if (philo->table->num_meals > 0 \
-&& philo->eat_count == philo->table->num_meals)
+	if (philo->table->num_meals > 0 && \
+	philo->eat_count == philo->table->num_meals)
 		set_full(philo, true);
 	pthread_mutex_unlock(&philo->first_fork->fork);
 	pthread_mutex_unlock(&philo->second_fork->fork);
