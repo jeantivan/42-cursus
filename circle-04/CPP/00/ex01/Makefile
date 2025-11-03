@@ -43,7 +43,7 @@ $(NAME): $(OBJ_FILES)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
-	@printf "🔧 $(GRAY)$(CC) $(CFLAGS) -c $< -o $@$(DEF_COLOR)\n"
+	@printf "🔧 $(GRAY)$(CC) $(FLAGS) -c $< -o $@$(DEF_COLOR)\n"
 
 clean:
 	@rm -dfr $(OBJ_DIR)

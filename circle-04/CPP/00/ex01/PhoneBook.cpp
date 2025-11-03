@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook():  _curr_index(0), _size(0)
@@ -12,12 +13,15 @@ void PhoneBook::showInstructions()
 	std::cout << "Type a command:" << std::endl;
 	std::cout << "  \"ADD\" to save a contact." << std::endl;
 	std::cout << "  \"SEARCH\" to search a contact." << std::endl;
-	std::cout << "  \"EXIT\" to exit the phone book." << std::endl;
+	std::cout << "  \"EXIT\" to std::exit the phone book." << std::endl;
 }
 
-void PhoneBook::bye()
+void PhoneBook::bye(bool isEOF)
 {
-	std::cout << "Bye Bye!" << std::endl;
+	std::cout << "\nBye Bye!";
+	if (isEOF)
+		std::cout << " (EOF reached)";
+	std::cout << std::endl;
 }
 
 void PhoneBook::init()
@@ -29,6 +33,8 @@ void PhoneBook::init()
 	{
 		std::cout << ">> ";
 		std::getline(std::cin, cmd);
+		if (std::cin.eof())
+			(bye(true),std::exit(1));
 		if (cmd == "EXIT")
 		{
 			bye();
@@ -52,36 +58,44 @@ void PhoneBook::addContact()
 	std::string phoneNumber;
 
 	std::cout << "Adding a new contact." << std::endl;
-
 	do
 	{
 		std::cout << "First name: ";
 		std::getline(std::cin, firstName);
+		if (std::cin.eof())
+			(bye(true),std::exit(1));
 	} while (firstName.empty());
 
 	do
 	{
 		std::cout << "Last name: ";
 		std::getline(std::cin, lastName);
+		if (std::cin.eof())
+			(bye(true),std::exit(1));
 	} while (lastName.empty());
-
 
 	do
 	{
 		std::cout << "Nick name: ";
 		std::getline(std::cin, nickName);
+		if (std::cin.eof())
+			(bye(true),std::exit(1));
 	} while (nickName.empty());
 
 	do
 	{
 		std::cout << "Secret name: ";
 		std::getline(std::cin, secret);
+		if (std::cin.eof())
+			(bye(true),std::exit(1));
 	} while (secret.empty());
 
 	do
 	{
 		std::cout << "Phone number: ";
 		std::getline(std::cin, phoneNumber);
+		if (std::cin.eof())
+			(bye(true),std::exit(1));
 	} while (phoneNumber.empty());
 
 	contacts[_curr_index].updateContact(firstName, lastName, nickName, secret, phoneNumber);
@@ -96,7 +110,14 @@ void PhoneBook::addContact()
 
 bool PhoneBook::validIndex(std::string searchIndex)
 {
-	if (searchIndex.empty() || searchIndex.length() > 1)
+	if (searchIndex.empty())
+		return (false);
+	if (!std::isdigit((int)searchIndex.at(0)))
+	{
+		std::cout << "Use only digits (1 - 8)" << std::endl;
+		return (false);
+	}
+	if (searchIndex.length() > 1)
 	{
 		std::cout << "Too long!" << std::endl;
 		return (false);
@@ -121,6 +142,8 @@ void PhoneBook::searchContact()
 		do {
 			std::cout << ">> Insert contact index: ";
 			std::getline(std::cin, searchIndex);
+			if (std::cin.eof())
+				(bye(true),std::exit(1));
 			if (searchIndex == "EXIT")
 				break;
 		} while (!validIndex(searchIndex));

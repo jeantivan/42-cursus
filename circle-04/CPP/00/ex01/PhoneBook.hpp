@@ -14,7 +14,7 @@ class PhoneBook
 		PhoneBook();
 		void init();
 		void showInstructions();
-		void bye();
+		void bye(bool isEOF = false);
 		void addContact();
 		void searchContact();
 		void wrongInput();
