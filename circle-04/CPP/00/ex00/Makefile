@@ -6,7 +6,6 @@ FLAGS = -Wall -Werror -Wextra -std=c++98
 
 INCLUDES = -I.
 
-
 SRC_DIR = .
 
 OBJ_DIR = ./obj
@@ -14,7 +13,7 @@ OBJ_DIR = ./obj
 FILES = megaphone.cpp
 
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(FILES))
-OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 # Colors
 BOLD_PURPLE	= \033[1;35m
@@ -38,10 +37,10 @@ $(NAME): $(OBJ_FILES)
 	@$(CC) $(FLAGS) $(OBJ_FILES) -o $(NAME)
 	@echo "✅ DONE ./$(NAME) created!"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/.c
-	@mkdir -p $(did $@)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)
 	@$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
-	@printf "🔧 $(GRAY)$(CC) $(CFLAGS) -c $< -o $@$(DEF_COLOR)\n"
+	@printf "🔧 $(GRAY)$(CC) $(FLAGS) -c $< -o $@$(DEF_COLOR)\n"
 
 clean:
 	@rm -dfr $(OBJ_DIR)
