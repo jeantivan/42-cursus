@@ -2,10 +2,9 @@ NAME = sed_is_for_losers
 
 CC = c++
 
-FLAGS = -Wall -Werror -Wextra -std=c++98 -g -fsanitize=address -fno-omit-frame-pointer
+FLAGS = -Wall -Werror -Wextra -std=c++98
 
 INCLUDES = -I.
-
 
 SRC_DIR = .
 
