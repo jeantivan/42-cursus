@@ -15,6 +15,6 @@ int main(int ac, char **av)
 
 	filename = av[1], old_str = av[2], new_str = av[3];
 	FileReplace fileReplace(filename, old_str, new_str);
-	fileReplace.readFile();
+	fileReplace.replace();
 	return (0);
 }

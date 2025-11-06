@@ -21,7 +21,7 @@ FileReplace::~FileReplace() {
 		_new_file.close();
 }
 
-void FileReplace::readFile() {
+void FileReplace::replace() {
 	std::string line;
 	std::string new_line;
 	size_t pos;

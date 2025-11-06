@@ -18,7 +18,7 @@ public:
 	FileReplace(std::string filename, std::string str_to_replace, std::string new_str);
 	~FileReplace();
 
-	void readFile();
+	void replace();
 };
 
 #endif // FILEREPLACE_HPP
