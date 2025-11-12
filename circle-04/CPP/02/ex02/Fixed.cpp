@@ -55,25 +55,25 @@ std::ostream& operator<<(std::ostream& os, const Fixed& n) {
 
 // Pre & Pos in/decrement
 Fixed& Fixed::operator++() {
-	val += 1;
+	val += (1 << fract_bits);
 	return *this;
 }
 
 Fixed Fixed::operator++(int)
 {
 	Fixed temp(*this);
-	val += 1;
+	val += (1 << fract_bits);
 	return temp;
 }
 
 Fixed& Fixed::operator--() {
-	val -= 1;
+	val -= (1 << fract_bits);
 	return *this;
 }
 
 Fixed Fixed::operator--(int) {
 	Fixed temp(*this);
-	val -= 1;
+	val -= (1 << fract_bits);
 	return temp;
 }
 
@@ -91,7 +91,7 @@ bool Fixed::operator<=(const Fixed& other) {
 }
 
 bool Fixed::operator>=(const Fixed& other) {
-	return val <= other.val;
+	return val >= other.val;
 }
 
 bool Fixed::operator==(const Fixed& other) {
