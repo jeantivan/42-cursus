@@ -19,7 +19,7 @@ Fixed::Fixed(const int n) {
 
 Fixed::Fixed(const float n) {
 	std::cout << "Float constructor called" << std::endl;
-	val = static_cast<int>(round(n * (1 << fract_bits)));
+	val = static_cast<int>(roundf(n * (1 << fract_bits)));
 }
 
 
