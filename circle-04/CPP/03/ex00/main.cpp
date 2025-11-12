@@ -3,25 +3,35 @@
 
 int main()
 {
+{
+	std::cout << "\n----  Orthodox canonical form\n" << std::endl;
 	ClapTrap c1;
 	ClapTrap c2("Megatron");
+	ClapTrap c3("Optimus");
+	c1 = c3;
+}
+{
+	std::cout << "\n----  Testing functions\n" << std::endl;
+	ClapTrap clap("Mazinger Z");
 
-	c2.takeDamage(7);
-	c2.takeDamage(2);
-	c2.takeDamage(1);
-	c2.takeDamage(2);
+	std::cout << "\n--  Taking damage\n" << std::endl;
+	clap.takeDamage(7);
+	clap.takeDamage(2);
+	clap.takeDamage(1);
+	clap.takeDamage(2);
 
-	c2.beRepaired(2);
-	c2.beRepaired(5);
-	c2.beRepaired(12);
-	c2.beRepaired(1);
+	std::cout << "\n--  Repairing damage\n" << std::endl;
+	clap.beRepaired(2);
+	clap.beRepaired(12);
+	clap.beRepaired(1);
 
-	c2.takeDamage(2);
+	clap.takeDamage(2);
 
+	std::cout << "\n--  Testing copy\n" << std::endl;
 	ClapTrap c3;
-	c3 = c2;
+	c3 = clap;
 
 	c3.takeDamage(1);
-
+}
 	return 0;
 }
