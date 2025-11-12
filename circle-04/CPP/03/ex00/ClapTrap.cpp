@@ -8,11 +8,7 @@ ClapTrap::ClapTrap(const std::string name) : _name(name), _hit_points(10), _ener
 	std::cout << "I'm " << _name << " ready to fight!" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &other) {
-	_name = other._name;
-	_hit_points = 10;
-	_energy_points = 10;
-	_attack_damage = 0;
+ClapTrap::ClapTrap(const ClapTrap &other) : _name(other._name), _hit_points(other._hit_points), _energy_points(other._energy_points), _attack_damage(other._attack_damage) {
 	std::cout << "A new " << _name << " has emerged!" << std::endl;
 }
 
@@ -22,13 +18,13 @@ ClapTrap::~ClapTrap() {
 
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
-	_name = other._name;
-	_hit_points = other._hit_points;
-	_energy_points = other._energy_points;
-	_attack_damage = other._attack_damage;
-
+	if (this != &other) {
+		_name = other._name;
+		_hit_points = other._hit_points;
+		_energy_points = other._energy_points;
+		_attack_damage = other._attack_damage;
+	}
 	std::cout << _name << " was successfully cloned!" << std::endl;
-
 	return *this;
 }
 
