@@ -6,7 +6,7 @@ int main() {
 	std::string const names[] = { "Goku", "Vegeta", "Gohan", "Trunks"};
 	size_t const totNames(sizeof(names) / sizeof(std::string));
 
-	ScavTrap  * robots[totNames];
+	ScavTrap * robots[totNames];
 
 	std::cout << "\n---- Test constructors\n" << std::endl;
 	for (size_t  i = 0; i  < totNames; i++)
