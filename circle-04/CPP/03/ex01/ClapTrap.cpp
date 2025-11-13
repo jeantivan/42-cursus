@@ -114,3 +114,10 @@ void ClapTrap::setAttackDamage(unsigned int n)
 {
 	_attack_damage = n;
 }
+
+void ClapTrap::showStats() {
+	std::cout << _name << " stats:\n";
+	std::cout << " -- hit points: " << _hit_points << "\n";
+	std::cout << " -- energy points: " << _energy_points << "\n";
+	std::cout << " -- attack damage: " << _attack_damage << std::endl;
+}

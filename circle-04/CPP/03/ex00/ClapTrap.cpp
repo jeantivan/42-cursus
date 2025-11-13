@@ -71,3 +71,10 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	_hit_points += amount;
 	std::cout << "ClapTrap " << _name << " regained " << amount << " health points!" << std::endl;
 }
+
+void ClapTrap::showStats() {
+	std::cout << _name << " stats:\n";
+	std::cout << " -- hit points: " << _hit_points << "\n";
+	std::cout << " -- energy points: " << _energy_points << "\n";
+	std::cout << " -- attack damage: " << _attack_damage << std::endl;
+}
