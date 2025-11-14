@@ -15,7 +15,7 @@ public:
 	ClapTrap();
 	ClapTrap(const ClapTrap &other);
 	ClapTrap(const std::string name);
-	~ClapTrap();
+	virtual ~ClapTrap();
 	ClapTrap &operator=(const ClapTrap &other);
 
 	// Getters & Setters
