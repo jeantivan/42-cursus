@@ -4,7 +4,7 @@ ScavTrap::ScavTrap() : ClapTrap(), _keepperMode(false) {
 	setHitPoints(100);
 	setEnergyPoints(50);
 	setAttackDamage(20);
-	std::cout << "(default) ScavTrap created" << std::endl;
+	std::cout << "Default ScavTrap created" << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string name) : ClapTrap(name), _keepperMode(false) {
