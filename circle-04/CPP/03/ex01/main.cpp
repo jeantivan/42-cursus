@@ -3,66 +3,38 @@
 #include "ScavTrap.hpp"
 
 int main() {
-	std::string const names[] = { "Goku", "Vegeta", "Gohan", "Trunks"};
-	size_t const totNames(sizeof(names) / sizeof(std::string));
-
-	ScavTrap * robots[totNames];
-
-	std::cout << "\n---- Test constructors\n" << std::endl;
-	for (size_t  i = 0; i  < totNames; i++)
-	{
-		robots[i] = new ScavTrap(names[i]);
-		std::cout << "\n";
-	}
-	std::cout << std::endl;
-
-	std::cout << "\n---- Test copy constructors" << std::endl;
-	ScavTrap gohan(*robots[2]);
+	std::cout << "\n---- Named constructor\n";
+	// Named Constructor
+	ScavTrap scav1("Goku");
 	std::cout << "\n";
 
-	ScavTrap trunks("trunks");
-	trunks = *robots[3];
-
-	std::cout << std::endl;
-
-	std::cout << "\n---- Test inherit functions" << std::endl;
-	robots[3]->attack(robots[0]->getName());
+	// Copy constructor
+	ClapTrap * scav2 = new ScavTrap("Vegeta");
 	std::cout << "\n";
 
-	gohan.attack(robots[0]->getName());
+	// Default constructor
+	ScavTrap scav3;
 	std::cout << "\n";
 
-	robots[0]->takeDamage(robots[3]->getAttackDamage());
+	// Magic to use the operator '='
+	scav3 = *static_cast<ScavTrap *>(scav2);
 	std::cout << "\n";
 
-	robots[0]->takeDamage(gohan.getAttackDamage());
+	// Inherited function
+	scav1.showStats();
 	std::cout << "\n";
 
-	robots[0]->beRepaired(30);
-	std::cout << "ScavTrap: " << robots[0]->getName() << " health " << robots[0]->getHitPoints() << std::endl;
-
-	std::cout << std::endl;
-
-	std::cout << "\n---- Test new functions\n" << std::endl;
-	robots[1]->guardGate();
+	scav2->showStats();
 	std::cout << "\n";
 
-	robots[3]->guardGate();
+	scav3.showStats();
 	std::cout << "\n";
 
-	robots[1]->leaveGate();
+	scav1.attack(scav2->getName());
 	std::cout << "\n";
 
-	robots[2]->leaveGate();
-	std::cout << std::endl;
-
-
-	std::cout << "\n---- Test destructors\n" << std::endl;
-	for (size_t  i = 0; i  < totNames; i++)
-	{
-		delete robots[i];
-		std::cout << "\n";
-	}
+	scav2->takeDamage(scav1.getAttackDamage());
+	std::cout << "\n";
 
 	return (0);
 }
