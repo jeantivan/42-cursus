@@ -44,12 +44,49 @@ int main() {
 	trunks.takeDamage(vegeta->getAttackDamage());
 	std::cout << "\n";
 
+	trunks.showStats();
+	std::cout << "\n";
+
+	trunks.beRepaired(vegeta->getAttackDamage());
+	std::cout << "\n";
+
+	trunks.showStats();
+	std::cout << "\n";
+
+	trunks.takeDamage(42);
+	std::cout << "\n";
+
+	trunks.showStats();
+	std::cout << "\n";
+
+	trunks.beRepaired(84);
+	std::cout << "\n";
+
+	trunks.showStats();
+	std::cout << "\n";
+
+	trunks.beRepaired(310);
+	std::cout << "\n";
+
+	trunks.showStats();
+	std::cout << "\n";
+
 	// Own functions
+	goku.guardGate();
+	std::cout << "\n";
+
 	goku.guardGate();
 	std::cout << "\n";
 
 	(static_cast<ScavTrap *>(vegeta))->guardGate();
 	std::cout << "\n";
+
+	goku.leaveGate();
+	std::cout << "\n";
+
+	(static_cast<ScavTrap *>(vegeta))->leaveGate();
+	std::cout << "\n";
+
 	// Free de ScavTrap pointer
 	delete vegeta;
 	return (0);

@@ -1,17 +1,14 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap(), _keepperMode(false) {
-	setHitPoints(100);
-	setEnergyPoints(50);
-	setAttackDamage(20);
+const unsigned int ScavTrap::MAX_HIT_POINTS = 100;
+const unsigned int ScavTrap::MAX_ENERGY_POINTS = 50;
+const unsigned int ScavTrap::MAX_ATTACK_DAMAGE = 20;
+
+ScavTrap::ScavTrap() : ClapTrap("Scav Default", MAX_HIT_POINTS, MAX_ENERGY_POINTS, MAX_ATTACK_DAMAGE), _keepperMode(false) {
 	std::cout << "Default ScavTrap created" << std::endl;
 }
 
-ScavTrap::ScavTrap(const std::string name) : ClapTrap(name), _keepperMode(false) {
-	setHitPoints(100);
-	setEnergyPoints(50);
-	setAttackDamage(20);
-
+ScavTrap::ScavTrap(const std::string name) : ClapTrap(name, MAX_HIT_POINTS, MAX_ENERGY_POINTS, MAX_ATTACK_DAMAGE), _keepperMode(false) {
 	std::cout << "ScavTrap: " << getName() << " created" << std::endl;
 }
 
@@ -85,8 +82,17 @@ void ScavTrap::beRepaired(unsigned int amount) {
 		std::cout << "ScavTrap "<< _name << " doesn't have enough energy to be repaired!" << std::endl;
 		return;
 	}
-	_energy_points--;
+
+	if (_hit_points == MAX_HIT_POINTS)
+	{
+		std::cout << "ScavTrap " << "max health points reached!" << std::endl;
+		return ;
+	}
+
+	if (_hit_points + amount >= MAX_HIT_POINTS)
+		amount = MAX_HIT_POINTS - _hit_points;
 	_hit_points += amount;
+	_energy_points--;
 	std::cout << "ScavTrap " << _name << " regained " << amount << " health points!" << std::endl;
 }
 
