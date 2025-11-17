@@ -46,7 +46,7 @@ void ScavTrap::setKeepperMode(bool active) {
 // Inherited functions
 void ScavTrap::attack(const std::string& target)
 {
-	if (_energy_points - 1 > 0)
+	if (_energy_points - 1 >= 0)
 	{
 		std::cout << "ScavTrap " << _name << " attacks " << target << ", causing " \
 		<< _attack_damage << " points of damage" << std::endl;
