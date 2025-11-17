@@ -1,6 +1,10 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name("Bumblebee"), _hit_points(10), _energy_points(10), _attack_damage(0) {
+const unsigned int ClapTrap::MAX_HIT_POINTS = 10;
+const unsigned int ClapTrap::MAX_ENERGY_POINTS = 10;
+const unsigned int ClapTrap::MAX_ATTACK_DAMAGE = 0;
+
+ClapTrap::ClapTrap() : _name("Bumblebee"), _hit_points(MAX_HIT_POINTS), _energy_points(MAX_ENERGY_POINTS), _attack_damage(MAX_ATTACK_DAMAGE) {
 	std::cout << "I'm " << _name << " ready to fight! " << std::endl;
 }
 
@@ -34,6 +38,16 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 	return *this;
 }
 
+// Protected Constructor, can only be used by child classes
+ClapTrap::ClapTrap( \
+	const std::string name, \
+	const unsigned int hit_points, \
+	const unsigned int energy_points, \
+	const unsigned int attack_damage) : \
+	_name(name), _hit_points(hit_points), _energy_points(energy_points), _attack_damage(attack_damage)
+{
+	std::cout << "ClapTrap: Protected constructor called from a child class" << std::endl;
+}
 
 void ClapTrap::attack(const std::string &target) {
 	if (_energy_points - 1 > 0)
@@ -73,8 +87,17 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		std::cout << "ClapTrap "<< _name << " doesn't have enough energy to be repaired!" << std::endl;
 		return;
 	}
-	_energy_points--;
+
+	if (_hit_points == MAX_HIT_POINTS)
+	{
+		std::cout << "ClapTrap " << "max health points reached!" << std::endl;
+		return ;
+	}
+
+	if (_hit_points + amount >= MAX_HIT_POINTS)
+		amount = MAX_HIT_POINTS - amount;
 	_hit_points += amount;
+	_energy_points--;
 	std::cout << "ClapTrap " << _name << " regained " << amount << " health points!" << std::endl;
 }
 
