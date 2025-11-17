@@ -49,8 +49,6 @@ ClapTrap::ClapTrap( \
 	std::cout << "ClapTrap: Protected constructor called from a child class" << std::endl;
 }
 
-
-
 void ClapTrap::attack(const std::string &target) {
 	if (_energy_points - 1 > 0)
 	{
