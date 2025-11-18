@@ -81,14 +81,22 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		return;
 	}
 
-	if (_hit_points == MAX_HIT_POINTS)
-	{
-		std::cout << "ClapTrap " << "max health points reached!" << std::endl;
-		return ;
-	}
+	/**
+	 * 📌📌📌📌📌
+	 *
+	 * This cannot be used because MAX_HIT_POINTS is ClapTrap::MAX_HIT_POINTS and beRepaired should not be reimplemented in ScavTrap. so using
+	 * beRepaired in ScavTrap will use 'ClapTrap::MAX_HIT_POINTS' which is different from 'ScavTrap::MAX_HIT_POINTS'
+	 *
+	 *if (_hit_points == MAX_HIT_POINTS)
+	 *{
+	 *	std::cout << "ClapTrap " << "max health points reached!" << std::endl;
+	 *	return ;
+	 *}
+	 *
+	 * */
 
-	if (_hit_points + amount >= MAX_HIT_POINTS)
-		amount = MAX_HIT_POINTS - _hit_points;
+	// if (_hit_points + amount >= MAX_HIT_POINTS)
+	// 	amount = MAX_HIT_POINTS - _hit_points;
 	_hit_points += amount;
 	_energy_points--;
 	std::cout << "ClapTrap " << _name << " regained " << amount << " health points!" << std::endl;
