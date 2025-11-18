@@ -20,7 +20,8 @@ int main() {
     std::cout << "\n=== Prueba de método heredado ===" << std::endl;
     FragTrap ft4("Alex");
     ft4.attack(ft3.getName());
-    ft4.showStats();
+    ft4.takeDamage(10001);
+    ft4.beRepaired(10000);
 
     std::cout << "\n=== Fin del main, comienza destrucción ===" << std::endl;
 	return 0;
