@@ -1,10 +1,14 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() : _name("Bumblebee"), _hit_points(10), _energy_points(10), _attack_damage(0) {
+const unsigned int ClapTrap::MAX_HIT_POINTS = 10;
+const unsigned int ClapTrap::MAX_ENERGY_POINTS = 10;
+const unsigned int ClapTrap::MAX_ATTACK_DAMAGE = 0;
+
+ClapTrap::ClapTrap() : _name("Default"), _hit_points(MAX_HIT_POINTS), _energy_points(MAX_ENERGY_POINTS), _attack_damage(MAX_ATTACK_DAMAGE) {
 	std::cout << "I'm " << _name << " ready to fight! " << std::endl;
 }
 
-ClapTrap::ClapTrap(const std::string name) : _name(name), _hit_points(10), _energy_points(10), _attack_damage(0) {
+ClapTrap::ClapTrap(const std::string name) : _name(name), _hit_points(MAX_HIT_POINTS), _energy_points(MAX_ENERGY_POINTS), _attack_damage(MAX_ATTACK_DAMAGE) {
 	std::cout << "I'm " << _name << " ready to fight!" << std::endl;
 }
 
