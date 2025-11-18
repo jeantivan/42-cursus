@@ -34,10 +34,13 @@ FragTrap& FragTrap::operator=(const FragTrap &other)
 
 // Override inherited functions
 void FragTrap::attack(const std::string& target) {
-	if (_energy_points - 1 >= 0)
+	if (_energy_points > 0)
 		std::cout << "FragTrap " << _name << " attack " << target << ", causing " << _attack_damage << " points of damage" << std::endl;
 	else
+	{
 		std::cout << "FragTrap " << _name << " does not have energy for an attack!" << std::endl;
+		return ;
+	}
 	if (_energy_points > 0)
 		_energy_points--;
 	std::cout << "Remaining energy for frag " << _energy_points << std::endl;
