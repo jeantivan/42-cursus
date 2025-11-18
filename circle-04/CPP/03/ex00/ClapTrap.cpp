@@ -20,7 +20,6 @@ ClapTrap::~ClapTrap() {
 	std::cout << _name << " was destroyed!" << std::endl;
 }
 
-
 ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 	if (this != &other) {
 		_name = other._name;
@@ -31,7 +30,6 @@ ClapTrap& ClapTrap::operator=(const ClapTrap &other) {
 	std::cout << _name << " was successfully cloned!" << std::endl;
 	return *this;
 }
-
 
 void ClapTrap::attack(const std::string &target) {
 	if (_energy_points > 0)
