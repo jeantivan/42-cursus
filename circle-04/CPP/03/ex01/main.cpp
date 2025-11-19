@@ -96,7 +96,16 @@ int main() {
 	scavtrap->showStats();
 	std::cout << "\n";
 
-	std::cout << "-- Freeing pointers\n\n";
+	std::cout << "\n-- Guarding gate\n\n";
+	static_cast<ScavTrap *>(scavtrap)->guardGate();
+
+	static_cast<ScavTrap *>(scavtrap)->guardGate();
+
+	static_cast<ScavTrap *>(scavtrap)->leaveGate();
+
+	static_cast<ScavTrap *>(scavtrap)->leaveGate();
+
+	std::cout << "\n-- Freeing pointers\n\n";
 
 	delete claptrap;
 	delete scavtrap;
