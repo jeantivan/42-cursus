@@ -35,7 +35,7 @@ int main() {
 	std::cout << "\n------ WrongAnimal & WrongCat ------\n" << std::endl;
 
 	const WrongAnimal* wrongAnimal = new WrongAnimal();
-	const WrongCat* wrongCat = new WrongCat();
+	const WrongAnimal* wrongCat = new WrongCat();
 
 	wrongAnimal->makeSound();
 	wrongCat->makeSound();
