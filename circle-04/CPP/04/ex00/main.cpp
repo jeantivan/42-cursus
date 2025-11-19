@@ -26,11 +26,22 @@ int main() {
 	const Animal* meta = new Animal();
 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
-	std::cout << j->getType() << " " << std::endl;
-	std::cout << i->getType() << " " << std::endl;
+
+	std::cout << "\n--- Animal pointers type ---\n" << std::endl;
+
+	std::cout << "Animal * meta type " << meta->getType() << std::endl;
+	std::cout << "Animal * j type " << j->getType() << std::endl;
+	std::cout << "Animal * i type " << i->getType() << std::endl;
+
+	std::cout << "\n--- Making sound ---\n" << std::endl;
 	i->makeSound(); //will output the cat sound!
 	j->makeSound();
 	meta->makeSound();
+
+	std::cout << "\n------ Deleting pointers objects ------\n" << std::endl;
+	delete meta;
+	delete j;
+	delete i;
 
 	std::cout << "\n------ WrongAnimal & WrongCat ------\n" << std::endl;
 
@@ -40,14 +51,11 @@ int main() {
 	wrongAnimal->makeSound();
 	wrongCat->makeSound();
 
-	std::cout << "\n------ Deleting pointers objects ------\n" << std::endl;
-	delete meta;
-	delete j;
-	delete i;
-
+	std::cout << "\n------ Destructors pointers ------\n" << std::endl;
 	delete wrongAnimal;
 	delete wrongCat;
-	std::cout << "\n------  Pointers objects cleaned\n" << std::endl;
+
+	std::cout << "\n------ Other destructors ------\n" << std::endl;
 
 	return 0;
 }
