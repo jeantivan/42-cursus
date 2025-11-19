@@ -52,92 +52,54 @@ int main() {
 
 }
 
+{
+	std::cout << "\n---- Test Inheritance with pointer ----\n\n";
+	ClapTrap *claptrap = new ClapTrap("Clap-PTR");
+	ClapTrap *scavtrap = new ScavTrap("Scav-PTR");
 
-	// std::cout << "\n---- Named constructor\n";
-	// // Named Constructor
-	// ScavTrap goku("Goku");
-	// std::cout << "\n";
+	std::cout << "\n-- Showing stats\n\n";
 
-	// // Copy constructor
-	// ClapTrap * vegeta = new ScavTrap("Vegeta");
-	// std::cout << "\n";
+	claptrap->showStats();
+	std::cout << "\n";
+	// Here showStats is inhereted from ClapTrap
+	scavtrap->showStats();
+	std::cout << "\n";
 
-	// // Default constructor
-	// ScavTrap trunks;
-	// std::cout << "\n";
+	std::cout << "\n-- Attacking\n\n";
 
-	// // Magic to use the operator '='
-	// trunks = *static_cast<ScavTrap *>(vegeta);
-	// std::cout << "\n";
-	// trunks = ScavTrap("Trunks");
-	// std::cout << "\n";
+	claptrap->attack("Nothing");
+	std::cout << "\n";
+	// Here attack is overwritten by ScavTrap implementation;
+	scavtrap->attack("Again nothing");
+	std::cout << "\n";
 
-	// // Inherited function
-	// goku.showStats();
-	// std::cout << "\n";
 
-	// vegeta->showStats();
-	// std::cout << "\n";
+	std::cout << "\n-- Taking damage\n\n";
+	// The member functions 'takeDamage' and 'beRepaired' are inhereted from ClapTrap
+	claptrap->takeDamage(3);
+	std::cout << "\n";
 
-	// trunks.showStats();
-	// std::cout << "\n";
+	scavtrap->takeDamage(42);
+	std::cout << "\n";
 
-	// goku.attack(vegeta->getName());
-	// std::cout << "\n";
+	std::cout << "\n-- Repairing damage\n\n";
 
-	// vegeta->takeDamage(goku.getAttackDamage());
-	// std::cout << "\n";
+	claptrap->beRepaired(5);
+	std::cout << "\n";
 
-	// vegeta->attack(trunks.getName());
-	// std::cout << "\n";
+	scavtrap->beRepaired(42 * 10);
+	std::cout << "\n";
 
-	// trunks.takeDamage(vegeta->getAttackDamage());
-	// std::cout << "\n";
+	claptrap->showStats();
+	std::cout << "\n";
 
-	// trunks.showStats();
-	// std::cout << "\n";
+	scavtrap->showStats();
+	std::cout << "\n";
 
-	// trunks.beRepaired(vegeta->getAttackDamage());
-	// std::cout << "\n";
+	std::cout << "-- Freeing pointers\n\n";
 
-	// trunks.showStats();
-	// std::cout << "\n";
-
-	// trunks.takeDamage(42);
-	// std::cout << "\n";
-
-	// trunks.showStats();
-	// std::cout << "\n";
-
-	// trunks.beRepaired(84);
-	// std::cout << "\n";
-
-	// trunks.showStats();
-	// std::cout << "\n";
-
-	// trunks.beRepaired(310);
-	// std::cout << "\n";
-
-	// trunks.showStats();
-	// std::cout << "\n";
-
-	// // Own functions
-	// goku.guardGate();
-	// std::cout << "\n";
-
-	// goku.guardGate();
-	// std::cout << "\n";
-
-	// (static_cast<ScavTrap *>(vegeta))->guardGate();
-	// std::cout << "\n";
-
-	// goku.leaveGate();
-	// std::cout << "\n";
-
-	// (static_cast<ScavTrap *>(vegeta))->leaveGate();
-	// std::cout << "\n";
-
-	// // Free de ScavTrap pointer
-	// delete vegeta;
+	delete claptrap;
+	delete scavtrap;
+}
 	return (0);
 }
