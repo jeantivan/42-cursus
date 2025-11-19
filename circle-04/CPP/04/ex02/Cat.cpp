@@ -36,7 +36,3 @@ void Cat::makeSound() const {
 std::string Cat::getType() const {
 	return (Animal::getType());
 }
-
-void Cat::makePooPoo() const {
-	std::cout << "🐈💩💩" << std::endl;
-}

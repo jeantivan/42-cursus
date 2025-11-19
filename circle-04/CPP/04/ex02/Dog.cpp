@@ -36,7 +36,3 @@ void Dog::makeSound() const {
 std::string Dog::getType() const {
 	return (Animal::getType());
 }
-
-void Dog::makePooPoo() const {
-	std::cout << "🐈💩💩" << std::endl;
-}

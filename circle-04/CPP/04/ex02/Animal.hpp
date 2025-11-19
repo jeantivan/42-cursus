@@ -6,7 +6,7 @@
 
 class Animal
 {
-private:
+protected:
 	std::string type;
 
 public:
@@ -17,8 +17,7 @@ public:
 	Animal &operator=(const Animal &other);
 
 	virtual std::string getType() const;
-	virtual void makeSound() const;
-	virtual void makePooPoo() const = 0;
+	virtual void makeSound() const = 0;
 };
 
 #endif // ANIMAL_HPP
