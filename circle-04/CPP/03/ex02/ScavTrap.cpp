@@ -58,44 +58,6 @@ void ScavTrap::attack(const std::string& target)
 	std::cout << "Remaining energy of scav " << _energy_points << std::endl;
 }
 
-void ScavTrap::takeDamage(unsigned int amount) {
-	int new_hit_points = static_cast<int>(_hit_points) - static_cast<int>(amount);
-
-	if (_hit_points == 0)
-	{
-		std::cout << "ScavTrap " << _name << " can't take more damage. Health is " << _hit_points << std::endl;
-		return ;
-	}
-	std::cout << "ScavTrap " << _name << " took " << amount << " points of damage!" << std::endl;
-	if (new_hit_points > 0)
-	{
-		_hit_points = new_hit_points;
-	}
-	else
-		_hit_points = 0;
-	std::cout << _name << " health " << _hit_points << std::endl;
-}
-
-void ScavTrap::beRepaired(unsigned int amount) {
-	if (_energy_points <= 0)
-	{
-		std::cout << "ScavTrap "<< _name << " doesn't have enough energy to be repaired!" << std::endl;
-		return;
-	}
-
-	if (_hit_points == MAX_HIT_POINTS)
-	{
-		std::cout << "ScavTrap " << "max health points reached!" << std::endl;
-		return ;
-	}
-
-	if (_hit_points + amount >= MAX_HIT_POINTS)
-		amount = MAX_HIT_POINTS - _hit_points;
-	_hit_points += amount;
-	_energy_points--;
-	std::cout << "ScavTrap " << _name << " regained " << amount << " health points!" << std::endl;
-}
-
 // Own functions
 void ScavTrap::guardGate() {
 	if (_keepperMode) {
