@@ -28,11 +28,10 @@ Brain& Brain::operator=(const Brain &other) {
 	return (*this);
 }
 
-std::string Brain::getIdea(size_t index) const {
+const std::string& Brain::getIdea(size_t index) const {
 	if (index > 99)
 	{
-		std::cerr << "Error: index out of bounds" << std::endl;
-		return "";
+		throw std::out_of_range("Error: index out of bounds in Brain::getIdea");
 	}
 	return ideas[index];
 }
