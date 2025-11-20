@@ -22,9 +22,8 @@ Animal &Animal::operator=(const Animal &other) {
 	return (*this);
 }
 
-
 Animal::~Animal() {
-	std::cout << "Class Animal default destructor" << std::endl;
+	std::cout << "Class Animal destructor" << std::endl;
 }
 
 void Animal::makeSound() const {
