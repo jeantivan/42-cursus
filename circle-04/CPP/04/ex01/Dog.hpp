@@ -15,7 +15,11 @@ public:
 	~Dog();
 	Dog &operator=(const Dog &other);
 
+	// Required by subject
 	void makeSound() const;
+
+	// Added by me
+	const Brain *getBrain() const;
 };
 
 #endif // DOG_HPP

@@ -3,12 +3,10 @@
 Dog::Dog() : Animal("Dog") {
 	std::cout << "Class Dog created with default constructor" << std::endl;
 	brain = new Brain();
-	std::cout << "Creating ideas for Dog object" << std::endl;
 }
 
 Dog::Dog(const Dog &other) : Animal(other) {
 	std::cout << "Class Dog copy constructor called" << std::endl;
-	std::cout << "Copying brain ideas of Dog object..." << std::endl;
 	brain = new Brain(*other.brain);
 }
 
@@ -23,12 +21,15 @@ Dog& Dog::operator=(const Dog &other) {
 	if (this != &other)
 	{
 		Animal::operator=(other);
-		std::cout << "Copying brain ideas of Dog Object..." << std::endl;
-		brain = new Brain(*other.brain);
+		*brain = *other.brain;
 	}
 	return (*this);
 }
 
 void Dog::makeSound() const {
 	std::cout << "woof woof woof" << std::endl;
+}
+
+const Brain* Dog::getBrain() const {
+	return brain;
 }

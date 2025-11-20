@@ -13,7 +13,11 @@ public:
 	~Cat();
 	Cat &operator=(const Cat &other);
 
+	// Required by subject
 	void makeSound() const;
+
+	// Added by me
+	const Brain *getBrain() const;
 };
 
 #endif // CAT_HPP
