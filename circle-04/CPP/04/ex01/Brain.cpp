@@ -21,7 +21,7 @@ Brain& Brain::operator=(const Brain &other) {
 	{
 		for(size_t i = 0; i < MAX_SIZE; i++)
 		{
-			ideas[i] = std::string(other.ideas[i]);
+			ideas[i] = other.ideas[i];
 		}
 	}
 	std::cout << "Class Brain '=' operator called" << std::endl;
