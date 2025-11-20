@@ -24,7 +24,7 @@ Cat& Cat::operator=(const Cat &other) {
 	{
 		Animal::operator=(other);
 		std::cout << "Copying ideas of Cat object" << std::endl;
-		brain = new Brain(*other.brain);
+		*brain = *other.brain;
 	}
 	return (*this);
 }
