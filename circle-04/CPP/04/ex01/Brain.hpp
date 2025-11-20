@@ -13,7 +13,7 @@ public:
 	Brain &operator=(const Brain &other);
 
 	void setIdea(size_t index, std::string new_idea);
-	std::string getIdea(size_t index) const;
+	const std::string& getIdea(size_t index) const;
 private:
 	std::string ideas[MAX_SIZE];
 };
