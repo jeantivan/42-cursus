@@ -21,18 +21,17 @@ Brain& Brain::operator=(const Brain &other) {
 	{
 		for(size_t i = 0; i < MAX_SIZE; i++)
 		{
-			ideas[i] = std::string(other.ideas[i]);
+			ideas[i] = other.ideas[i];
 		}
 	}
 	std::cout << "Class Brain '=' operator called" << std::endl;
 	return (*this);
 }
 
-std::string Brain::getIdea(size_t index) const {
+const std::string& Brain::getIdea(size_t index) const {
 	if (index > 99)
 	{
-		std::cerr << "Error: index out of bounds" << std::endl;
-		return "";
+		throw std::out_of_range("Error: index out of bounds in Brain::getIdea");
 	}
 	return ideas[index];
 }
