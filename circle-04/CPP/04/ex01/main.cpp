@@ -55,23 +55,24 @@ int main() {
 {
 	std::cout << "\n===== Subject requirement =====\n\n";
 
-	Animal *animals[40];
+	int n_animals = 20;
+	Animal *animals[n_animals];
 
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < n_animals; i++)
 	{
-		if (i < 20)
+		if (i < n_animals / 2)
 			animals[i] = new Cat();
 		else
 			animals[i] = new Dog();
 	}
 
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < n_animals; i++)
 	{
 		std:: cout << i << " ";
 		animals[i]->makeSound();
 	}
 
-	for (int i = 0; i < 40; i++)
+	for (int i = 0; i < n_animals; i++)
 	{
 		delete animals[i];
 	}
