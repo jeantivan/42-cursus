@@ -5,6 +5,7 @@
 #include "Cat.hpp"
 
 int main() {
+{
 	std::cout << "\n===== Canonical orthodox form =====\n";
 
 	std::cout << "\n--- Creating a Dog ---\n\n";
@@ -40,7 +41,7 @@ int main() {
 
 	std::cout << "cat1 brain address " << cat1.getBrain() << " \n";
 	std::cout << "cat2 brain address " << cat2.getBrain() << " \n";
-	std::cout << "dog3 brain address " << dog3.getBrain() << " \n";
+	std::cout << "cat3 brain address " << cat3.getBrain() << " \n";
 
 	std::cout << "\n--- catN idea '# 42' address ---\n\n";
 
@@ -49,4 +50,30 @@ int main() {
 	std::cout << "cat3.brain->ideas[42]  " << &cat3.getBrain()->getIdea(42)  << " \n";
 
 	std::cout << "\n-- Automatic destruction\n\n";
+}
+
+{
+	std::cout << "\n===== Subject requirement =====\n\n";
+
+	Animal *animals[40];
+
+	for (int i = 0; i < 40; i++)
+	{
+		if (i < 20)
+			animals[i] = new Cat();
+		else
+			animals[i] = new Dog();
+	}
+
+	for (int i = 0; i < 40; i++)
+	{
+		std:: cout << i << " ";
+		animals[i]->makeSound();
+	}
+
+	for (int i = 0; i < 40; i++)
+	{
+		delete animals[i];
+	}
+}
 }
