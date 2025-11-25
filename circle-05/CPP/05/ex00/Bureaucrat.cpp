@@ -1,10 +1,10 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name_("Default") , grade_(155) {
+Bureaucrat::Bureaucrat() : name_("Default") , grade_(150) {
 	std::cout << "Default Bureaucrat" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string& name, unsigned int grade) : name_(name) {
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : name_(name) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
@@ -16,17 +16,11 @@ Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : name_(other.name_), grade_(other.grade_) {}
 
-// Can't be implemented because the member name_ is 'const' and it cannot be assigned using '='
-Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-	(void)other;
-	return *this;
-}
-
 const std::string Bureaucrat::getName() const {
 	return name_;
 }
 
-unsigned int Bureaucrat::getGrade() const {
+int Bureaucrat::getGrade() const {
 	return grade_;
 }
 
