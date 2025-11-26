@@ -12,7 +12,7 @@ void correct_form() {
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Exception: " << e.what() << '\n';
+		std::cerr << RED"Exception: " << e.what() << RST"\n";
 	}
 }
 
@@ -27,7 +27,7 @@ void grade_too_high_form() {
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Exception: " << e.what() << '\n';
+		std::cerr << RED"Exception: " << e.what() << RST"\n";
 	}
 }
 
@@ -42,6 +42,48 @@ void grade_too_low_form() {
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << "Exception: " << e.what() << '\n';
+		std::cerr << RED"Exception: " << e.what() << RST"\n";
 	}
 }
+
+void correct_signed_form() {
+	std::cout << "\n====    Correct signed form    ====\n\n";
+	try
+	{
+		Bureaucrat buro("Jean", 2);
+		Form good("Good", 42, 42);
+
+		std::cout << buro << "\n";
+		std::cout << good << "\n";
+		good.beSigned(buro);
+		std::cout << good << "\n";
+
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED"Exception: " << e.what() << RST"\n";
+	}
+}
+
+void signed_twice_form() {
+	std::cout << "\n====    Signed twice form    ====\n\n";
+	try
+	{
+		Bureaucrat buro("Jean", 2);
+		Form good("Good", 42, 42);
+
+		std::cout << buro << "\n";
+		std::cout << good << "\n";
+		good.beSigned(buro);
+		std::cout << good << "\n";
+
+		good.beSigned(buro);
+		std::cout << good << "\n";
+
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << RED"Exception: " << e.what() << RST"\n";
+	}
+}
+
