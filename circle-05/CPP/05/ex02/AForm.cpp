@@ -75,7 +75,3 @@ const char *AForm::GradeTooHighException::what() const throw() {
 const char *AForm::AlreadySignedException::what() const throw() {
 	return "Form already signed.";
 }
-
-const char *AForm::AlreadyExecutedException::what() const throw() {
-	return "Form already executed.";
-}
