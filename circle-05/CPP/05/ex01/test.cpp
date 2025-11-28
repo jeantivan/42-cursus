@@ -48,15 +48,16 @@ void grade_too_low_form() {
 
 void correct_signed_form() {
 	std::cout << "\n====    Correct signed form    ====\n\n";
+	Bureaucrat buro("Jean", 2);
+	Form form("Good", 42, 42);
 	try
 	{
-		Bureaucrat buro("Jean", 2);
-		Form good("Good", 42, 42);
 
 		std::cout << buro << "\n";
-		std::cout << good << "\n";
-		good.beSigned(buro);
-		std::cout << good << "\n";
+		std::cout << form << "\n";
+		form.beSigned(buro);
+		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
+		std::cout << form << "\n";
 
 	}
 	catch(const std::exception& e)
@@ -67,23 +68,45 @@ void correct_signed_form() {
 
 void signed_twice_form() {
 	std::cout << "\n====    Signed twice form    ====\n\n";
+	Bureaucrat buro("Jean", 2);
+	Form form("Good form", 42, 42);
+
+
 	try
 	{
-		Bureaucrat buro("Jean", 2);
-		Form good("Good", 42, 42);
 
 		std::cout << buro << "\n";
-		std::cout << good << "\n";
-		good.beSigned(buro);
-		std::cout << good << "\n";
+		std::cout << form << "\n";
+		form.beSigned(buro);
+		std::cout << form << "\n";
+		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
 
-		good.beSigned(buro);
-		std::cout << good << "\n";
+		form.beSigned(buro);
+		std::cout << form << "\n";
+		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
+
 
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << RED"Exception: " << e.what() << RST"\n";
+		std::cerr << RED"Exception: Bureaucrat " << buro.getName() << " couldn't sign " << form.getName() << " because " << e.what() << RST"\n";
 	}
 }
 
+void buro_grade_too_low() {
+	std::cout << "\n====    Bureaucrat grade too low    ====\n\n";
+	Bureaucrat buro("Jean", 149);
+	Form form("Low grade", 22, 1);
+
+	try
+	{
+		std::cout << buro << "\n";
+		std::cout << form << "\n";
+		form.beSigned(buro);
+		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
+	}
+	catch(const std::exception& e) {
+		std::cerr << RED"Exception: Bureaucrat " << buro.getName() << " couldn't sign " << form.getName() << " because " <<  e.what() << RST"\n";
+	}
+
+}

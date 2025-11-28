@@ -24,5 +24,6 @@ void grade_too_high_form();
 void grade_too_low_form();
 void correct_signed_form();
 void signed_twice_form();
+void buro_grade_too_low();
 
 #endif // TEST_HPP
