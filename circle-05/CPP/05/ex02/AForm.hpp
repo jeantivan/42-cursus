@@ -6,7 +6,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 private:
 	const std::string name_;
@@ -15,13 +15,13 @@ private:
 	bool isSigned_;
 
 	// Cannot be implemented because the class has 'const' attributes
-	Form &operator=(const Form &other);
+	AForm &operator=(const AForm &other);
 
 public:
-	Form();
-	Form(const Form &other);
-	~Form();
-	Form(const std::string name, int signGrade, int execGrade);
+	AForm();
+	AForm(const AForm &other);
+	~AForm();
+	AForm(const std::string name, int signGrade, int execGrade);
 
 	const std::string getName() const;
 	int getSignGrade() const;
@@ -51,6 +51,6 @@ public:
 	};
 };
 
-std::ostream& operator<<(std::ostream& os, const Form& f);
+std::ostream& operator<<(std::ostream& os, const AForm& f);
 
 #endif // FORM_HPP
