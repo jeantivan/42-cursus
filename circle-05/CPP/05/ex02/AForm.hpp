@@ -30,6 +30,7 @@ public:
 
 	void beSigned(const Bureaucrat& b);
 	bool execute(Bureaucrat const& executor) const;
+	virtual void formAction() const = 0;
 
 	class GradeTooHighException : public std::exception {
 		public:
@@ -46,11 +47,10 @@ public:
 			const char* what() const throw();
 	};
 
-	class NotSignedException : public std::exception
-	{
+	class NotSignedException : public std::exception {
 		public:
-			const char*  what() const throw();
-	}
+			const char* what() const throw();
+	};
 };
 
 std::ostream& operator<<(std::ostream& os, const AForm& f);
