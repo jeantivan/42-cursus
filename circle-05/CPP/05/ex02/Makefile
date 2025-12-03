@@ -11,7 +11,7 @@ SRC_DIR = .
 
 OBJ_DIR = ./obj
 
-FILES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+FILES = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
 SRC_FILES = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
