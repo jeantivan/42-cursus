@@ -2,7 +2,7 @@
 # define TEST_HPP
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 #define BOLD_PURPLE  "\033[1;35m"
 #define BOLD_CYAN  "\033[1;36m"
@@ -19,11 +19,11 @@
 #define WHITE  "\033[0;97m"
 #define BG_GREEN  "\033[42;37m"
 
-void correct_form();
-void grade_too_high_form();
-void grade_too_low_form();
-void correct_signed_form();
-void signed_twice_form();
-void buro_grade_too_low();
+// void correct_form();
+// void grade_too_high_form();
+// void grade_too_low_form();
+// void correct_signed_form();
+// void signed_twice_form();
+// void buro_grade_too_low();
 
 #endif // TEST_HPP

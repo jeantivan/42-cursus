@@ -1,17 +1,22 @@
 #include <iostream>
-#include "test.hpp"
+
+#include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
 
-	grade_too_high_form();
-	grade_too_low_form();
-	signed_twice_form();
-	buro_grade_too_low();
-	correct_form();
-	correct_signed_form();
+	Bureaucrat buro("Jean", 2);
+	AForm* shrubbery = new ShrubberyCreationForm("tree");
 
-
+	try {
+		shrubbery->beSigned(buro);
+		shrubbery->execute(buro);
+	} catch (std::exception& e)
+	{
+		std::cerr << "Exception: " << e.what() << "\n";
+	}
+	delete shrubbery;
 
 	return 0;
 }
