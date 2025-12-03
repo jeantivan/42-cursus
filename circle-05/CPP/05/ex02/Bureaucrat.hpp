@@ -4,7 +4,7 @@
 #include <iostream>
 #include <exception>
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -25,7 +25,7 @@ public:
 	void incrementGrade();
 
 	// Try to sign a Form
-	void signForm(Form& f);
+	void signForm(AForm& f);
 
 	// Exceptions
 	class GradeTooLowException : public std::exception {
