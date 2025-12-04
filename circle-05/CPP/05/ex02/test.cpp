@@ -1,112 +1,99 @@
 #include "test.hpp"
 
-void correct_form() {
-	std::cout << "\n====    Correct forms    ====\n\n";
-	try
-	{
-		Form def_form;
-		std::cout << def_form << "\n";
+void no_signed_forms() {
+	std::cout << "\n" << BG_GREEN"====    No signed forms    ====" << RST"\n\n";
 
-		Form custom_form("Custom form", 42, 4);
-		std::cout << custom_form << "\n";
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED"Exception: " << e.what() << RST"\n";
-	}
+	Bureaucrat buro("Jean", 1);
+	AForm *shrubbery = new ShrubberyCreationForm("Tree");
+	AForm *robotomy = new RobotomyRequestForm("Pepito patatero");
+	AForm *presidential = new PresidentialPardonForm("John Doe");
+
+	std::cout << RED"\n";
+	buro.executeForm(*shrubbery);
+	buro.executeForm(*robotomy);
+	buro.executeForm(*presidential);
+	std::cout << RST"\n";
+
+	delete shrubbery;
+	delete robotomy;
+	delete presidential;
+
 }
 
-void grade_too_high_form() {
-	std::cout << "\n====    Grade too high    ====\n\n";
-	try
-	{
-		Form form("High grade", 1, 1);
-		std::cout << form << "\n";
-		Form form_high("Grade too high", -42, 0);
-		std::cout << form_high << "\n";
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED"Exception: " << e.what() << RST"\n";
-	}
+void buro_grade_too_low_to_execute() {
+	std::cout << "\n" << BG_GREEN"====    Buro grade too low    ====" << RST"\n\n";
+
+	Bureaucrat buro("Jean", 1);
+	Bureaucrat fake("Pepe", 150);
+
+	AForm *shrubbery = new ShrubberyCreationForm("Tree");
+	AForm *robotomy = new RobotomyRequestForm("Pepito patatero");
+	AForm *presidential = new PresidentialPardonForm("John Doe");
+
+	std::cout << "\n";
+	buro.signForm(*shrubbery);
+	buro.signForm(*robotomy);
+	buro.signForm(*presidential);
+
+	std::cout << "\n" << *shrubbery << "\n";
+	std::cout << *robotomy << "\n";
+	std::cout << *presidential << "\n";
+
+	std::cout << RED;
+	fake.executeForm(*shrubbery);
+	fake.executeForm(*robotomy);
+	fake.executeForm(*presidential);
+	std::cout << RST"\n";
+
+	delete shrubbery;
+	delete robotomy;
+	delete presidential;
 }
 
-void grade_too_low_form() {
-	std::cout << "\n====    Grade too low    ====\n\n";
-	try
-	{
-		Form form_low("Grade too low", 150, 42);
-		std::cout << form_low << "\n";
-		Form form_too_low("Grade too low", 4242, 42);
-		std::cout << form_too_low << "\n";
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED"Exception: " << e.what() << RST"\n";
-	}
-}
 
-void correct_signed_form() {
-	std::cout << "\n====    Correct signed form    ====\n\n";
-	Bureaucrat buro("Jean", 2);
-	Form form("Good", 42, 42);
-	try
-	{
+void correct_execution() {
+	std::cout << "\n" << BG_GREEN"====    Correct execution    ====" << RST"\n\n";
 
-		std::cout << buro << "\n";
-		std::cout << form << "\n";
-		form.beSigned(buro);
-		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
-		std::cout << form << "\n";
+	AForm *shrubbery = new ShrubberyCreationForm("Tree");
+	AForm *robotomy = new RobotomyRequestForm("Pepito patatero");
+	AForm *presidential = new PresidentialPardonForm("John Doe");
 
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED"Exception: " << e.what() << RST"\n";
-	}
-}
+	Bureaucrat almighty("Almighty", 1);
+	Bureaucrat civil_executor("Civil", 150);
+	Bureaucrat shrubbery_executor("Gardener", 137);
+	Bureaucrat robotomy_executor("Mechanic", 45);
+	Bureaucrat presidential_executor("Zaphod", 5);
 
-void signed_twice_form() {
-	std::cout << "\n====    Signed twice form    ====\n\n";
-	Bureaucrat buro("Jean", 2);
-	Form form("Good form", 42, 42);
+	std::cout << "\n";
+	civil_executor.signForm(*shrubbery);
+	shrubbery_executor.signForm(*shrubbery);
+	std::cout << "\n";
+
+	shrubbery_executor.signForm(*robotomy);
+	robotomy_executor.signForm(*robotomy);
+	std::cout << "\n";
 
 
-	try
-	{
+	robotomy_executor.signForm(*presidential);
+	presidential_executor.signForm(*presidential);
+	std::cout << "\n";
 
-		std::cout << buro << "\n";
-		std::cout << form << "\n";
-		form.beSigned(buro);
-		std::cout << form << "\n";
-		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
+	std::cout << "\n";
+	civil_executor.executeForm(*shrubbery);
+	shrubbery_executor.executeForm(*shrubbery);
+	std::cout << "\n";
 
-		form.beSigned(buro);
-		std::cout << form << "\n";
-		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
+	shrubbery_executor.executeForm(*robotomy);
+	robotomy_executor.executeForm(*robotomy);
+	std::cout << "\n";
 
 
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << RED"Exception: Bureaucrat " << buro.getName() << " couldn't sign " << form.getName() << " because " << e.what() << RST"\n";
-	}
-}
+	robotomy_executor.executeForm(*presidential);
+	presidential_executor.executeForm(*presidential);
+	std::cout << "\n";
 
-void buro_grade_too_low() {
-	std::cout << "\n====    Bureaucrat grade too low    ====\n\n";
-	Bureaucrat buro("Jean", 149);
-	Form form("Low grade", 22, 1);
 
-	try
-	{
-		std::cout << buro << "\n";
-		std::cout << form << "\n";
-		form.beSigned(buro);
-		std::cout << GREEN"Bureaucrat " << buro.getName() << " signed " << form.getName() << RST"\n";
-	}
-	catch(const std::exception& e) {
-		std::cerr << RED"Exception: Bureaucrat " << buro.getName() << " couldn't sign " << form.getName() << " because " <<  e.what() << RST"\n";
-	}
-
+	delete shrubbery;
+	delete robotomy;
+	delete presidential;
 }
