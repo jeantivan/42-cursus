@@ -6,15 +6,15 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequest Default", 72
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string& t) : AForm("RobotomyRequest " + t, 72, 45), target(t) {
-	std::cout << GRAY << "RobotomyRequest '" + target + "' created" << "\n";
+	std::cout << GRAY << "RobotomyRequest '" + target + "' created" << RST"\n";
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), target(other.target) {
-	std::cout << GRAY << "RobotomyRequest copied" << "\n";
+	std::cout << GRAY << "RobotomyRequest copied" << RST"\n";
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
-	std::cout << GRAY << "RobotomyRequest " << getName() << " destroyed" << "\n";
+	std::cout << GRAY << "RobotomyRequest " << getName() << " destroyed" << RST"\n";
 }
 
 void RobotomyRequestForm::formAction() const {
