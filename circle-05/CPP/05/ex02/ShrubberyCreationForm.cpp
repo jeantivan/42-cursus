@@ -2,19 +2,19 @@
 
 // Canonical orthodox form
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyForm Default", 145, 137), target("") {
-	std::cout << "ShrubberyForm 'Default' created\n";
+	std::cout << GRAY << "ShrubberyForm 'Default' created"<< RST"\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string& t) : AForm("ShrubberyForm " + t, 145, 137), target(t) {
-	std::cout << "ShrubberyForm '" + target + "' created\n";
+	std::cout << GRAY << "ShrubberyForm '" + target + "' created"<< RST"\n";
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : AForm(other), target(other.target) {
-	std::cout << "ShrubberyForm copied\n";
+	std::cout << GRAY << "ShrubberyForm copied"<< RST"\n";
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-	std::cout << "ShrubberyForm " << getName() << " destroyed\n";
+	std::cout << GRAY << "ShrubberyForm " << getName() << " destroyed"<< RST"\n";
 }
 
 // Exception
@@ -42,7 +42,7 @@ void ShrubberyCreationForm::formAction() const {
     file << "       |.|        | |         | |\n";
     file << "    \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_\n";
 
-	std::cout << "Tree planted in " + filename + "\n";
+	std::cout << MAGENTA << "Tree planted in " + filename << RST"\n";
 
 	file.close();
 }
