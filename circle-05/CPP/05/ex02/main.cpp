@@ -2,25 +2,14 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
+#include "test.hpp"
 
 int main()
 {
 	srand((unsigned)time(NULL));
 
-
-	Bureaucrat buro("Jean", 2);
-	AForm* shrubbery = new ShrubberyCreationForm("tree");
-
-	try {
-		shrubbery->beSigned(buro);
-		shrubbery->execute(buro);
-	} catch (std::exception& e)
-	{
-		std::cerr << "Exception: " << e.what() << "\n";
-	}
-	delete shrubbery;
-
+	no_signed_forms();
+	buro_grade_too_low_to_execute();
+	correct_execution();
 	return 0;
 }
