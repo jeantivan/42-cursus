@@ -24,8 +24,11 @@ public:
 	void decrementGrade();
 	void incrementGrade();
 
-	// Try to sign a Form
-	void signForm(AForm& f);
+	// Try to sign a AForm
+	void signForm(AForm& form);
+
+	// Try to execute a AForm
+	void executeForm(AForm const& form) const;
 
 	// Exceptions
 	class GradeTooLowException : public std::exception {
