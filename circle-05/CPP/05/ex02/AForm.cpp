@@ -3,12 +3,12 @@
 
 // Default constructor
 AForm::AForm() : name_("Default"), signGrade_(150), execGrade_(150), isSigned_(false) {
-	std::cout << "Default form created\n";
+	// std::cout << "Default form created\n";
 }
 
 // Destructor
 AForm::~AForm() {
-	std::cout << "Form " << name_ << " destroyed\n";
+	// std::cout << "Form " << name_ << " destroyed\n";
 }
 
 // Custom constructor
@@ -17,12 +17,12 @@ AForm::AForm(const std::string name, int signGrade, int execGrade) : name_(name)
 		throw GradeTooHighException();
 	if (signGrade_ > 150 || execGrade_ > 150)
 		throw GradeTooLowException();
-	std::cout << "Parametrized form created\n";
+	// std::cout << "Parametrized form created\n";
 }
 
 // Copy constructor
 AForm::AForm(const AForm& other) : name_(other.name_), signGrade_(other.signGrade_), execGrade_(other.execGrade_),  isSigned_(other.isSigned_) {
-	std::cout << "Form copied\n" << *this;
+	// std::cout << "Form copied\n" << *this;
 }
 
 // Getters
@@ -58,7 +58,6 @@ bool AForm::execute(const Bureaucrat& executor) const {
 	if (executor.getGrade() > execGrade_)
 		throw GradeTooHighException();
 	formAction();
-	std::cout << "Form executed\n";
 	return true;
 }
 
