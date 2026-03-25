@@ -10,22 +10,23 @@ int main()
 
 	Intern intern;
 
-	try {
-		AForm* shrubbery = intern.makeForm("shrubbery creation", "manzanas");
+	try
+	{
+		AForm *shrubbery = intern.makeForm("shrubbery creation", "manzanas");
 		std::cout << *shrubbery << "\n";
 
-		AForm* robotomy = intern.makeForm("robotomy request", "God");
+		AForm *robotomy = intern.makeForm("robotomy request", "God");
 		std::cout << *robotomy << "\n";
 
-		AForm* presidential = intern.makeForm("presidential pardon", "John");
+		AForm *presidential = intern.makeForm("presidential pardon", "For John");
 		std::cout << *presidential << "\n";
 
-		AForm* impossible = intern.makeForm("kickflip varial", "Tony Hawks");
+		AForm *impossible = intern.makeForm("kickflip varial", "Tony Hawks");
 		std::cout << *impossible << "\n";
-
-	} catch (std::exception& e)
+	}
+	catch (std::exception &e)
 	{
-		std::cout << RED << "Exception: " << e.what() << RST"\n";
+		std::cout << RED << "Exception: " << e.what() << RST "\n";
 	}
 	return 0;
 }
