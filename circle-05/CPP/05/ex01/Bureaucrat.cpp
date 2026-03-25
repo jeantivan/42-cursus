@@ -21,10 +21,12 @@ Bureaucrat::~Bureaucrat()
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_), grade_(other.grade_) {}
 
-// Can't be implemented because the member name_ is 'const' and it cannot be assigned using '='
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
-	(void)other;
+	if (this != &other)
+	{
+		this->grade_ = other.getGrade();
+	}
 	return *this;
 }
 
