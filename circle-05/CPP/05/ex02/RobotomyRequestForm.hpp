@@ -1,5 +1,5 @@
 #ifndef ROBOTOMYREQUESTFORM_HPP
-# define ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
 #include <fstream>
@@ -10,13 +10,13 @@ class RobotomyRequestForm : public AForm
 {
 private:
 	std::string target;
-	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
 public:
 	RobotomyRequestForm();
-	RobotomyRequestForm(const std::string& t);
+	RobotomyRequestForm(const std::string &t);
 	RobotomyRequestForm(const RobotomyRequestForm &other);
 	virtual ~RobotomyRequestForm();
+	RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
 	void formAction() const;
 };

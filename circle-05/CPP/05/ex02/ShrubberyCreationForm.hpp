@@ -1,5 +1,5 @@
 #ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 #include <fstream>
@@ -9,20 +9,20 @@ class ShrubberyCreationForm : public AForm
 {
 private:
 	std::string target;
-	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 
 public:
 	ShrubberyCreationForm();
-	ShrubberyCreationForm(const std::string& t);
+	ShrubberyCreationForm(const std::string &t);
 	ShrubberyCreationForm(const ShrubberyCreationForm &other);
 	virtual ~ShrubberyCreationForm();
+	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
 
 	void formAction() const;
-	void implantTree() const;
 
-	class InvalidFileException : public std::exception {
-		public:
-			const char* what() const throw();
+	class InvalidFileException : public std::exception
+	{
+	public:
+		const char *what() const throw();
 	};
 };
 
