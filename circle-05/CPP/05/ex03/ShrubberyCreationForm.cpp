@@ -1,29 +1,44 @@
 #include "ShrubberyCreationForm.hpp"
 
 // Canonical orthodox form
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyForm Default", 145, 137), target("") {
-	std::cout << GRAY << "ShrubberyForm 'Default' created"<< RST"\n";
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyForm Default", 145, 137), target("")
+{
+	std::cout << GRAY << "ShrubberyForm 'Default' created" << RST "\n";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& t) : AForm("ShrubberyForm " + t, 145, 137), target(t) {
-	std::cout << GRAY << "ShrubberyForm '" + target + "' created"<< RST"\n";
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &t) : AForm("ShrubberyForm " + t, 145, 137), target(t)
+{
+	std::cout << GRAY << "ShrubberyForm '" << target << "' created" << RST "\n";
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : AForm(other), target(other.target) {
-	std::cout << GRAY << "ShrubberyForm copied"<< RST"\n";
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other), target(other.target)
+{
+	std::cout << GRAY << "ShrubberyForm copied" << RST "\n";
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-	std::cout << GRAY << "ShrubberyForm " << getName() << " destroyed"<< RST"\n";
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
+	std::cout << GRAY << "ShrubberyForm " << getName() << " destroyed" << RST "\n";
+}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+{
+	if (this != &other)
+	{
+		AForm::operator=(other);
+		this->target = other.target;
+	}
+	return *this;
 }
 
 // Exception
-const char* ShrubberyCreationForm::InvalidFileException::what() const throw()
+const char *ShrubberyCreationForm::InvalidFileException::what() const throw()
 {
 	return "It was not possible to plant the tree in the file";
 }
 
-void ShrubberyCreationForm::formAction() const {
+void ShrubberyCreationForm::formAction() const
+{
 	std::string filename = target + "_shrubbery";
 	std::ofstream file;
 
@@ -32,17 +47,17 @@ void ShrubberyCreationForm::formAction() const {
 		throw InvalidFileException();
 
 	file << "               ,@@@@@@@,\n";
-    file << "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n";
-    file << "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n";
-    file << "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n";
-    file << "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n";
-    file << "   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n";
-    file << "   `&%\\ ` /%&'    |.|        \\ '|8'\n";
-    file << "       |o|        | |         | |\n";
-    file << "       |.|        | |         | |\n";
-    file << "    \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_\n";
+	file << "       ,,,.   ,@@@@@@/@@,  .oo8888o.\n";
+	file << "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o\n";
+	file << "   ,%&\\%&&%&&%,@@@\\@@@/@@@88\\88888/88'\n";
+	file << "   %&&%&%&/%&&%@@\\@@/ /@@@88888\\88888'\n";
+	file << "   %&&%/ %&%%&&@@\\ V /@@' `88\\8 `/88'\n";
+	file << "   `&%\\ ` /%&'    |.|        \\ '|8'\n";
+	file << "       |o|        | |         | |\n";
+	file << "       |.|        | |         | |\n";
+	file << "    \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_\n";
 
-	std::cout << MAGENTA << "Tree planted in " + filename << RST"\n";
+	std::cout << MAGENTA << "Tree planted in " << filename << RST "\n";
 
 	file.close();
 }
