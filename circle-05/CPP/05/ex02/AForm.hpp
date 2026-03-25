@@ -29,8 +29,6 @@ private:
 	const int execGrade_;
 	bool isSigned_;
 
-	// Cannot be implemented because the class has 'const' attributes
-
 public:
 	AForm();
 	AForm(const AForm &other);
