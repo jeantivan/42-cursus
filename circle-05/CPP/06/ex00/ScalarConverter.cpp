@@ -29,14 +29,13 @@ bool ScalarConverter::isInt(const std::string& input) {
 
 bool ScalarConverter::isFloat(const std::string& input) {
 	char *end;
-
 	if (input.empty())
 		return false;
 	errno = 0;
 	std::strtof(input.c_str(), &end);
-	std::string end_str = end;
-
-	return (end_str[0] == 'f' && end_str.length() == 1 && errno == 0);
+	if (input.c_str() == end || *end != 'f' || *(end + 1) || errno != 0)
+		return false;
+	return true;
 }
 
 bool ScalarConverter::isDouble(const std::string& input) {
@@ -46,7 +45,9 @@ bool ScalarConverter::isDouble(const std::string& input) {
 		return false;
 	errno = 0;
 	std::strtod(input.c_str(), &end);
-	return (end == input.c_str() + input.length() && errno == 0);
+	if (input.c_str() == end || *end || errno != 0)
+		return false;
+	return true;
 }
 
 
@@ -95,57 +96,69 @@ void ScalarConverter::convert(const std::string& input) {
 		return;
 	case CHAR:
 		c = input[0];
-		i = static_cast<int>(c);
-		f = static_cast<float>(c);
-		d = static_cast<double>(c);
+		std::cout << "char: ";
+		if (!std::isprint(c))
+			std::cout << "Non displayable\n";
+		else
+			std::cout << "'" << c << "'" << "\n";
+		std::cout << "int: " << static_cast<int>(c) << "\n";
+		std::cout << std::setprecision(1) << std::fixed << "float: " << static_cast<float>(c) << "f\n";
+		std::cout << std::setprecision(1) << std::fixed << "double: " << static_cast<double>(c) << "\n";
 		break;
 	case INT:
 		i = std::atoi(input.c_str());
-		c = static_cast<char>(i);
-		f = static_cast<float>(i);
-		d = static_cast<double>(i);
+		std::cout << "char: ";
+		if (i < std::numeric_limits<char>::min() || i > std::numeric_limits<char>::max())
+			std::cout << "impossible\n";
+		else if (!std::isprint(static_cast<char>(i)))
+			std::cout << "Non displayable\n";
+		else
+			std::cout << "'" << static_cast<char>(i) << "'" << "\n";
+		std::cout << "int: " << i << "\n";
+		std::cout << std::setprecision(1) << std::fixed << "float: " << static_cast<float>(i) << "f\n";
+		std::cout << std::setprecision(1) << std::fixed << "double: " << static_cast<double>(i) << "\n";
 		break;
 	case FLOAT:
 		f = std::strtof(input.c_str(), NULL);
-		c = static_cast<char>(f);
-		i = static_cast<int>(f);
-		d = static_cast<double>(f);
+		std::cout << "char: ";
+		if (f < std::numeric_limits<char>::min() || f > std::numeric_limits<char>::max())
+			std::cout << "impossible\n";
+		else if (!std::isprint(static_cast<char>(f)))
+			std::cout << "Non displayable\n";
+		else
+			std::cout << "'" << static_cast<char>(f) << "'" << "\n";
+		std::cout << "int: ";
+		if (f < std::numeric_limits<int>::min() || f > std::numeric_limits<int>::max())
+			std::cout << "impossible\n";
+		else
+			std::cout << static_cast<int>(f) << "\n";
+		std::cout << std::setprecision(1) << std::fixed << "float: " << f << "f\n";
+		std::cout << std::setprecision(1) << std::fixed << "double: " << static_cast<double>(f) << "\n";
 		break;
 	case DOUBLE:
 		d = std::strtod(input.c_str(), NULL);
-		c = static_cast<double>(d);
-		i = static_cast<int>(d);
-		f = static_cast<float>(d);
+		std::cout << "char: ";
+		if (d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max())
+			std::cout << "impossible\n";
+		else if (!std::isprint(static_cast<char>(d)))
+			std::cout << "Non displayable\n";
+		else
+			std::cout << "'" << static_cast<char>(d) << "'" << "\n";
+		std::cout << "int: ";
+		if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
+			std::cout << "impossible\n";
+		else
+			std::cout << static_cast<int>(d) << "\n";
+
+		std::cout << std::setprecision(1) << std::fixed << "float: ";
+		if (d < std::numeric_limits<float>::min() || d > std::numeric_limits<float>::max())
+			std::cout << "impossible\n";
+		else
+			std::cout << static_cast<float>(d) << "\n";
+		std::cout << std::setprecision(1) << std::fixed << "double: " << static_cast<double>(d) << "\n";
 		break;
 	default:
 		std::cout << "Invalid conversion to any scalar type (char, int, float, double)\n";
 		return;
 	}
-
-
-	std::cout << "char: ";
-	if (checkLimits<char>(scalarType, i, f, d))
-		std::cout << "impossible\n";
-	else
-	{
-		if (!std::isprint(c))
-			std::cout << "Non displayable\n";
-		else
-			std::cout << c << "\n";
-	}
-
-	std::cout << "int: ";
-	if (checkLimits<int>(scalarType, i, f, d))
-		std::cout << "impossible\n";
-	else
-		std::cout  << i << "\n";
-	std::cout << std::setprecision(1) << std::fixed;
-
-	std::cout << "float: ";
-	if (checkLimits<float>(scalarType, i, f, d))
-		std::cout << "impossible\n";
-	else
-		std::cout  << i << "\n";
-
-	std::cout << "double: " << d << "\n";
 }
