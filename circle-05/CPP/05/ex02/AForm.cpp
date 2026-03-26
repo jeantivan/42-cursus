@@ -2,16 +2,10 @@
 #include "Bureaucrat.hpp"
 
 // Default constructor
-AForm::AForm() : name_("Default"), signGrade_(150), execGrade_(150), isSigned_(false)
-{
-	// std::cout << "Default form created\n";
-}
+AForm::AForm() : name_("Default"), signGrade_(150), execGrade_(150), isSigned_(false) {}
 
 // Destructor
-AForm::~AForm()
-{
-	// std::cout << "Form " << name_ << " destroyed\n";
-}
+AForm::~AForm() {}
 
 // Custom constructor
 AForm::AForm(const std::string name, int signGrade, int execGrade) : name_(name), signGrade_(signGrade), execGrade_(execGrade), isSigned_(false)
@@ -20,14 +14,10 @@ AForm::AForm(const std::string name, int signGrade, int execGrade) : name_(name)
 		throw GradeTooHighException();
 	if (signGrade_ > 150 || execGrade_ > 150)
 		throw GradeTooLowException();
-	// std::cout << "Parametrized form created\n";
 }
 
 // Copy constructor
-AForm::AForm(const AForm &other) : name_(other.name_), signGrade_(other.signGrade_), execGrade_(other.execGrade_), isSigned_(other.isSigned_)
-{
-	// std::cout << "Form copied\n" << *this;
-}
+AForm::AForm(const AForm &other) : name_(other.name_), signGrade_(other.signGrade_), execGrade_(other.execGrade_), isSigned_(other.isSigned_) {}
 
 AForm &AForm::operator=(const AForm &other)
 {
@@ -92,23 +82,22 @@ std::ostream &operator<<(std::ostream &os, const AForm &f)
 	return os;
 }
 
-// Exceptions
 const char *AForm::GradeTooLowException::what() const throw()
 {
-	return "Form grade too low.";
+	return "grade too low.";
 }
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-	return "Form grade too high.";
+	return "grade too high.";
 }
 
 const char *AForm::AlreadySignedException::what() const throw()
 {
-	return "Form already signed.";
+	return "form already signed.";
 }
 
 const char *AForm::NotSignedException::what() const throw()
 {
-	return "Form is not signed.";
+	return "form is not signed.";
 }

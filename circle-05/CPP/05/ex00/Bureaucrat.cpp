@@ -1,9 +1,6 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : name_("Default"), grade_(150)
-{
-	std::cout << "Default Bureaucrat" << std::endl;
-}
+Bureaucrat::Bureaucrat() : name_("Default"), grade_(150) {}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : name_(name)
 {

@@ -1,20 +1,13 @@
 #include "Intern.hpp"
 
-Intern::Intern()
-{
-	std::cout << GRAY << "Intern created" << RST "\n";
-}
+Intern::Intern() {}
 
 Intern::Intern(const Intern &other)
 {
 	(void)other;
-	std::cout << GRAY << "Intern copied" << RST "\n";
 }
 
-Intern::~Intern()
-{
-	std::cout << GRAY << "Intern destroyed" << RST "\n";
-}
+Intern::~Intern() {}
 
 Intern &Intern::operator=(const Intern &other)
 {
@@ -61,12 +54,10 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &formTarg
 			return (this->*functions[i])(formTarget);
 		}
 	}
-
-	std::cout << RED << "Intern cannot create form: '" << formName << "' does not exist." << RST << "\n";
 	throw InvalidFormNameException();
 }
 
 const char *Intern::InvalidFormNameException::what() const throw()
 {
-	return "Invalid form name.";
+	return "invalid form name.";
 }

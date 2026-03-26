@@ -1,10 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Bureaucrat::Bureaucrat() : name_("Default"), grade_(150)
-{
-	std::cout << "Default Bureaucrat" << std::endl;
-}
+Bureaucrat::Bureaucrat() : name_("Default"), grade_(150) {}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : name_(name), grade_(grade)
 {
@@ -14,10 +11,7 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : name_(name), grade_
 		throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat::~Bureaucrat()
-{
-	std::cout << "Bureaucrat " << name_ << " destroyed\n";
-}
+Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_), grade_(other.grade_) {}
 

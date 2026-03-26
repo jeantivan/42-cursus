@@ -1,10 +1,7 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-Bureaucrat::Bureaucrat() : name_("Default"), grade_(150)
-{
-	// std::cout << "Default Bureaucrat" << std::endl;
-}
+Bureaucrat::Bureaucrat() : name_("Default"), grade_(150) {}
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade) : name_(name), grade_(grade)
 {
@@ -14,10 +11,7 @@ Bureaucrat::Bureaucrat(const std::string &name, int grade) : name_(name), grade_
 		throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat::~Bureaucrat()
-{
-	// std::cout << "Bureaucrat " << name_ << " destroyed\n";
-}
+Bureaucrat::~Bureaucrat() {}
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name_(other.name_), grade_(other.grade_) {}
 
@@ -92,6 +86,6 @@ void Bureaucrat::executeForm(AForm const &form) const
 	}
 	catch (std::exception &e)
 	{
-		std::cout << RED << "Exception: " << name_ << " couldn't execute the form " << form.getName() << " because " << e.what() << RST "\n";
+		std::cout << RED << name_ << " couldn't execute the form " << form.getName() << " because " << e.what() << RST "\n";
 	}
 }

@@ -1,25 +1,13 @@
 #include "ShrubberyCreationForm.hpp"
 
 // Canonical orthodox form
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyForm Default", 145, 137), target("")
-{
-	std::cout << GRAY << "ShrubberyForm 'Default' created" << RST "\n";
-}
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreation Default", 145, 137), target("") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &t) : AForm("ShrubberyForm " + t, 145, 137), target(t)
-{
-	std::cout << GRAY << "ShrubberyForm '" << target << "' created" << RST "\n";
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &t) : AForm("ShrubberyCreation " + t, 145, 137), target(t) {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other), target(other.target)
-{
-	std::cout << GRAY << "ShrubberyForm copied" << RST "\n";
-}
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm(other), target(other.target) {}
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
-	std::cout << GRAY << "ShrubberyForm " << getName() << " destroyed" << RST "\n";
-}
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
