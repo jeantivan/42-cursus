@@ -6,7 +6,8 @@
 #include "B.hpp"
 #include "C.hpp"
 
-Base * generate(void) {
+Base *generate(void)
+{
 	int prob = 1 + (rand() % 3);
 
 	if (prob == 1)
@@ -16,7 +17,13 @@ Base * generate(void) {
 	return (new C());
 }
 
-void identify(Base* p) {
+void identify(Base *p)
+{
+	if (p == NULL)
+	{
+		std::cout << "type NULL\n";
+		return;
+	}
 	if (dynamic_cast<A *>(p) != NULL)
 		std::cout << "type A\n";
 	else if (dynamic_cast<B *>(p) != NULL)
@@ -27,28 +34,41 @@ void identify(Base* p) {
 		std::cout << "type Base\n";
 }
 
-void identify(Base& p) {
-	try {
-		dynamic_cast<A&>(p);
+void identify(Base &p)
+{
+	try
+	{
+		dynamic_cast<A &>(p);
 		std::cout << "type A\n";
-		return ;
-	} catch (std::exception& e) {}
+		return;
+	}
+	catch (std::exception &e)
+	{
+	}
 
-	try {
-		dynamic_cast<B&>(p);
+	try
+	{
+		dynamic_cast<B &>(p);
 		std::cout << "type B\n";
-		return ;
-	} catch (std::exception& e) {}
+		return;
+	}
+	catch (std::exception &e)
+	{
+	}
 
-	try {
-		dynamic_cast<C&>(p);
+	try
+	{
+		dynamic_cast<C &>(p);
 		std::cout << "type C\n";
-		return ;
-	} catch (std::exception& e) {}
-
+		return;
+	}
+	catch (std::exception &e)
+	{
+	}
 }
 
-int main() {
+int main()
+{
 	srand(time(NULL));
 
 	Base *classes[20];
@@ -58,12 +78,19 @@ int main() {
 		classes[i] = generate();
 	}
 
-	for(int i = 0; i < 20; i++)
+	std::cout << "---- Test: Identify with pointer:    \n";
+	for (int i = 0; i < 20; i++)
 	{
 		identify(classes[i]);
 	}
 
-	for(int i = 0; i < 20; i++)
+	std::cout << "---- Test: Identify with reference:  \n";
+	for (int i = 0; i < 20; i++)
+	{
+		identify(*classes[i]);
+	}
+
+	for (int i = 0; i < 20; i++)
 	{
 		delete classes[i];
 	}
