@@ -1,22 +1,25 @@
 #include "ScalarConverter.hpp"
 
 // This isn't used the class is Abstract
-ScalarConverter::ScalarConverter() {
+ScalarConverter::ScalarConverter()
+{
 }
 
-ScalarConverter::ScalarConverter(const ScalarConverter& other) {
+ScalarConverter::ScalarConverter(const ScalarConverter &other)
+{
 	(void)other;
 }
 
-ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other) {
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)
+{
 	(void)other;
 	return (*this);
 }
 
 ScalarConverter::~ScalarConverter() {}
 
-
-bool ScalarConverter::isInt(const std::string& input) {
+bool ScalarConverter::isInt(const std::string &input)
+{
 	char *end;
 	long val;
 
@@ -27,7 +30,8 @@ bool ScalarConverter::isInt(const std::string& input) {
 	return (end == input.c_str() + input.length() && errno == 0 && val >= std::numeric_limits<int>::min() && val <= std::numeric_limits<int>::max());
 }
 
-bool ScalarConverter::isFloat(const std::string& input) {
+bool ScalarConverter::isFloat(const std::string &input)
+{
 	char *end;
 	if (input.empty())
 		return false;
@@ -38,7 +42,8 @@ bool ScalarConverter::isFloat(const std::string& input) {
 	return true;
 }
 
-bool ScalarConverter::isDouble(const std::string& input) {
+bool ScalarConverter::isDouble(const std::string &input)
+{
 	char *end;
 
 	if (input.empty())
@@ -50,11 +55,12 @@ bool ScalarConverter::isDouble(const std::string& input) {
 	return true;
 }
 
-
 // Detect de literal type of input
-ELiteral ScalarConverter::detectLiteral(const std::string& input) {
+ELiteral ScalarConverter::detectLiteral(const std::string &input)
+{
 	std::string pseudos[] = {"nan", "+nan", "-nan", "nanf", "+nanf", "-nanf", "inf", "+inf", "-inf", "inff", "+inff", "-inff"};
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 12; i++)
+	{
 		if (input == pseudos[i])
 			return (PSEUDO);
 	}
@@ -69,20 +75,24 @@ ELiteral ScalarConverter::detectLiteral(const std::string& input) {
 	return (INVALID);
 }
 
-void ScalarConverter::printPseudo(const std::string& pseudo) {
+void ScalarConverter::printPseudo(const std::string &pseudo)
+{
 	std::cout << "char: impossible\n";
 	std::cout << "int: impossible\n";
 	if (pseudo.find("nan") != std::string::npos)
 	{
 		std::cout << "float: nanf\n";
 		std::cout << "double: nan\n";
-	} else {
+	}
+	else
+	{
 		std::cout << "float: " << (pseudo[pseudo.length() - 2] == 'f' ? pseudo : pseudo + 'f') << "\n";
 		std::cout << "double: " << (pseudo[pseudo.length() - 2] == 'f' ? pseudo.substr(0, pseudo.length() - 1) : pseudo) << "\n";
 	}
 }
 
-void ScalarConverter::convert(const std::string& input) {
+void ScalarConverter::convert(const std::string &input)
+{
 	ELiteral scalarType = detectLiteral(input);
 	char c;
 	int i;
@@ -151,7 +161,10 @@ void ScalarConverter::convert(const std::string& input) {
 			std::cout << static_cast<int>(d) << "\n";
 
 		std::cout << std::setprecision(1) << std::fixed << "float: ";
-		if (d < std::numeric_limits<float>::min() || d > std::numeric_limits<float>::max())
+
+		// Check if the double value can be represented as a float without overflow
+		// std::numeric_limits<float>::min() is the smallest positive normal float, that's why we use max() to check for overflow in both directions
+		if (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max())
 			std::cout << "impossible\n";
 		else
 			std::cout << static_cast<float>(d) << "\n";
