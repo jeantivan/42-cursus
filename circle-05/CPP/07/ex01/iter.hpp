@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_HPP
-#define TEMPLATE_HPP
+#ifndef ITER_HPP
+#define ITER_HPP
 
 template <typename T, typename S, typename F>
 void iter(T arr, const S size, F func)
@@ -23,4 +23,4 @@ void power2(T &n)
 	n *= n;
 }
 
-#endif // TEMPLATE_HPP
+#endif // ITER_HPP
