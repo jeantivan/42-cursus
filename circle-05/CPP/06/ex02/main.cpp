@@ -6,6 +6,8 @@
 #include "B.hpp"
 #include "C.hpp"
 
+#define N 6
+
 Base *generate(void)
 {
 	int prob = 1 + (rand() % 3);
@@ -24,22 +26,24 @@ void identify(Base *p)
 		std::cout << "type NULL\n";
 		return;
 	}
-	if (dynamic_cast<A *>(p) != NULL)
-		std::cout << "type A\n";
-	else if (dynamic_cast<B *>(p) != NULL)
-		std::cout << "type B\n";
-	else if (dynamic_cast<C *>(p) != NULL)
-		std::cout << "type C\n";
+
+	Base *res;
+	if ((res = dynamic_cast<A *>(p)) != NULL)
+		res->whoAmI();
+	else if ((res = dynamic_cast<B *>(p))!= NULL)
+		res->whoAmI();
+	else if (((res = dynamic_cast<C *>(p))) != NULL)
+		res->whoAmI();
 	else
-		std::cout << "type Base\n";
+		res->whoAmI();
 }
 
 void identify(Base &p)
 {
 	try
 	{
-		dynamic_cast<A &>(p);
-		std::cout << "type A\n";
+		A &res = dynamic_cast<A &>(p);
+		res.whoAmI();
 		return;
 	}
 	catch (std::exception &e)
@@ -48,8 +52,8 @@ void identify(Base &p)
 
 	try
 	{
-		dynamic_cast<B &>(p);
-		std::cout << "type B\n";
+		B &res = dynamic_cast<B &>(p);
+		res.whoAmI();
 		return;
 	}
 	catch (std::exception &e)
@@ -58,8 +62,8 @@ void identify(Base &p)
 
 	try
 	{
-		dynamic_cast<C &>(p);
-		std::cout << "type C\n";
+		C &res = dynamic_cast<C &>(p);
+		res.whoAmI();
 		return;
 	}
 	catch (std::exception &e)
@@ -71,28 +75,22 @@ int main()
 {
 	srand(time(NULL));
 
-	Base *classes[20];
+	Base *classes[N];
 
-	for (int i = 0; i < 20; i++)
-	{
+	for (int i = 0; i < N; i++)
 		classes[i] = generate();
-	}
 
-	std::cout << "---- Test: Identify with pointer:    \n";
-	for (int i = 0; i < 20; i++)
-	{
+	std::cout << "---- Test: Identify with pointer    \n\n";
+	for (int i = 0; i < N; i++)
 		identify(classes[i]);
-	}
 
-	std::cout << "---- Test: Identify with reference:  \n";
-	for (int i = 0; i < 20; i++)
-	{
+	std::cout << "\n---- Test: Identify with reference  \n\n";
+	for (int i = 0; i < N; i++)
 		identify(*classes[i]);
-	}
 
-	for (int i = 0; i < 20; i++)
-	{
+	std::cout << "\n---- Free memory  \n\n";
+	for (int i = 0; i < N; i++)
 		delete classes[i];
-	}
+
 	return 0;
 }
