@@ -33,7 +33,7 @@ bool ScalarConverter::isInt(const std::string &input)
 bool ScalarConverter::isFloat(const std::string &input)
 {
 	char *end;
-	if (input.empty())
+	if (input.empty() || input.find(".") == std::string::npos)
 		return false;
 	errno = 0;
 	std::strtof(input.c_str(), &end);
@@ -46,7 +46,7 @@ bool ScalarConverter::isDouble(const std::string &input)
 {
 	char *end;
 
-	if (input.empty())
+	if (input.empty() || input.find(".") == std::string::npos)
 		return false;
 	errno = 0;
 	std::strtod(input.c_str(), &end);
@@ -167,7 +167,7 @@ void ScalarConverter::convert(const std::string &input)
 		if (d < -std::numeric_limits<float>::max() || d > std::numeric_limits<float>::max())
 			std::cout << "impossible\n";
 		else
-			std::cout << static_cast<float>(d) << "\n";
+			std::cout << static_cast<float>(d) << "f\n";
 		std::cout << std::setprecision(1) << std::fixed << "double: " << static_cast<double>(d) << "\n";
 		break;
 	default:
