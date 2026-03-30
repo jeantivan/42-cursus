@@ -8,6 +8,7 @@ class B : public Base
 private:
 
 public:
+	virtual void whoAmI() const;
 	virtual ~B();
 };
 
