@@ -34,4 +34,9 @@ void power2(T &n)
 	n *= n;
 }
 
+struct Awesome {
+	int id;
+	std::string name;
+};
+
 #endif // ITER_HPP
