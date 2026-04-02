@@ -1,60 +1,73 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange()
+BitcoinExchange::BitcoinExchange() : csv_file(CSV_FILE), exchangeRates()
 {
-	this->_file.open(FILE_NAME);
-	if (!this->_file.is_open())
-	{
-		std::cerr << "Error: could not open file " << FILE_NAME << std::endl;
-		exit(1);
-	}
+	std::ifstream cvs(csv_file.c_str());
+
+	if (!cvs.is_open())
+		throw ErrorFileException();
+
+	loadExchangeRates(cvs);
+	cvs.close();
 }
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
+BitcoinExchange::BitcoinExchange(const std::string &csv_f) : csv_file(csv_f), exchangeRates()
 {
-	(void)other;
+	std::ifstream cvs(csv_file.c_str());
+
+	if (!cvs.is_open())
+		throw ErrorFileException();
+
+	loadExchangeRates(cvs);
+	cvs.close();
 }
 
-BitcoinExchange::~BitcoinExchange()
-{
-	this->_file.close();
-}
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) : csv_file(other.csv_file), exchangeRates(other.exchangeRates) {}
+
+BitcoinExchange::~BitcoinExchange() {}
 
 BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
 {
 	if (this != &other)
 	{
-		// do something
+		csv_file = other.csv_file;
+		exchangeRates = other.exchangeRates;
 	}
-	(void)other;
 	return *this;
 }
 
-void BitcoinExchange::readFile()
+const char *BitcoinExchange::ErrorFileException::what() const throw() {
+	return "Error: Could not open file";
+}
+
+const char *BitcoinExchange::InvalidFormatFileException::what() const throw() {
+	return "Error: Invalid format file";
+}
+
+void BitcoinExchange::loadExchangeRates(std::ifstream &cvs_file)
 {
 	bool firstLine = true;
 	std::string line;
 	std::string date;
 	std::string value;
 
-	while (std::getline(this->_file, line))
+	while (std::getline(cvs_file, line))
 	{
 		std::stringstream ss(line);
 		if (firstLine)
 		{
 			if (line != "date,exchange_rate")
-			{
-				std::cerr << "Error: invalid file format" << std::endl;
-				std::exit(1);
-			}
+				throw InvalidFormatFileException();
+
 			firstLine = false;
 			continue;
 		}
 		std::getline(ss, date, ',');
 		std::getline(ss, value, ',');
 		if (!isValidDate(date) || !isValidValue(value))
-			continue;
-		this->_exchangeRates[date] = std::strtof(value.c_str(), NULL);
+			throw InvalidFormatFileException();
+
+			exchangeRates[date] = std::strtof(value.c_str(), NULL);
 	}
 }
 
@@ -70,19 +83,22 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
 
 bool BitcoinExchange::isValidValue(const std::string &value) const
 {
-	char *end;
-	if (value.empty())
+	std::istringstream ss(value);
+	float val;
+
+	if (!(ss >> val) || val < 0)
 		return false;
-	errno = 0;
-	std::strtof(value.c_str(), &end);
-	if (value.c_str() == end || *(end + 1) || errno != 0)
+
+	char extra;
+	if (ss >> extra)
 		return false;
+
 	return true;
 }
 
 void BitcoinExchange::printExchangeRates() const
 {
-	for (std::map<std::string, float>::const_iterator it = this->_exchangeRates.begin(); it != this->_exchangeRates.end(); ++it)
+	for (std::map<std::string, float>::const_iterator it = exchangeRates.begin(); it != exchangeRates.end(); ++it)
 	{
 		std::cout << it->first << " => " << it->second << std::endl;
 	}
