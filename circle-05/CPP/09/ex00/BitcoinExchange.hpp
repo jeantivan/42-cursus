@@ -9,25 +9,37 @@
 #include <string>
 #include <map>
 
-#define FILE_NAME "data1.csv"
+#define CSV_FILE "data1.csv"
 
 class BitcoinExchange
 {
 private:
-	std::ifstream _file;
-	std::map<std::string, float> _exchangeRates;
+	std::string csv_file;
+	std::map<std::string, float> exchangeRates;
 
 	bool isValidDate(const std::string &date) const;
 	bool isValidValue(const std::string &value) const;
 
 public:
 	BitcoinExchange();
+	BitcoinExchange(const std::string &cvs_f);
 	BitcoinExchange(const BitcoinExchange &other);
 	~BitcoinExchange();
 	BitcoinExchange &operator=(const BitcoinExchange &other);
 
-	void readFile();
+	void loadExchangeRates(std::ifstream &cvs_file);
 	void printExchangeRates() const;
+
+	class ErrorFileException : public std::exception
+	{
+	public:
+		const char *what() const throw();
+	};
+	class InvalidFormatFileException : public std::exception
+	{
+	public:
+		const char *what() const throw();
+	};
 };
 
 #endif // BITCOINEXCHANGE_HPP
