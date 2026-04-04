@@ -1,6 +1,11 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <iostream>
+#include <sstream>
+#include <deque>
+#include <vector>
+
 class PmergeMe
 {
 private:
