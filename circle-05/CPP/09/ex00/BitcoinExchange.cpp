@@ -66,11 +66,12 @@ void BitcoinExchange::loadExchangeRates(std::ifstream &cvs_file)
 		}
 		std::getline(ss, date, ',');
 		std::getline(ss, value, ',');
-		if (!isValidDate(date) || !isValidValue(value))
+		float rate;
+		if (!isValidDate(date) || !isValidValue(value, rate))
 		{
 			throw InvalidFormatFileException();
 		}
-		exchangeRates[date] = std::strtof(value.c_str(), NULL);
+		exchangeRates[date] = rate;
 	}
 }
 
@@ -98,7 +99,7 @@ bool BitcoinExchange::isValidDate(const std::string &date) const
 	return true;
 }
 
-bool BitcoinExchange::isValidValue(const std::string &value) const
+bool BitcoinExchange::isValidValue(const std::string &value, float &rate) const
 {
 	std::istringstream ss(value);
 	float val;
@@ -110,6 +111,7 @@ bool BitcoinExchange::isValidValue(const std::string &value) const
 	if (ss >> extra)
 		return false;
 
+	rate = val;
 	return true;
 }
 
@@ -117,6 +119,11 @@ void BitcoinExchange::calculate(const std::string &input_file) const
 {
 	std::ifstream input(input_file.c_str());
 
+	if (exchangeRates.empty())
+	{
+		std::cerr << "Error: No exchange rates loaded." << std::endl;
+		return;
+	}
 	if (!input.is_open())
 		throw ErrorFileException();
 
@@ -146,19 +153,19 @@ void BitcoinExchange::calculate(const std::string &input_file) const
 
 		if (separator != "|" || date.empty() || value.empty())
 		{
-			std::cerr << "Error: Invalid input => " << line << std::endl;
+			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
 
 		if (!isValidDate(date))
 		{
-			std::cerr << "Error: Invalid date => " << date << std::endl;
+			std::cerr << "Error: bad input => " << date << std::endl;
 			continue;
 		}
-		float val = std::strtof(value.c_str(), NULL);
-		if (!isValidValue(value))
+		float val;
+		if (!isValidValue(value, val))
 		{
-			std::cerr << "Error: Invalid value => " << value << std::endl;
+			std::cerr << "Error: bad input => " << value << std::endl;
 			continue;
 		}
 		else if (val < 0)
@@ -177,11 +184,16 @@ void BitcoinExchange::calculate(const std::string &input_file) const
 		// If there are no elements greater than or equal to k: Returns map::end().
 		std::map<std::string, float>::const_iterator it = exchangeRates.lower_bound(date);
 
+		if (it == exchangeRates.begin() && it->first != date)
+		{
+			std::cerr << "Error: date is older than database." << std::endl;
+			continue;
+		}
+
 		if (it == exchangeRates.end())
-			it = --exchangeRates.end();
+			it--;
 		else if (it != exchangeRates.begin() && it->first != date)
 			it--;
-
 		std::cout << date << " => " << val << " = " << val * it->second << std::endl;
 	}
 	input.close();

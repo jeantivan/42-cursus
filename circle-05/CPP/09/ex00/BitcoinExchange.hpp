@@ -18,7 +18,7 @@ private:
 	std::map<std::string, float> exchangeRates;
 
 	bool isValidDate(const std::string &date) const;
-	bool isValidValue(const std::string &value) const;
+	bool isValidValue(const std::string &value, float &rate) const;
 
 public:
 	BitcoinExchange();
