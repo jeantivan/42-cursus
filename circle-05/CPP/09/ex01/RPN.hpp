@@ -2,6 +2,7 @@
 #define RPN_HPP
 #include <iostream>
 #include <stack>
+#include <list>
 #include <sstream>
 #include <stdexcept>
 #include <cstdlib>
@@ -9,7 +10,7 @@
 class RPN
 {
 private:
-	std::stack<int> operands;
+	std::stack<int, std::list<int> > operands;
 	bool isValidDigit(const std::string &token, int &digit) const;
 
 public:
