@@ -9,7 +9,7 @@
 #include <string>
 #include <map>
 
-#define CSV_FILE "data1.csv"
+#define CSV_FILE "data.csv"
 
 class BitcoinExchange
 {
@@ -28,6 +28,7 @@ public:
 	BitcoinExchange &operator=(const BitcoinExchange &other);
 
 	void loadExchangeRates(std::ifstream &cvs_file);
+	void calculate(const std::string &input_file) const;
 	void printExchangeRates() const;
 
 	class ErrorFileException : public std::exception

@@ -113,6 +113,80 @@ bool BitcoinExchange::isValidValue(const std::string &value) const
 	return true;
 }
 
+void BitcoinExchange::calculate(const std::string &input_file) const
+{
+	std::ifstream input(input_file.c_str());
+
+	if (!input.is_open())
+		throw ErrorFileException();
+
+	std::string line;
+	std::string date;
+	std::string value;
+	bool firstLine = true;
+
+	while (std::getline(input, line))
+	{
+		if (firstLine)
+		{
+			if (line != "date | value")
+			{
+				throw InvalidFormatFileException();
+			}
+			firstLine = false;
+			continue;
+		}
+		std::stringstream ss(line);
+		std::string date;
+		std::string separator;
+		std::string value;
+		std::getline(ss, date, ' ');
+		std::getline(ss, separator, ' ');
+		std::getline(ss, value);
+
+		if (separator != "|" || date.empty() || value.empty())
+		{
+			std::cerr << "Error: Invalid input => " << line << std::endl;
+			continue;
+		}
+
+		if (!isValidDate(date))
+		{
+			std::cerr << "Error: Invalid date => " << date << std::endl;
+			continue;
+		}
+		float val = std::strtof(value.c_str(), NULL);
+		if (!isValidValue(value))
+		{
+			std::cerr << "Error: Invalid value => " << value << std::endl;
+			continue;
+		}
+		else if (val < 0)
+		{
+			std::cerr << "Error: not a positive number." << std::endl;
+			continue;
+		}
+		else if (val > 1000)
+		{
+			std::cerr << "Error: too large a number." << std::endl;
+			continue;
+		}
+		// std::map::lower_bound(k) returns an iterator to the first element whose key is greater than or equal to k.
+		// If the key exists: Returns an iterator pointing directly to that element.
+		// If the key does not exist: Returns an iterator to the next closest element that is greater than k.
+		// If there are no elements greater than or equal to k: Returns map::end().
+		std::map<std::string, float>::const_iterator it = exchangeRates.lower_bound(date);
+
+		if (it == exchangeRates.end())
+			it = --exchangeRates.end();
+		else if (it != exchangeRates.begin() && it->first != date)
+			it--;
+
+		std::cout << date << " => " << val << " = " << val * it->second << std::endl;
+	}
+	input.close();
+}
+
 void BitcoinExchange::printExchangeRates() const
 {
 	for (std::map<std::string, float>::const_iterator it = exchangeRates.begin(); it != exchangeRates.end(); ++it)
