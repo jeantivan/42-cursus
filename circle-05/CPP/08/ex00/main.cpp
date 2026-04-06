@@ -66,6 +66,8 @@ void easyfindWithConstIterator() {
 	numbers.push_back(50);
 	numbers.push_back(60);
 
+	const std::list<int>& const_numbers = numbers;
+
 	std::cout << "List original:";
 	for (std::list<int>::iterator iter = numbers.begin(); iter != numbers.end(); ++iter)
 	{
@@ -74,7 +76,7 @@ void easyfindWithConstIterator() {
 	std::cout << std::endl;
 
 	try {
-		it = easyfind(numbers, 50);
+		it = easyfind(const_numbers, 50);
 	} catch (std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
