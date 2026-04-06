@@ -23,7 +23,7 @@ public:
 	int longestSpan() const;
 
 	template<typename Iterator>
-	void assign(Iterator first, Iterator last) {
+	void addNumbers(Iterator first, Iterator last) {
 		long dist = std::distance(first, last);
 
 		if (numbers_.size() + dist > N_)

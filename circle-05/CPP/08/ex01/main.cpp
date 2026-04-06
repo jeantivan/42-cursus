@@ -76,7 +76,7 @@ int main()
 		}
 
 		std::cout << "Adding " << hugeSize << " elements at once using assign()..." << std::endl;
-		hugeSpan.assign(randomNumbers.begin(), randomNumbers.end());
+		hugeSpan.addNumbers(randomNumbers.begin(), randomNumbers.end());
 
 		std::cout << "Shortest Span on 15,000 elements: " << hugeSpan.shortestSpan() << std::endl;
 		std::cout << "Longest Span on 15,000 elements: " << hugeSpan.longestSpan() << std::endl;
