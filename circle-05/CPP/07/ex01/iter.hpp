@@ -1,6 +1,9 @@
 #ifndef ITER_HPP
 #define ITER_HPP
 
+#include <iostream>
+#include <string>
+
 template <typename T, typename S>
 void iter(T *arr, const S size, void (*func)(T &))
 {
