@@ -5,6 +5,7 @@
 #include <sstream>
 #include <deque>
 #include <vector>
+#include <cmath>
 
 class PmergeMe
 {
@@ -14,6 +15,8 @@ public:
 	PmergeMe(const PmergeMe &other);
 	~PmergeMe();
 	PmergeMe &operator=(const PmergeMe &other);
+
+	double jacob(double n) const;
 };
 
 #endif // PMERGEME_HPP
