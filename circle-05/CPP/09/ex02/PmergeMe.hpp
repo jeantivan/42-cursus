@@ -7,16 +7,9 @@
 #include <vector>
 #include <cmath>
 
-class PmergeMe
-{
-private:
-public:
-	PmergeMe();
-	PmergeMe(const PmergeMe &other);
-	~PmergeMe();
-	PmergeMe &operator=(const PmergeMe &other);
+bool isValidNumber(const std::string &str, int &val);
+double jacob(int k);
 
-	double jacob(double n) const;
-};
+
 
 #endif // PMERGEME_HPP

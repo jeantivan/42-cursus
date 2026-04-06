@@ -1,22 +1,21 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() {}
-
-PmergeMe::PmergeMe(const PmergeMe &other) { (void)other; }
-
-PmergeMe::~PmergeMe() {}
-
-PmergeMe &PmergeMe::operator=(const PmergeMe &other)
+bool isValidNumber(const std::string &str, int &val)
 {
-	if (this != &other)
-	{
-		// No member variables to copy, but if there were, we would copy them here.
-	}
-	(void)other;
-	return *this;
+	int num;
+	char extra;
+	std::istringstream iss(str);
+
+	if (!(iss >> num) || (iss >> extra))
+		return false;
+	if (num < 0)
+		return false;
+
+	val = num;
+	return true;
 }
 
-double PmergeMe::jacob(double n) const
+double jacob(int n)
 {
 	double res;
 

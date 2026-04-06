@@ -1,20 +1,7 @@
 #include "PmergeMe.hpp"
 #include <iterator>
 
-bool isValidNumber(const std::string &str, int &val)
-{
-	int num;
-	char extra;
-	std::istringstream iss(str);
 
-	if (!(iss >> num) || (iss >> extra))
-		return false;
-	if (num < 0)
-		return false;
-
-	val = num;
-	return true;
-}
 
 int main(int ac, char **av)
 {
