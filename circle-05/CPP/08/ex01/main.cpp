@@ -71,26 +71,35 @@ void testExceptionHandling() {
 	}
 }
 
-void testStressAndIterators() {
-	printHeader("TEST: +15,000 Numbers & Iterator Assignment");
+void testUniqueStressTest() {
+	printHeader("TEST: +15,000 Numbers (Guaranteed Non-Zero Span)");
 
 	try {
 		unsigned int hugeSize = 15000;
 		Span hugeSpan(hugeSize);
-		std::vector<int> randomNumbers;
+		std::vector<int> uniqueNumbers;
 
-		// Generate 15000 random numbers
+		int currentValue = 0;
+
+
 		for (unsigned int i = 0; i < hugeSize; i++) {
-			randomNumbers.push_back(rand() % 1000000);
+			// A random jump between 5 and 50
+			int jump = (rand() % 46) + 5;
+			currentValue += jump;
+			uniqueNumbers.push_back(currentValue);
 		}
 
-		std::cout << "Adding " << hugeSize << " elements at once using iterator range..." << std::endl;
+		// We shuffle the vector so that the numbers are not inserted already sorted.
+		std::random_shuffle(uniqueNumbers.begin(), uniqueNumbers.end());
 
-		hugeSpan.addNumbers(randomNumbers.begin(), randomNumbers.end());
+		std::cout << "Adding " << hugeSize << " scattered elements using iterators..." << std::endl;
+
+		hugeSpan.addNumbers(uniqueNumbers.begin(), uniqueNumbers.end());
 
 		std::cout << GREEN << "Successfully added " << hugeSize << " elements!" << RESET << std::endl;
-		std::cout << "Shortest Span on 15,000 elements: " << YELLOW << hugeSpan.shortestSpan() << RESET << std::endl;
-		std::cout << "Longest Span on 15,000 elements: " << YELLOW << hugeSpan.longestSpan() << RESET << std::endl;
+
+		std::cout << "Shortest Span: " << YELLOW << hugeSpan.shortestSpan() << RESET << std::endl;
+		std::cout << "Longest Span: "  << YELLOW << hugeSpan.longestSpan()  << RESET << std::endl;
 
 	}
 	catch (const std::exception &e) {
@@ -105,7 +114,7 @@ int main() {
 
 	testSubjectExample();
 	testExceptionHandling();
-	testStressAndIterators();
+	testUniqueStressTest();
 
 	std::cout << CYAN << "\n========================================" << RESET << std::endl;
 	std::cout << GREEN << "   All tests completed successfully!	" << RESET << std::endl;
