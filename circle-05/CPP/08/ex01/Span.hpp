@@ -19,8 +19,8 @@ public:
 	Span &operator=(const Span &other);
 
 	void addNumber(int num);
-	int shortestSpan() const;
-	int longestSpan() const;
+	unsigned int shortestSpan() const;
+	unsigned int longestSpan() const;
 
 	template<typename Iterator>
 	void addNumbers(Iterator first, Iterator last) {

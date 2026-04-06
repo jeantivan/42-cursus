@@ -25,7 +25,7 @@ void Span::addNumber(int num)
 	numbers_.push_back(num);
 }
 
-int Span::shortestSpan() const
+unsigned int Span::shortestSpan() const
 {
 	if (numbers_.empty() || numbers_.size() == 1)
 		throw std::runtime_error("Impossible to get a span, vector too small.");
@@ -36,10 +36,10 @@ int Span::shortestSpan() const
 	std::sort(copy.begin(), copy.end());
 	std::adjacent_difference(copy.begin(), copy.end(), result.begin());
 	std::vector<int>::const_iterator min_el = std::min_element(result.begin() + 1, result.end());
-	return *min_el;
+	return static_cast<unsigned int>(*min_el);
 }
 
-int Span::longestSpan() const
+unsigned int Span::longestSpan() const
 {
 	if (numbers_.empty() || numbers_.size() == 1)
 		throw std::runtime_error("Impossible to get a span, vector too small.");
@@ -47,5 +47,5 @@ int Span::longestSpan() const
 	std::vector<int>::const_iterator min_el = std::min_element(numbers_.begin(), numbers_.end());
 	std::vector<int>::const_iterator max_el = std::max_element(numbers_.begin(), numbers_.end());
 
-	return *(max_el) - *(min_el);
+	return static_cast<unsigned int>(*max_el) - static_cast<unsigned int>(*min_el);
 }
