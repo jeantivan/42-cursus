@@ -17,6 +17,20 @@ void printHeader(const std::string& title) {
 	std::cout << CYAN << "========================================" << RESET << std::endl;
 }
 
+int generateBigRandom() {
+	// rand() gives us at least 15 bits.
+	// We shift the bits and combine it with another rand() to get a huge number.
+	// We use the ternary operator to randomly determine the sign (+ or -).
+	// We shift the bits and combine it with another rand() to get a huge number.
+	// We use the ternary operator to randomly determine the sign (+ or -).
+
+	int bigNum = (rand() << 15) | rand();
+	int sign = (rand() % 2 == 0) ? 1 : -1;
+
+	return bigNum * sign;
+}
+
+
 void testSubjectExample() {
 	printHeader("TEST: Subject example");
 
@@ -71,30 +85,39 @@ void testExceptionHandling() {
 	}
 }
 
+void testShortestAndLongestSpan() {
+	printHeader("TEST: Shortest and longest Span");
+
+	try {
+		unsigned int hugeSize = 100;
+		Span hugeSpan(hugeSize);
+
+		for (unsigned int i = 0; i < hugeSize; i++) {
+			hugeSpan.addNumber(generateBigRandom());
+		}
+
+		std::cout << GREEN << "Successfully added " << hugeSize << " elements!" << RESET << std::endl;
+
+		std::cout << "Shortest Span: " << YELLOW << hugeSpan.shortestSpan() << RESET << std::endl;
+		std::cout << "Longest Span: "  << YELLOW << hugeSpan.longestSpan()  << RESET << std::endl;
+
+	}
+	catch (const std::exception &e) {
+		std::cout << RED << "Error: " << e.what() << RESET << std::endl;
+	}
+}
+
 void testUniqueStressTest() {
-	printHeader("TEST: +15,000 Numbers (Guaranteed Non-Zero Span)");
+	printHeader("TEST: +15,000 Numbers");
 
 	try {
 		unsigned int hugeSize = 15000;
 		Span hugeSpan(hugeSize);
-		std::vector<int> uniqueNumbers;
-
-		int currentValue = 0;
 
 
 		for (unsigned int i = 0; i < hugeSize; i++) {
-			// A random jump between 5 and 50
-			int jump = (rand() % 46) + 5;
-			currentValue += jump;
-			uniqueNumbers.push_back(currentValue);
+			hugeSpan.addNumber(generateBigRandom());
 		}
-
-		// We shuffle the vector so that the numbers are not inserted already sorted.
-		std::random_shuffle(uniqueNumbers.begin(), uniqueNumbers.end());
-
-		std::cout << "Adding " << hugeSize << " scattered elements using iterators..." << std::endl;
-
-		hugeSpan.addNumbers(uniqueNumbers.begin(), uniqueNumbers.end());
 
 		std::cout << GREEN << "Successfully added " << hugeSize << " elements!" << RESET << std::endl;
 
@@ -114,6 +137,7 @@ int main() {
 
 	testSubjectExample();
 	testExceptionHandling();
+	testShortestAndLongestSpan();
 	testUniqueStressTest();
 
 	std::cout << CYAN << "\n========================================" << RESET << std::endl;

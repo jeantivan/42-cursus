@@ -3,14 +3,15 @@
 #include <ctime>
 #include <algorithm>
 #include <list>
+#include <vector>
 #include "MutantStack.hpp"
 
 // --- Colors and Formatting Macros ---
-#define RESET   "\033[0m"
+#define RESET	"\033[0m"
 #define CYAN	"\033[36m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define RED	 "\033[31m"
+#define GREEN	"\033[32m"
+#define YELLOW	"\033[33m"
+#define RED		"\033[31m"
 
 void printHeader(const std::string& title) {
 	std::cout << CYAN << "\n========================================" << RESET << std::endl;
@@ -129,6 +130,36 @@ void testStlAlgorithms() {
 	std::cout << std::endl;
 }
 
+void testVectorContainer() {
+	printHeader("TEST 5: MutantStack using std::vector as underlying container");
+
+	MutantStack<int, std::vector<int> > mstack_vec;
+
+	std::cout << "Pushing 100, 200, 300 to the vector-backed stack...\n";
+	mstack_vec.push(100);
+	mstack_vec.push(200);
+	mstack_vec.push(300);
+
+	std::cout << "Top element: " << YELLOW << mstack_vec.top() << RESET << " (Expected: 300)" << std::endl;
+
+	mstack_vec.pop();
+	std::cout << "Size after pop: " << YELLOW << mstack_vec.size() << RESET << " (Expected: 2)" << std::endl;
+
+	mstack_vec.push(400);
+	mstack_vec.push(500);
+
+	std::cout << "\nIterating through MutantStack<int, std::vector<int> >:" << std::endl;
+
+	MutantStack<int, std::vector<int> >::iterator it = mstack_vec.begin();
+	MutantStack<int, std::vector<int> >::iterator ite = mstack_vec.end();
+
+	while (it != ite) {
+		std::cout << GREEN << *it << RESET << " ";
+		++it;
+	}
+	std::cout << std::endl;
+}
+
 int main() {
 	// Initialize random seed
 	srand(time(NULL));
@@ -139,9 +170,10 @@ int main() {
 	testListComparison();
 	testConstIterator();
 	testStlAlgorithms();
+	testVectorContainer();
 
 	std::cout << CYAN << "\n========================================" << RESET << std::endl;
-	std::cout << GREEN << "   All tests completed successfully!	" << RESET << std::endl;
+	std::cout << GREEN << "   All tests completed successfully! " << RESET << std::endl;
 	std::cout << CYAN << "========================================\n" << RESET << std::endl;
 
 	return 0;

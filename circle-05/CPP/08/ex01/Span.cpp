@@ -33,6 +33,7 @@ unsigned int Span::shortestSpan() const
 	std::vector<int> copy = numbers_;
 	std::vector<int> result(copy.size());
 
+	// C++ generally uses Introsort (Introspective Sort), a hybrid algorithm that guarantees a time complexity of O( N · log(N) )
 	std::sort(copy.begin(), copy.end());
 	std::adjacent_difference(copy.begin(), copy.end(), result.begin());
 	std::vector<int>::const_iterator min_el = std::min_element(result.begin() + 1, result.end());
