@@ -15,19 +15,19 @@ bool isValidNumber(const std::string &str, int &val)
 	return true;
 }
 
-double jacob(int n)
+size_t jacob(int n)
 {
-	double res;
+	size_t res;
 
 	if (n == 0 || n == 1)
 		return n;
 
-	res = (std::pow(2, n) - std::pow(-1, n)) / 3;
+	res = static_cast<size_t>((std::pow(2, n) - std::pow(-1, n)) / 3);
 
 	return res;
 }
 
-void showVecPairs(std::vector<std::pair<int, int> > vecPairs)
+void showVecPairs(std::vector<std::pair<int, int> > &vecPairs)
 {
 	std::cout << "{" << std::endl;
 	for (std::vector<std::pair<int, int> >::iterator it = vecPairs.begin(); it != vecPairs.end(); it++)
@@ -37,7 +37,7 @@ void showVecPairs(std::vector<std::pair<int, int> > vecPairs)
 	std::cout << "}" << std::endl;
 }
 
-std::vector<std::pair<int, int> > makeSortedPairs(std::vector<int> numbers)
+std::vector<std::pair<int, int> > makeSortedPairs(std::vector<int> &numbers)
 {
 	std::pair<int, int> iPair;
 	std::vector<std::pair<int, int> > vec;
@@ -60,7 +60,59 @@ std::vector<std::pair<int, int> > makeSortedPairs(std::vector<int> numbers)
 	return vec;
 }
 
-std::vector<int> mergeInsertionSort(std::vector<int> vecToSort)
+std::vector<size_t> generateJacobSequence(size_t pend_size)
+{
+	std::vector<size_t> jacob_sqc;
+
+	int jacob_index = 3;
+	while (true)
+	{
+		size_t current_jacob = jacob(jacob_index);
+
+		jacob_sqc.push_back(current_jacob);
+
+		if (current_jacob >= pend_size)
+			break;
+
+		jacob_index++;
+	}
+
+	return jacob_sqc;
+}
+
+void jacobsthalInsert(std::vector<int> &main_c, std::vector<int> &pend_c)
+{
+	std::vector<size_t> jacob_sequence = generateJacobSequence(pend_c.size());
+
+	size_t last_inserted_idx = 0;
+	size_t pend_size = pend_c.size();
+
+	for (size_t i = 0; i < jacob_sequence.size(); i++)
+	{
+		size_t curr_jacob_idx = jacob_sequence[i] - 1;
+
+		if (curr_jacob_idx >= pend_size)
+		{
+			curr_jacob_idx = pend_size - 1;
+		}
+
+		for (size_t j = curr_jacob_idx; j > last_inserted_idx; j--)
+		{
+			int val = pend_c[j];
+
+			std::vector<int>::iterator it = std::lower_bound(main_c.begin(), main_c.end(), val);
+
+			main_c.insert(it, val);
+		}
+
+		last_inserted_idx = curr_jacob_idx;
+
+		if (last_inserted_idx == pend_size - 1)
+			break;
+	}
+}
+
+std::vector<int> mergeInsertionSort(std::vector<int> &vecToSort)
 {
 
 	if (vecToSort.size() == 1)
@@ -111,7 +163,7 @@ std::vector<int> mergeInsertionSort(std::vector<int> vecToSort)
 	main_chain.insert(main_chain.begin(), pend_chain[0]);
 
 	// TODO: Insert pend_chain inside main_chain following the Jacobsthal numbers;
-	// jacob_insert(main_chain, pend_chain);
+	jacobsthalInsert(main_chain, pend_chain);
 
 	if (hasOdd)
 	{

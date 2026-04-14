@@ -37,17 +37,31 @@ int main(int ac, char **av)
 		vec_numbers.push_back(num);
 		// deq_numbers.push_back(num);
 	}
-	int oddNum;
-	bool hasOdd = vec_numbers.size() % 2 != 0;
-	if (hasOdd)
-	{
-		oddNum = *(vec_numbers.end() - 1);
-		vec_numbers.pop_back();
-	}
+	// int oddNum;
+	// bool hasOdd = vec_numbers.size() % 2 != 0;
+	// if (hasOdd)
+	// {
+	// 	oddNum = *(vec_numbers.end() - 1);
+	// 	vec_numbers.pop_back();
+	// }
 
-	std::vector<std::pair<int, int> > vecPairs = makeSortedPairs(vec_numbers);
-	showVecPairs(vecPairs);
-	if (oddNum)
-		std::cout << "Odd num " << oddNum << std::endl;
+	// std::vector<std::pair<int, int> > vecPairs = makeSortedPairs(vec_numbers);
+	// showVecPairs(vecPairs);
+	// if (oddNum)
+	// 	std::cout << "Odd num " << oddNum << std::endl;
+	std::cout << "Vec  before sort:" << std::endl;
+	for (size_t i = 0; i < vec_numbers.size(); i++)
+	{
+		std::cout << vec_numbers[i] << " ";
+	}
+	std::cout << std::endl;
+	std::vector<int> sorted_vec_numbers = mergeInsertionSort(vec_numbers);
+
+	std::cout << "Vec  after sort:" << std::endl;
+	for (size_t i = 0; i < sorted_vec_numbers.size(); i++)
+	{
+		std::cout << sorted_vec_numbers[i] << " ";
+	}
+	std::cout << std::endl;
 	return 0;
 }

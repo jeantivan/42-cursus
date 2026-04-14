@@ -9,7 +9,7 @@
 #include <ctime>
 
 bool isValidNumber(const std::string &str, int &val);
-double jacob(int k);
+size_t jacob(int k);
 
 template <typename Func>
 double measure_time(Func f)
@@ -24,7 +24,8 @@ double measure_time(Func f)
 
 	return double(end - start);
 }
-std::vector<std::pair<int, int> > makeSortedPairs(std::vector<int> numbers);
-void showVecPairs(std::vector<std::pair<int, int> > vecPairs);
+std::vector<std::pair<int, int> > makeSortedPairs(std::vector<int> &numbers);
+void showVecPairs(std::vector<std::pair<int, int> > &vecPairs);
+std::vector<int> mergeInsertionSort(std::vector<int> &vecToSort);
 
 #endif // PMERGEME_HPP
