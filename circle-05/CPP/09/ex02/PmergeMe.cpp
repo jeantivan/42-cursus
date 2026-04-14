@@ -77,20 +77,39 @@ std::vector<int> mergeInsertionSort(std::vector<int> vecToSort)
 
 	std::vector<std::pair<int, int> > pairs = makeSortedPairs(vecToSort);
 
-	// TODO: Recursive sort pairs;
-	// sortPairsRecursively(pairs);
+	// Create winners
 
+	std::vector<int> winners;
+	for (size_t i = 0; i < pairs.size(); i++)
+	{
+		winners.push_back(pairs[i].first);
+	}
+
+	// Recursively call mergeInsertionSort on the winners;
+	std::vector<int> sorted_winners = mergeInsertionSort(winners);
+
+	// Build main_chain and pend_chain
 	std::vector<int> main_chain;
 	std::vector<int> pend_chain;
 
-	for (size_t i = 0; i < pairs.size(); i++)
+	for (size_t i = 0; i < sorted_winners.size(); i++)
 	{
-		main_chain.push_back(pairs[i].first);
-		pend_chain.push_back(pairs[i].second);
+		int curr_winner = sorted_winners[i];
+		main_chain.push_back(curr_winner);
+
+		for (size_t j = 0; j < pairs.size(); j++)
+		{
+			if (pairs[j].first == curr_winner)
+			{
+				pend_chain.push_back(pairs[j].second);
+				break;
+			}
+		}
 	}
 
 	// Insert first element of pend chain;
 	main_chain.insert(main_chain.begin(), pend_chain[0]);
+
 	// TODO: Insert pend_chain inside main_chain following the Jacobsthal numbers;
 	// jacob_insert(main_chain, pend_chain);
 
