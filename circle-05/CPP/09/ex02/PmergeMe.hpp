@@ -11,8 +11,8 @@
 
 bool isValidNumber(const std::string &str, int &val);
 size_t jacob(int k);
-std::vector<int> mergeInsertionSort(std::vector<int> &vecToSort);
-std::deque<int> mergeInsertionSort(std::deque<int> &deqToSort);
+std::vector<int> mergeInsertionSort(std::vector<int> vecToSort);
+std::deque<int> mergeInsertionSort(std::deque<int> deqToSort);
 
 template <typename InContainer, typename OutContainer>
 void makeSortedPairs(InContainer &numbers, OutContainer &pairs)
