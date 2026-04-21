@@ -48,7 +48,7 @@ void showVecPairs(std::vector<std::pair<int, int> > &vecPairs)
 std::vector<int> mergeInsertionSort(std::vector<int> vecToSort)
 {
 
-	if (vecToSort.size() == 1)
+	if (vecToSort.size() <= 1)
 		return vecToSort;
 
 	bool hasOdd = vecToSort.size() % 2 != 0;
