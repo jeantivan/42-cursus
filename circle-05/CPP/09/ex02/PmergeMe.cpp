@@ -87,6 +87,7 @@ std::vector<int> mergeInsertionSort(std::vector<int> vecToSort)
 			if (pairs[j].first == curr_winner)
 			{
 				pend_chain.push_back(pairs[j].second);
+				pairs[j].first = -1;
 				break;
 			}
 		}
@@ -150,6 +151,7 @@ std::deque<int> mergeInsertionSort(std::deque<int> deqToSort)
 			if (pairs[j].first == curr_winner)
 			{
 				pend_chain.push_back(pairs[j].second);
+				pairs[j].first = -1;
 				break;
 			}
 		}
