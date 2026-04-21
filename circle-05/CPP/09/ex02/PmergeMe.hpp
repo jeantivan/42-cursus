@@ -72,9 +72,9 @@ void jacobsthalInsert(Container &main_c, Container &pend_c)
 		{
 			T val = pend_c[j];
 
-			typename Container::iterator it = std::lower_bound(main_c.begin(), main_c.end(), val)
+			typename Container::iterator it = std::lower_bound(main_c.begin(), main_c.end(), val);
 
-												  main_c.insert(it, val);
+			main_c.insert(it, val);
 		}
 
 		// Update the starting point for the next group
