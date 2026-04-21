@@ -41,7 +41,7 @@ int main(int ac, char **av)
 		vec_numbers.push_back(num);
 		deq_numbers.push_back(num);
 	}
-	std::cout << "Size" << vec_numbers.size() << " " << deq_numbers.size() << " Before: ";
+	std::cout << "Size " << vec_numbers.size() << " " << deq_numbers.size() << " Before: ";
 	for (size_t i = 0; i < vec_numbers.size(); i++)
 	{
 		// if (i <= 15)
