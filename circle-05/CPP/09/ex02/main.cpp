@@ -26,9 +26,9 @@ int main(int ac, char **av)
 	// Vars to measure the time
 	std::clock_t vt_start, vt_end, dt_start, dt_end;
 
-	// Containers for the test
 	std::vector<int> vec_numbers;
 	std::deque<int> deq_numbers;
+
 	// Insert numbers into vector and deque from command line arguments
 	for (int i = 1; i < ac; ++i)
 	{
@@ -41,13 +41,13 @@ int main(int ac, char **av)
 		vec_numbers.push_back(num);
 		deq_numbers.push_back(num);
 	}
-	std::cout << "Size " << vec_numbers.size() << " " << deq_numbers.size() << " Before: ";
+	std::cout << "Before: ";
 	for (size_t i = 0; i < vec_numbers.size(); i++)
 	{
-		// if (i <= 15)
-		std::cout << vec_numbers[i] << " ";
-		// if (i == 16)
-		// 	std::cout << "...";
+		if (i <= 15)
+			std::cout << vec_numbers[i] << " ";
+		if (i == 16)
+			std::cout << "...";
 	}
 	std::cout << std::endl;
 
@@ -61,20 +61,30 @@ int main(int ac, char **av)
 	std::deque<int> sorted_deq_numbers = mergeInsertionSort(deq_numbers);
 	dt_end = std::clock();
 
-	double vec_time = 1000.0 * double(vt_end - vt_start) / CLOCKS_PER_SEC;
-	double deq_time = 1000.0 * double(dt_end - dt_start) / CLOCKS_PER_SEC;
+	double vec_time = 1.0e6 * double(vt_end - vt_start) / CLOCKS_PER_SEC;
+	double deq_time = 1.0e6 * double(dt_end - dt_start) / CLOCKS_PER_SEC;
 
-	std::cout << "After: ";
+	std::cout << "Vector after sort: ";
 	for (size_t i = 0; i < sorted_vec_numbers.size(); i++)
 	{
-		// if (i <= 15)
-		std::cout << sorted_vec_numbers[i] << " ";
-		// if (i == 16)
-		// 	std::cout << "...";
+		if (i <= 15 || i > sorted_deq_numbers.size() - 5)
+			std::cout << sorted_vec_numbers[i] << " ";
+		if (i == 16)
+			std::cout << "... ";
 	}
 	std::cout << std::endl;
 
-	std::cout << "Time to process a range of " << sorted_vec_numbers.size() << " with std::vector : " << std::fixed << std::setprecision(8) << vec_time << " ms" << std::endl;
-	std::cout << "Time to process a range of " << sorted_deq_numbers.size() << " with std::deque : " << std::fixed << std::setprecision(8) << deq_time << " ms" << std::endl;
+	std::cout << "Deque after sort: ";
+	for (size_t i = 0; i < sorted_deq_numbers.size(); i++)
+	{
+		if (i <= 15 || i > sorted_deq_numbers.size() - 5)
+			std::cout << sorted_deq_numbers[i] << " ";
+		if (i == 16)
+			std::cout << "... ";
+	}
+	std::cout << std::endl;
+
+	std::cout << "Time to process a range of " << sorted_vec_numbers.size() << " with std::vector: " << std::fixed << std::setprecision(4) << vec_time << " us" << std::endl;
+	std::cout << "Time to process a range of " << sorted_deq_numbers.size() << " with std::deque: " << std::fixed << std::setprecision(4) << deq_time << " us" << std::endl;
 	return 0;
 }
